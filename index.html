@@ -41,6 +41,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
             padding: 1.5rem;
             margin-bottom: 1.5rem;
+            transition: all 0.3s ease-in-out; /* Smooth transition for past-card effect */
         }
         .header-section {
             background-color: #4f46e5; /* Indigo */
@@ -131,8 +132,38 @@
             background-color: #ffffff; /* Ensure it has a background */
             border-radius: 8px; /* Rounded corners */
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-            /* Removed max-width and auto margins as it's now inside main-container */
         }
+
+        /* Styling for past event cards */
+        .past-card {
+            background-color: #e9ecef; /* Lighter gray background */
+            color: #6c757d; /* Grayer text */
+            opacity: 0.7; /* Slightly reduce opacity */
+            box-shadow: none; /* Remove shadow for past events to make them less prominent */
+            border: 1px solid #dee2e6; /* Add a light border */
+        }
+        .past-card .section-title,
+        .past-card .list-item strong {
+            color: #6c757d; /* Ensure all text within is grayed out */
+        }
+        .past-card .deadline-highlight strong {
+            color: #868e96; /* Even lighter gray for past highlighted text */
+        }
+        .past-card .calendar-button {
+            background-color: #ced4da; /* Grayer button */
+            color: #495057; /* Darker gray text for button */
+            border-color: #adb5bd; /* Grayer border */
+            cursor: default; /* Indicate it's less interactive */
+        }
+        .past-card .calendar-button:hover {
+            background-color: #adb5bd;
+            border-color: #6c757d;
+        }
+        .past-card .deadline-highlight {
+            background-color: #e9ecef; /* Match card background */
+            border-left-color: #adb5bd; /* Grayer border for deadline highlight */
+        }
+
         /* Responsive adjustments for list items and buttons */
         @media (max-width: 768px) {
             .list-item, .deadline-highlight {
@@ -153,7 +184,7 @@
         </div>
 
         <main>
-            <section class="card">
+            <section class="card" data-end-date="2025-02-04">
                 <h2 class="section-title text-2xl md:text-3xl">Winterferien</h2>
                 <ul class="list-disc pl-5">
                     <li class="list-item">
@@ -175,7 +206,7 @@
                 </ul>
             </section>
 
-            <section class="card">
+            <section class="card" data-end-date="2025-04-21">
                 <h2 class="section-title text-2xl md:text-3xl">Osterferien</h2>
                 <ul class="list-disc pl-5">
                     <li class="list-item">
@@ -202,7 +233,7 @@
                 </ul>
             </section>
 
-            <section class="card">
+            <section class="card" data-end-date="2025-06-10">
                 <h2 class="section-title text-2xl md:text-3xl">Feiertage & Brückentage</h2>
                 <ul class="list-disc pl-5">
                     <li class="list-item">
@@ -248,7 +279,7 @@
                 </ul>
             </section>
 
-            <section class="card">
+            <section class="card" data-end-date="2025-08-13">
                 <h2 class="section-title text-2xl md:text-3xl">Sommerferien</h2>
                 <ul class="list-disc pl-5">
                     <li class="list-item">
@@ -291,7 +322,7 @@
                 </ul>
             </section>
 
-            <section class="card">
+            <section class="card" data-end-date="2025-10-24">
                 <h2 class="section-title text-2xl md:text-3xl">Herbstferien</h2>
                 <ul class="list-disc pl-5">
                     <li class="list-item">
@@ -318,7 +349,7 @@
                 </ul>
             </section>
 
-            <section class="card">
+            <section class="card" data-end-date="2026-01-02">
                 <h2 class="section-title text-2xl md:text-3xl">Weihnachtsferien</h2>
                 <ul class="list-disc pl-5">
                     <li class="list-item">
@@ -410,7 +441,39 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url); // Clean up the object URL
         }
+
+        /**
+         * Checks if a given date is in the past compared to the current date.
+         * @param {string} dateString - Date in 'YYYY-MM-DD' format.
+         * @returns {boolean} True if the date is in the past, false otherwise.
+         */
+        function isDateInPast(dateString) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Normalize today to start of day
+
+            const checkDate = new Date(dateString);
+            checkDate.setHours(0, 0, 0, 0); // Normalize checkDate to start of day
+
+            return checkDate < today;
+        }
+
+        /**
+         * Updates the styling of cards based on whether their end date is in the past.
+         */
+        function updateCardStyles() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const endDate = card.dataset.endDate; // Get the end date from data attribute
+                if (endDate && isDateInPast(endDate)) {
+                    card.classList.add('past-card');
+                } else {
+                    card.classList.remove('past-card');
+                }
+            });
+        }
+
+        // Run the function when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', updateCardStyles);
     </script>
-    
 </body>
 </html>
