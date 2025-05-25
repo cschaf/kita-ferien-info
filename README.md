@@ -1,8 +1,10 @@
 # Ferienplan 2025 der Kita
 
 Dies ist ein digitaler und interaktiver Überblick über die Ferienzeiten, Schließtage und wichtigen Anmeldefristen der Kita für das Jahr 2025.
-##
+
+## Demo
 **[Link zur Seite](https://cschaf.github.io/kita-ferien-info/)**
+
 ## Zweck
 
 Der Hauptzweck dieses Dokuments ist es, Eltern und Mitarbeitenden eine klare, leicht zugängliche und übersichtliche Darstellung aller relevanten Termine für das Kita-Jahr 2025 zu bieten.
