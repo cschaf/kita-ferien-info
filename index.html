@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress CssUnknownUnit -->
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -638,6 +639,59 @@
             background-color: #4f46e5;
         }
 
+        /* Strikethrough style for past items */
+        .line-through {
+            text-decoration: line-through;
+            color: #6c757d; /* Gray out the text when struck through */
+            transition: color 0.3s ease; /* Smooth transition */
+        }
+        body.dark-mode .line-through {
+            color: #a0aec0; /* Lighter gray for dark mode */
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #4f46e5; /* Indigo */
+            color: #ffffff;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            opacity: 0; /* Hidden by default */
+            pointer-events: none; /* Disables interaction when hidden */
+            z-index: 1000; /* Ensure it's on top */
+            transform: translateY(100px); /* Start off-screen */
+        }
+        .scroll-to-top-btn.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        .scroll-to-top-btn:hover {
+            background-color: #4338ca; /* Darker indigo on hover */
+            transform: translateY(-3px); /* Slight lift on hover */
+        }
+
+        /* Dark Mode for Scroll to Top Button */
+        body.dark-mode .scroll-to-top-btn {
+            background-color: #6366f1; /* Lighter indigo for dark mode */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        body.dark-mode .scroll-to-top-btn:hover {
+            background-color: #4f46e5; /* Darker indigo on hover */
+        }
+
+
         /* Print-specific styles */
         @media print {
             body {
@@ -657,7 +711,8 @@
             .note-disclaimer-section, /* Hide combined section for print */
             .legend-container, /* Hide legend for print */
             .footer-section,
-            .dark-mode-toggle { /* Hide footer and toggle for print */
+            .dark-mode-toggle, /* Hide footer and toggle for print */
+            .scroll-to-top-btn { /* Hide scroll to top button for print */
                 display: none !important;
             }
             .card {
@@ -984,6 +1039,10 @@
     </p>
 </footer>
 
+<button id="scrollToTopBtn" class="scroll-to-top-btn" aria-label="Nach oben scrollen">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
 <script>
     // Global variable to store all original cards
     let allCards = [];
@@ -1008,6 +1067,55 @@
             darkModeToggleIcon.classList.add('fa-moon');
         }
     }
+
+    /**
+     * Parses a German date string (DD.MM.YYYY or D[D]. MonthName) into a Date object.
+     * Handles single dates or date ranges.
+     * Returns the *latest* date in a range, or the single date.
+     * Returns null if no valid date is found.
+     */
+    function parseGermanDate(dateString) {
+        const monthMap = {
+            'januar': 0, 'februar': 1, 'märz': 2, 'april': 3, 'mai': 4, 'juni': 5,
+            'juli': 6, 'august': 7, 'september': 8, 'oktober': 9, 'november': 10, 'dezember': 11
+        };
+
+        let dates = [];
+
+        // Try matching DD.MM.YYYY or D.M.YYYY format
+        const regexNumericDate = /(\d{1,2})\.(\d{1,2})\.(\d{4})/;
+        let matchNumeric = dateString.match(regexNumericDate);
+        if (matchNumeric) {
+            const day = parseInt(matchNumeric[1], 10);
+            const month = parseInt(matchNumeric[2], 10) - 1; // Month is 0-indexed
+            const year = parseInt(matchNumeric[3], 10);
+            dates.push(new Date(year, month, day));
+        }
+
+        // Try matching D[D]. MonthName format
+        const regexMonthNameDate = /(\d{1,2})\.\s*(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\s*(\d{4})/i;
+        let matchMonthName = dateString.match(regexMonthNameDate);
+        if (matchMonthName) {
+            const day = parseInt(matchMonthName[1], 10);
+            const monthName = matchMonthName[2].toLowerCase();
+            const month = monthMap[monthName];
+            const year = parseInt(matchMonthName[3], 10);
+            if (month !== undefined) {
+                dates.push(new Date(year, month, day));
+            }
+        }
+
+        if (dates.length === 0) {
+            return null;
+        } else if (dates.length === 1) {
+            return dates[0];
+        } else {
+            // If multiple dates are found (e.g., a range like "03.07. - 13.08.2025"),
+            // take the latest date for the "past" check.
+            return new Date(Math.max(...dates.map(d => d.getTime())));
+        }
+    }
+
 
     /**
      * Generates and downloads an ICS calendar file.
@@ -1154,7 +1262,7 @@
     }
 
     /**
-     * Applies visual highlighting (past, current, upcoming) to cards.
+     * Applies visual highlighting (past, current, upcoming) to cards and strikethrough to past list items.
      * This function should be called after filtering and sorting.
      */
     function updateVisualHighlighting() {
@@ -1174,29 +1282,40 @@
 
             if (!startDateStr || !endDateStr) {
                 console.warn('Card missing start or end date:', card);
-                return;
-            }
+                // Even if card dates are missing, still process list items
+            } else {
+                const startDate = new Date(startDateStr);
+                startDate.setHours(0, 0, 0, 0);
+                const endDate = new Date(endDateStr);
+                endDate.setHours(0, 0, 0, 0);
 
-            const startDate = new Date(startDateStr);
-            startDate.setHours(0, 0, 0, 0);
-            const endDate = new Date(endDateStr);
-            endDate.setHours(0, 0, 0, 0);
-
-            // Check for Past
-            if (endDate < today) {
-                card.classList.add('past-card');
-            }
-            // Check for Current (today is within the event period)
-            else if (startDate <= today && endDate >= today) {
-                card.classList.add('current-card');
-            }
-            // Check for Upcoming (find the soonest one among non-past/non-current cards)
-            else if (startDate > today) {
-                if (startDate.getTime() < soonestUpcomingStartDate) {
-                    soonestUpcomingStartDate = startDate.getTime();
-                    soonestUpcomingCard = card;
+                // Check for Past
+                if (endDate < today) {
+                    card.classList.add('past-card');
+                }
+                // Check for Current (today is within the event period)
+                else if (startDate <= today && endDate >= today) {
+                    card.classList.add('current-card');
+                }
+                // Check for Upcoming (find the soonest one among non-past/non-current cards)
+                else if (startDate > today) {
+                    if (startDate.getTime() < soonestUpcomingStartDate) {
+                        soonestUpcomingStartDate = startDate.getTime();
+                        soonestUpcomingCard = card;
+                    }
                 }
             }
+
+            // Process individual list items for strikethrough
+            const listItems = card.querySelectorAll('.list-item span, .deadline-highlight span');
+            listItems.forEach(spanElement => {
+                const dateInItem = parseGermanDate(spanElement.textContent);
+                if (dateInItem && dateInItem < today) {
+                    spanElement.classList.add('line-through');
+                } else {
+                    spanElement.classList.remove('line-through');
+                }
+            });
         });
 
         // Apply 'upcoming-card' class to the soonest upcoming event after iterating all cards
@@ -1227,6 +1346,26 @@
 
         // Add event listener for dark mode toggle
         document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+
+        // Scroll to Top Button Logic
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        // Show/hide button on scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Show button after scrolling down 300px
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        // Scroll to top on button click
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Smooth scroll
+            });
+        });
     });
 </script>
 </body>
