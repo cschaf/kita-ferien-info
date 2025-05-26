@@ -101,66 +101,66 @@
             flex-direction: column; /* Always stack items vertically */
             align-items: flex-start; /* Align content to the start (left) */
             flex-wrap: wrap;
-            gap: 0.25rem; /* Reduced gap */
+            gap: 0.25rem;
             list-style-type: none; /* Remove bullet point */
             /* Adjust padding-left to align with other list items that have pl-5 (1.25rem) */
             padding-left: calc(1rem + 1.25rem); /* Base padding + ul's padding */
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .deadline-highlight strong {
-            color: #dc2626; /* Keep red for the text */
-            font-weight: 800; /* Extra bold */
-            font-size: 1.05rem; /* Slightly larger font */
+            color: #dc2626;
+            font-weight: 800;
+            font-size: 1.05rem;
             transition: color 0.3s ease;
         }
         /* Combined Note and Disclaimer Section */
         .note-disclaimer-section {
-            background-color: #fff7ed; /* Matches deadline-highlight background */
-            border-left: 5px solid #f97316; /* Matches deadline-highlight border */
-            padding: 1.5rem; /* Slightly more padding than deadline-highlight for content */
-            border-radius: 12px; /* Rounded corners */
+            background-color: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 1.5rem;
+            border-radius: 12px;
             margin-top: 2rem;
-            margin-bottom: 2rem; /* Space before next elements */
-            color: #374151; /* Default text color for readability */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+            margin-bottom: 2rem;
+            color: #374151;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         .note-disclaimer-section p {
             margin-bottom: 0.5rem;
         }
         .note-disclaimer-section .disclaimer-text {
-            font-size: 0.875rem; /* text-sm */
-            color: #6b7280; /* Gray text for disclaimer part */
-            text-align: center; /* Center disclaimer text */
-            margin-top: 1rem; /* Space after note content */
-            padding-top: 1rem; /* Padding before disclaimer text */
-            border-top: 1px solid #e5e7eb; /* Light gray border above disclaimer */
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-align: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
             transition: color 0.3s ease, border-color 0.3s ease;
         }
         .note-disclaimer-section .note-title {
-            color: #dc2626; /* Red color for the title of the note */
-            font-weight: 800; /* Extra bold for the title */
+            color: #dc2626;
+            font-weight: 800;
             transition: color 0.3s ease;
         }
 
 
         .calendar-button {
-            flex-shrink: 0; /* Prevent button from shrinking */
-            background-color: #e0e7ff; /* Very light indigo */
-            color: #4f46e5; /* Indigo text */
-            font-weight: 500; /* Medium weight */
-            padding: 0.3rem 0.75rem; /* Smaller padding */
-            border-radius: 6px; /* Slightly less rounded, more uniform */
-            font-size: 0.75rem; /* text-xs */
-            border: 1px solid #c7d2fe; /* Light indigo border */
+            flex-shrink: 0;
+            background-color: #e0e7ff;
+            color: #4f46e5;
+            font-weight: 500;
+            padding: 0.3rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            border: 1px solid #c7d2fe;
             transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
-            white-space: nowrap; /* Prevent button text from wrapping */
-            margin-top: 0.5rem; /* Space from the text above it */
-            align-self: flex-start; /* Align button to the left within its flex container */
+            white-space: nowrap;
+            margin-top: 0.5rem;
+            align-self: flex-start;
         }
         .calendar-button:hover {
-            background-color: #c7d2fe; /* Slightly darker light indigo on hover */
-            border-color: #a5b4fc; /* Darker border on hover */
+            background-color: #c7d2fe;
+            border-color: #a5b4fc;
         }
         .calendar-button i {
             margin-right: 0.25rem;
@@ -169,11 +169,11 @@
 
         /* Styling for past event cards */
         .past-card {
-            background-color: #e9ecef; /* Lighter gray background */
-            color: #6c757d; /* Grayer text */
-            opacity: 0.7; /* Slightly reduce opacity */
-            box-shadow: none; /* Remove shadow for past events to make them less prominent */
-            border: 1px solid #dee2e6; /* Add a light border */
+            background-color: #e9ecef;
+            color: #6c757d;
+            opacity: 0.7;
+            box-shadow: none;
+            border: 1px solid #dee2e6;
             transition: all 0.3s ease-in-out;
         }
         .past-card .section-title,
@@ -1396,7 +1396,7 @@
         // --- LOAD DATA ---
         try {
             const currentYear = new Date().getFullYear();
-            const dataFilePath = `/data/${currentYear}.json`; // Dynamically construct the file path
+            const dataFilePath = `data/${currentYear}.json`; // Changed path to relative
 
             // Update the main title with the current year
             document.getElementById('mainTitle').textContent = `Ferienplan ${currentYear}`;
@@ -1408,6 +1408,7 @@
             allCardsData = await response.json();
 
             // Generate HTML elements from fetched data
+            allCards.length = 0; // Clear existing cards
             allCardsData.forEach(cardData => {
                 const cardElement = createCardElement(cardData);
                 allCards.push(cardElement); // Store the generated HTML elements
