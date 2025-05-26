@@ -1,0 +1,269 @@
+[
+  {
+    "title": "Winterferien",
+    "startDate": "2025-02-03",
+    "endDate": "2025-02-04",
+    "details": [
+      {
+        "text": "Zeitraum: 03.02. - 04.02.2025",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Feriendienst Winterferien",
+          "dtstart": "20250203",
+          "dtend": "20250205",
+          "summary": "Feriendienst Winterferien",
+          "description": "Feriendienst nur für Kinder von berufstätigen Eltern (Vorbereitung/Durchführung der Entwicklungsgespräche)."
+        }
+      },
+      {
+        "text": "Letzter Anmeldetag für den Feriendienst: 10.01.2025",
+        "isDeadline": true,
+        "icsData": {
+          "filename": "Anmeldetag Winterferien",
+          "dtstart": "20250110",
+          "dtend": "20250111",
+          "summary": "Letzter Anmeldetag Winterferien",
+          "description": "Letzter Anmeldetag für den Feriendienst Winterferien."
+        }
+      }
+    ]
+  },
+  {
+    "title": "Osterferien",
+    "startDate": "2025-04-07",
+    "endDate": "2025-04-21",
+    "details": [
+      {
+        "text": "Zeitraum: 07.04. - 21.04.2025",
+        "isDeadline": false
+      },
+      {
+        "text": "Feriendienst: 07.04. - 17.04.2025",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Feriendienst Osterferien",
+          "dtstart": "20250407",
+          "dtend": "20250418",
+          "summary": "Feriendienst Osterferien",
+          "description": "Feriendienst vom 07.04.2025 bis 17.04.2025."
+        }
+      },
+      {
+        "text": "Letzter Anmeldetag für den Feriendienst: 14.03.2025",
+        "isDeadline": true,
+        "icsData": {
+          "filename": "Anmeldetag Osterferien",
+          "dtstart": "20250314",
+          "dtend": "20250315",
+          "summary": "Letzter Anmeldetag Osterferien",
+          "description": "Letzter Anmeldetag für den Feriendienst Osterferien."
+        }
+      }
+    ]
+  },
+  {
+    "title": "Feiertage & Brückentage",
+    "startDate": "2025-05-01",
+    "endDate": "2025-06-10",
+    "details": [
+      {
+        "text": "Feiertag 1. Mai 2025 (Tag der Arbeit)",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Feiertag Tag der Arbeit",
+          "dtstart": "20250501",
+          "dtend": "20250502",
+          "summary": "Feiertag Tag der Arbeit",
+          "description": "Gesetzlicher Feiertag."
+        }
+      },
+      {
+        "text": "Kita geschlossen: 02. Mai 2025 (Brückentag)",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Kita geschlossen Brückentag",
+          "dtstart": "20250502",
+          "dtend": "20250503",
+          "summary": "Kita geschlossen (Brückentag)",
+          "description": "Kita geschlossen aufgrund Brückentag nach dem 1. Mai."
+        }
+      },
+      {
+        "text": "Feiertag 29. Mai 2025 (Christi Himmelfahrt)",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Feiertag Christi Himmelfahrt",
+          "dtstart": "20250529",
+          "dtend": "20250530",
+          "summary": "Feiertag Christi Himmelfahrt",
+          "description": "Gesetzlicher Feiertag."
+        }
+      },
+      {
+        "text": "Kita geschlossen: 30. Mai 2025 (Brückentag)",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Kita geschlossen Brückentag",
+          "dtstart": "20250530",
+          "dtend": "20250531",
+          "summary": "Kita geschlossen (Brückentag)",
+          "description": "Kita geschlossen aufgrund Brückentag nach Christi Himmelfahrt."
+        }
+      },
+      {
+        "text": "Kita geschlossen: 10.06.2025 (Planungstag für alle Mitarbeitenden)",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Kita geschlossen Planungstag",
+          "dtstart": "20250610",
+          "dtend": "20250611",
+          "summary": "Kita geschlossen (Planungstag)",
+          "description": "Planungstag für alle Mitarbeitende."
+        }
+      }
+    ]
+  },
+  {
+    "title": "Sommerferien",
+    "startDate": "2025-07-03",
+    "endDate": "2025-08-13",
+    "details": [
+      {
+        "text": "Zeitraum: 03.07. - 13.08.2025",
+        "isDeadline": false
+      },
+      {
+        "text": "Feriendienst (Teil 1): 03.07. - 11.07.2025",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Feriendienst Sommerferien Teil 1",
+          "dtstart": "20250703",
+          "dtend": "20250712",
+          "summary": "Feriendienst Sommerferien (Teil 1)",
+          "description": "Feriendienst vom 03.07.2025 bis 11.07.2025."
+        }
+      },
+      {
+        "text": "Feriendienst (Teil 2): 04.08. - 13.08.2025",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Feriendienst Sommerferien Teil 2",
+          "dtstart": "20250804",
+          "dtend": "20250814",
+          "summary": "Feriendienst Sommerferien (Teil 2)",
+          "description": "Feriendienst vom 04.08.2025 bis 13.08.2025."
+        }
+      },
+      {
+        "text": "Kita geschlossen: 14.07.2025 bis 01.08.2025",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Kita geschlossen Sommer",
+          "dtstart": "20250714",
+          "dtend": "20250802",
+          "summary": "Kita geschlossen (Sommer)",
+          "description": "Kita geschlossen während der Sommerferien."
+        }
+      },
+      {
+        "text": "Letzter Anmeldetag für den Feriendienst: 13.06.2025",
+        "isDeadline": true,
+        "icsData": {
+          "filename": "Anmeldetag Sommerferien",
+          "dtstart": "20250613",
+          "dtend": "20250614",
+          "summary": "Letzter Anmeldetag Sommerferien",
+          "description": "Letzter Anmeldetag für den Feriendienst Sommerferien."
+        }
+      }
+    ]
+  },
+  {
+    "title": "Herbstferien",
+    "startDate": "2025-10-13",
+    "endDate": "2025-10-24",
+    "details": [
+      {
+        "text": "Zeitraum: 13.10. - 24.10.2025",
+        "isDeadline": false
+      },
+      {
+        "text": "Feriendienst: 13.10. - 24.10.2025",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Feriendienst Herbstferien",
+          "dtstart": "20251013",
+          "dtend": "20251025",
+          "summary": "Feriendienst Herbstferien",
+          "description": "Feriendienst vom 13.10.2025 bis 24.10.2025."
+        }
+      },
+      {
+        "text": "Letzter Anmeldetag für den Feriendienst: 19.09.2025",
+        "isDeadline": true,
+        "icsData": {
+          "filename": "Anmeldetag Herbstferien",
+          "dtstart": "20250919",
+          "dtend": "20250920",
+          "summary": "Letzter Anmeldetag Herbstferien",
+          "description": "Letzter Anmeldetag für den Feriendienst Herbstferien."
+        }
+      }
+    ]
+  },
+  {
+    "title": "Weihnachtsferien",
+    "startDate": "2025-12-22",
+    "endDate": "2026-01-02",
+    "details": [
+      {
+        "text": "Zeitraum: 22.12.2025 bis 01.01.2026",
+        "isDeadline": false
+      },
+      {
+        "text": "Feriendienst: 22.12.2025 (ausschließlich für Kinder von berufstätigen Eltern)",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Feriendienst Weihnachtsferien",
+          "dtstart": "20251222",
+          "dtend": "20251223",
+          "summary": "Feriendienst Weihnachtsferien",
+          "description": "Feriendienst ausschließlich für Kinder von berufstätigen Eltern."
+        }
+      },
+      {
+        "text": "Kita geschlossen: 23.12.2025 - 02.01.2026",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Kita geschlossen Weihnachten",
+          "dtstart": "20251223",
+          "dtend": "20260103",
+          "summary": "Kita geschlossen (Weihnachten)",
+          "description": "Kita geschlossen über die Weihnachtsferien."
+        }
+      },
+      {
+        "text": "Kita geschlossen: 02.01.2026 (Planungstag Mitarbeitende)",
+        "isDeadline": false,
+        "icsData": {
+          "filename": "Kita geschlossen Planungstag 2026",
+          "dtstart": "20260102",
+          "dtend": "20260103",
+          "summary": "Kita geschlossen (Planungstag 2026)",
+          "description": "Planungstag für Mitarbeitende im neuen Jahr."
+        }
+      },
+      {
+        "text": "Letzter Anmeldetag für den Feriendienst: 05.12.2025",
+        "isDeadline": true,
+        "icsData": {
+          "filename": "Anmeldetag Weihnachtsferien",
+          "dtstart": "20251205",
+          "dtend": "20251206",
+          "summary": "Letzter Anmeldetag Weihnachtsferien",
+          "description": "Letzter Anmeldetag für den Feriendienst Weihnachtsferien."
+        }
+      }
+    ]
+  }
+]

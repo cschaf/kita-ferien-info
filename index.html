@@ -126,7 +126,7 @@
             transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         .note-disclaimer-section p {
-            margin-bottom: 0.5rem; /* Space between paragraphs */
+            margin-bottom: 0.5rem;
         }
         .note-disclaimer-section .disclaimer-text {
             font-size: 0.875rem; /* text-sm */
@@ -873,783 +873,600 @@
     </style>
 </head>
 <body class="p-4 md:p-8 lg:p-12">
-    <div class="main-container">
-        <header class="header-section">
-            <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
-                <i class="fas fa-moon"></i>
+<div class="main-container">
+    <header class="header-section">
+        <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+            <i class="fas fa-moon"></i>
+        </button>
+
+        <div class="header-content">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">Ferienplan 2025</h1>
+            <p class="text-lg md:text-xl">Übersicht über Ferienzeiten und Schließtage der Kita</p>
+        </div>
+    </header>
+
+    <div class="note-disclaimer-section">
+        <p class="font-semibold text-lg mb-2 note-title">Wichtiger Hinweis zur Anmeldung:</p>
+        <p>Die Anmeldung für die Feriendienste erfolgt ausschließlich im Büro – persönlich, telefonisch oder per Mail!</p>
+        <p class="disclaimer-text">Alle Angaben ohne Gewähr.</p>
+    </div>
+
+    <div class="legend-container">
+        <div class="collapsible-header">
+            <h2 class="legend-title">Legende</h2>
+            <button class="toggle-button" data-target="legend-content" aria-expanded="false" aria-controls="legend-content">
+                <i class="fas fa-chevron-down"></i>
             </button>
-
-            <div class="header-content">
-                <h1 class="text-3xl md:text-4xl font-bold mb-2">Ferienplan 2025</h1>
-                <p class="text-lg md:text-xl">Übersicht über Ferienzeiten und Schließtage der Kita</p>
-            </div>
-        </header>
-
-        <div class="note-disclaimer-section">
-            <p class="font-semibold text-lg mb-2 note-title">Wichtiger Hinweis zur Anmeldung:</p>
-            <p>Die Anmeldung für die Feriendienste erfolgt ausschließlich im Büro – persönlich, telefonisch oder per Mail!</p>
-            <p class="disclaimer-text">Alle Angaben ohne Gewähr.</p>
         </div>
-
-        <div class="legend-container">
-            <div class="collapsible-header">
-                <h2 class="legend-title">Legende</h2>
-                <button class="toggle-button" data-target="legend-content" aria-expanded="false" aria-controls="legend-content">
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-            </div>
-            <div id="legend-content" class="collapsible-content">
-                <div class="legend-items">
-                    <div class="legend-item">
-                        <span class="color-box past-color"></span>
-                        <span>Vergangene Termine</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="color-box current-color"></span>
-                        <span>Aktuelle Termine</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="color-box upcoming-color"></span>
-                        <span>Nächste kommende Termine</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="color-box deadline-color"></span>
-                        <span>Wichtiger Hinweis</span>
-                    </div>
-                    <div class="legend-item">
-                        <i class="fas fa-calendar-plus legend-icon"></i>
-                        <span>Kalender-Eintrag hinzufügen</span>
-                    </div>
+        <div id="legend-content" class="collapsible-content">
+            <div class="legend-items">
+                <div class="legend-item">
+                    <span class="color-box past-color"></span>
+                    <span>Vergangene Termine</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box current-color"></span>
+                    <span>Aktuelle Termine</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box upcoming-color"></span>
+                    <span>Nächste kommende Termine</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box deadline-color"></span>
+                    <span>Wichtiger Hinweis</span>
+                </div>
+                <div class="legend-item">
+                    <i class="fas fa-calendar-plus legend-icon"></i>
+                    <span>Kalender-Eintrag hinzufügen</span>
                 </div>
             </div>
-        </div>
-
-        <div class="controls-container">
-            <div class="collapsible-header">
-                <h2 class="controls-title">Filter & Sortierung</h2>
-                <button class="toggle-button" data-target="controls-content" aria-expanded="false" aria-controls="controls-content">
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-            </div>
-            <div id="controls-content" class="collapsible-content">
-                <div class="controls-group">
-                    <div>
-                        <label for="filterOptions">Filter:</label>
-                        <select id="filterOptions">
-                            <option value="all">Alle Termine</option>
-                            <option value="upcoming">Nur kommende Termine</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="sortOptions">Sortierung:</label>
-                        <select id="sortOptions">
-                            <option value="asc">Älteste zuerst</option>
-                            <option value="desc">Neueste zuerst</option>
-                        </select>
-                    </div>
-                </div>
-                </div>
-        </div>
-
-        <main id="cards-container">
-            <section class="card" data-start-date="2025-02-03" data-end-date="2025-02-04">
-                <h2 class="section-title text-2xl md:text-3xl">Winterferien</h2>
-                <ul class="list-disc pl-5">
-                    <li class="list-item">
-                        <span>
-                            <strong>Zeitraum:</strong> 03.02. - 04.02.2025
-                        </span>
-                        <button onclick="downloadICS('Feriendienst Winterferien', '20250203', '20250205', 'Feriendienst Winterferien', 'Feriendienst nur für Kinder von berufstätigen Eltern (Vorbereitung/Durchführung der Entwicklungsgespräche).')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="deadline-highlight">
-                        <span>
-                            <strong>Letzter Anmeldetag für den Feriendienst:</strong> 10.01.2025
-                        </span>
-                        <button onclick="downloadICS('Anmeldetag Winterferien', '20250110', '20250111', 'Letzter Anmeldetag Winterferien', 'Letzter Anmeldetag für den Feriendienst Winterferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                </ul>
-            </section>
-
-            <section class="card" data-start-date="2025-04-07" data-end-date="2025-04-21">
-                <h2 class="section-title text-2xl md:text-3xl">Osterferien</h2>
-                <ul class="list-disc pl-5">
-                    <li class="list-item">
-                        <span>
-                            <strong>Zeitraum:</strong> 07.04. - 21.04.2025
-                        </span>
-                    </li>
-                    <li class="list-item">
-                        <span>
-                            <strong>Feriendienst:</strong> 07.04. - 17.04.2025
-                        </span>
-                        <button onclick="downloadICS('Feriendienst Osterferien', '20250407', '20250418', 'Feriendienst Osterferien', 'Feriendienst vom 07.04.2025 bis 17.04.2025.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="deadline-highlight">
-                        <span>
-                            <strong>Letzter Anmeldetag für den Feriendienst:</strong> 14.03.2025
-                        </span>
-                        <button onclick="downloadICS('Anmeldetag Osterferien', '20250314', '20250315', 'Letzter Anmeldetag Osterferien', 'Letzter Anmeldetag für den Feriendienst Osterferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                </ul>
-            </section>
-
-            <section class="card" data-start-date="2025-05-01" data-end-date="2025-06-10">
-                <h2 class="section-title text-2xl md:text-3xl">Feiertage & Brückentage</h2>
-                <ul class="list-disc pl-5">
-                    <li class="list-item">
-                        <span>
-                            <strong>Feiertag 1. Mai 2025 (Tag der Arbeit)</strong>
-                        </span>
-                        <button onclick="downloadICS('Feiertag Tag der Arbeit', '20250501', '20250502', 'Feiertag Tag der Arbeit', 'Gesetzlicher Feiertag.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
-                        <span>
-                            Kita geschlossen: 02. Mai 2025 (Brückentag)
-                        </span>
-                        <button onclick="downloadICS('Kita geschlossen Brückentag', '20250502', '20250503', 'Kita geschlossen (Brückentag)', 'Kita geschlossen aufgrund Brückentag nach dem 1. Mai.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
-                        <span>
-                            <strong>Feiertag 29. Mai 2025 (Christi Himmelfahrt)</strong>
-                        </span>
-                        <button onclick="downloadICS('Feiertag Christi Himmelfahrt', '20250529', '20250530', 'Feiertag Christi Himmelfahrt', 'Gesetzlicher Feiertag.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
-                        <span>
-                            Kita geschlossen: 30. Mai 2025 (Brückentag)
-                        </span>
-                        <button onclick="downloadICS('Kita geschlossen Brückentag', '20250530', '20250531', 'Kita geschlossen (Brückentag)', 'Kita geschlossen aufgrund Brückentag nach Christi Himmelfahrt.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
-                        <span>
-                            <strong>Kita geschlossen:</strong> 10.06.2025 (Planungstag für alle Mitarbeitenden)
-                        </span>
-                        <button onclick="downloadICS('Kita geschlossen Planungstag', '20250610', '20250611', 'Kita geschlossen (Planungstag)', 'Planungstag für alle Mitarbeitende.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                </ul>
-            </section>
-
-            <section class="card" data-start-date="2025-07-03" data-end-date="2025-08-13">
-                <h2 class="section-title text-2xl md:text-3xl">Sommerferien</h2>
-                <ul class="list-disc pl-5">
-                    <li class="list-item">
-                        <span>
-                            <strong>Zeitraum:</strong> 03.07. - 13.08.2025
-                        </span>
-                    </li>
-                    <li class="list-item">
-                        <span>
-                            <strong>Feriendienst (Teil 1):</strong> 03.07. - 11.07.2025
-                        </span>
-                        <button onclick="downloadICS('Feriendienst Sommerferien Teil 1', '20250703', '20250712', 'Feriendienst Sommerferien (Teil 1)', 'Feriendienst vom 03.07.2025 bis 11.07.2025.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
-                        <span>
-                            <strong>Feriendienst (Teil 2):</strong> 04.08. - 13.08.2025
-                        </span>
-                        <button onclick="downloadICS('Feriendienst Sommerferien Teil 2', '20250804', '20250814', 'Feriendienst Sommerferien (Teil 2)', 'Feriendienst vom 04.08.2025 bis 13.08.2025.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
-                        <span>
-                            <strong>Kita geschlossen:</strong> 14.07.2025 bis 01.08.2025
-                        </span>
-                        <button onclick="downloadICS('Kita geschlossen Sommer', '20250714', '20250802', 'Kita geschlossen (Sommer)', 'Kita geschlossen während der Sommerferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="deadline-highlight">
-                        <span>
-                            <strong>Letzter Anmeldetag für den Feriendienst:</strong> 13.06.2025
-                        </span>
-                        <button onclick="downloadICS('Anmeldetag Sommerferien', '20250613', '20250614', 'Letzter Anmeldetag Sommerferien', 'Letzter Anmeldetag für den Feriendienst Sommerferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                </ul>
-            </section>
-
-            <section class="card" data-start-date="2025-10-13" data-end-date="2025-10-24">
-                <h2 class="section-title text-2xl md:text-3xl">Herbstferien</h2>
-                <ul class="list-disc pl-5">
-                    <li class="list-item">
-                        <span>
-                            <strong>Zeitraum:</strong> 13.10. - 24.10.2025
-                        </span>
-                    </li>
-                    <li class="list-item">
-                        <span>
-                            <strong>Feriendienst:</strong> 13.10. - 24.10.2025
-                        </span>
-                        <button onclick="downloadICS('Feriendienst Herbstferien', '20251013', '20251025', 'Feriendienst Herbstferien', 'Feriendienst vom 13.10.2025 bis 24.10.2025.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="deadline-highlight">
-                        <span>
-                            <strong>Letzter Anmeldetag für den Feriendienst:</strong> 19.09.2025
-                        </span>
-                        <button onclick="downloadICS('Anmeldetag Herbstferien', '20250919', '20250920', 'Letzter Anmeldetag Herbstferien', 'Letzter Anmeldetag für den Feriendienst Herbstferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                </ul>
-            </section>
-
-            <section class="card" data-start-date="2025-12-22" data-end-date="2026-01-02">
-                <h2 class="section-title text-2xl md:text-3xl">Weihnachtsferien</h2>
-                <ul class="list-disc pl-5">
-                    <li class="list-item">
-                        <span>
-                            <strong>Zeitraum:</strong> 22.12.2025 bis 01.01.2026
-                        </span>
-                    </li>
-                    <li class="list-item">
-                        <span>
-                            <strong>Feriendienst:</strong> 22.12.2025 (ausschließlich für Kinder von berufstätigen Eltern)
-                        </span>
-                        <button onclick="downloadICS('Feriendienst Weihnachtsferien', '20251222', '20251223', 'Feriendienst Weihnachtsferien', 'Feriendienst ausschließlich für Kinder von berufstätigen Eltern.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
-                        <span>
-                            <strong>Kita geschlossen:</strong> 23.12.2025 - 02.01.2026
-                        </span>
-                        <button onclick="downloadICS('Kita geschlossen Weihnachten', '20251223', '20260103', 'Kita geschlossen (Weihnachten)', 'Kita geschlossen über die Weihnachtsferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
-                        <span>
-                            <strong>Kita geschlossen:</strong> 02.01.2026 (Planungstag Mitarbeitende)
-                        </span>
-                        <button onclick="downloadICS('Kita geschlossen Planungstag 2026', '20260102', '20260103', 'Kita geschlossen (Planungstag 2026)', 'Planungstag für Mitarbeitende im neuen Jahr.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="deadline-highlight">
-                        <span>
-                            <strong>Letzter Anmeldetag für den Feriendienst:</strong> 05.12.2025
-                        </span>
-                        <button onclick="downloadICS('Anmeldetag Weihnachtsferien', '20251205', '20251206', 'Letzter Anmeldetag Weihnachtsferien', 'Letzter Anmeldetag für den Feriendienst Weihnachtsferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                </ul>
-            </section>
-        </main>
-
-        <div class="print-button-container">
-            <button class="print-button" onclick="window.print()">
-                <i class="fas fa-print"></i> Drucken
-            </button>
         </div>
     </div>
 
-    <div id="stickyCountdownBar" class="sticky-countdown-bar">
-        <span id="countdownCombinedDisplay" class="countdown-combined-display"></span>
+    <div class="controls-container">
+        <div class="collapsible-header">
+            <h2 class="controls-title">Filter & Sortierung</h2>
+            <button class="toggle-button" data-target="controls-content" aria-expanded="false" aria-controls="controls-content">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+        <div id="controls-content" class="collapsible-content">
+            <div class="controls-group">
+                <div>
+                    <label for="filterOptions">Filter:</label>
+                    <select id="filterOptions">
+                        <option value="all">Alle Termine</option>
+                        <option value="upcoming">Nur kommende Termine</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="sortOptions">Sortierung:</label>
+                    <select id="sortOptions">
+                        <option value="asc">Älteste zuerst</option>
+                        <option value="desc">Neueste zuerst</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <footer class="footer-section">
-        <p>Dies ist ein privates Projekt und steht in keiner direkten Verbindung zur Kita.</p>
-        <p>Die Informationen auf dieser Seite wurden allgemein von der Kita an alle verteilt.</p>
-        <p>Ich habe nicht mehr Informationen als alle anderen auch. Alle Angaben sind ohne Gewähr.</p>
-        <p>
-            <a href="images/2025-Ferien.jpg" target="_blank" rel="noopener noreferrer">
-                Link zur originalen Liste mit den Terminen (JPG)
-            </a>
-        </p>
-        <br>
-        <br>
-    </footer>
+    <main id="cards-container">
+    </main>
 
-    <button id="scrollToTopBtn" class="scroll-to-top-btn" aria-label="Nach oben scrollen">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <div class="print-button-container">
+        <button class="print-button" onclick="window.print()">
+            <i class="fas fa-print"></i> Drucken
+        </button>
+    </div>
+</div>
 
-    <script>
-        // Global variable to store all original cards
-        let allCards = [];
-        let countdownInterval; // Variable to hold the countdown interval
+<div id="stickyCountdownBar" class="sticky-countdown-bar">
+    <span id="countdownCombinedDisplay" class="countdown-combined-display"></span>
+</div>
 
-        // List of ONLY important registration dates for the countdown
-        const importantCountdownDates = [
-            { name: "Winterferien", date: "2025-01-10" },
-            { name: "Osterferien", date: "2025-03-14" },
-            { name: "Sommerferien", date: "2025-06-13" },
-            { name: "Herbstferien", date: "2025-09-19" },
-            { name: "Weihnachtsferien", date: "2025-12-05" }
-        ];
+<footer class="footer-section">
+    <p>Dies ist ein privates Projekt und steht in keiner direkten Verbindung zur Kita.</p>
+    <p>Die Informationen auf dieser Seite wurden allgemein von der Kita an alle verteilt.</p>
+    <p>Ich habe nicht mehr Informationen als alle anderen auch. Alle Angaben sind ohne Gewähr.</p>
+    <p>
+        <a href="images/2025-Ferien.jpg" target="_blank" rel="noopener noreferrer">
+            Link zur originalen Liste mit den Terminen (JPG)
+        </a>
+    </p><br><br>
+</footer>
 
-        /**
-         * Finds the next important registration date from the predefined list.
-         * @returns {object|null} An object with name and targetDate, or null if no future registration days.
-         */
-        function findNextImportantEvent() {
-            const now = new Date();
-            // We want to count down to 15:00 on the registration day
-            // now.setHours(23, 59, 59, 999); // Old: end of day
+<button id="scrollToTopBtn" class="scroll-to-top-btn" aria-label="Nach oben scrollen">
+    <i class="fas fa-arrow-up"></i>
+</button>
 
-            let nextEvent = null;
-            let minDiff = Infinity;
+<script>
+    let allCardsData = []; // Store the raw JSON data
+    let allCards = [];    // Store the generated HTML card elements
+    let countdownInterval;
 
-            for (const event of importantCountdownDates) {
-                const targetDate = new Date(event.date);
-                targetDate.setHours(15, 0, 0, 0); // Set to 15:00:00.000
+    /**
+     * Creates an HTML card element from a data object.
+     * @param {Object} cardData - The data object for the card.
+     * @returns {HTMLElement} The created card element.
+     */
+    function createCardElement(cardData) {
+        const card = document.createElement('section');
+        card.classList.add('card');
+        card.setAttribute('data-start-date', cardData.startDate);
+        card.setAttribute('data-end-date', cardData.endDate);
 
-                // If the event date and time is in the future
-                if (targetDate.getTime() > now.getTime()) {
-                    const diff = targetDate.getTime() - now.getTime();
-                    if (diff < minDiff) {
-                        minDiff = diff;
-                        nextEvent = { name: event.name, targetDate: targetDate };
+        const title = document.createElement('h2');
+        title.classList.add('section-title', 'text-2xl', 'md:text-3xl');
+        title.textContent = cardData.title;
+        card.appendChild(title);
+
+        const ul = document.createElement('ul');
+        ul.classList.add('list-disc', 'pl-5');
+
+        cardData.details.forEach(detail => {
+            const li = document.createElement('li');
+            li.classList.add('list-item');
+            if (detail.isDeadline) {
+                li.classList.add('deadline-highlight');
+            }
+
+            const span = document.createElement('span');
+            // Check if text should be strong, currently only in list-item
+            // If you want "strong" only for deadlines, adjust this logic
+            span.innerHTML = detail.text.includes('strong>') ? detail.text : `<span>${detail.text}</span>`;
+
+
+            li.appendChild(span);
+
+            if (detail.icsData) {
+                const button = document.createElement('button');
+                button.classList.add('calendar-button');
+                button.innerHTML = '<i class="fas fa-calendar-plus"></i> Kalender';
+                button.onclick = () => {
+                    downloadICS(
+                        detail.icsData.filename,
+                        detail.icsData.dtstart,
+                        detail.icsData.dtend,
+                        detail.icsData.summary,
+                        detail.icsData.description
+                    );
+                };
+                li.appendChild(button);
+            }
+            ul.appendChild(li);
+        });
+        card.appendChild(ul);
+        return card;
+    }
+
+
+    /**
+     * Finds the next important registration date from the predefined list.
+     * @returns {object|null} An object with name and targetDate, or null if no future registration days.
+     */
+    function findNextImportantEvent() {
+        const now = new Date();
+        let nextEvent = null;
+        let minDiff = Infinity;
+
+        // Iterate through the allCardsData to find deadline events
+        for (const card of allCardsData) {
+            for (const detail of card.details) {
+                if (detail.isDeadline && detail.icsData) {
+                    // Use dtstart from icsData for the countdown as it's the specific date
+                    const targetDateString = detail.icsData.dtstart;
+                    if (targetDateString) {
+                        const year = parseInt(targetDateString.substring(0, 4), 10);
+                        const month = parseInt(targetDateString.substring(4, 6), 10) - 1; // 0-indexed
+                        const day = parseInt(targetDateString.substring(6, 8), 10);
+                        const targetDate = new Date(year, month, day);
+                        targetDate.setHours(15, 0, 0, 0); // Set to 15:00:00.000 for countdown
+
+                        if (targetDate.getTime() > now.getTime()) {
+                            const diff = targetDate.getTime() - now.getTime();
+                            if (diff < minDiff) {
+                                minDiff = diff;
+                                nextEvent = { name: card.title.replace('ferien', ''), targetDate: targetDate }; // e.g., "Winter" from "Winterferien"
+                            }
+                        }
                     }
                 }
             }
-            return nextEvent;
+        }
+        return nextEvent;
+    }
+
+    /**
+     * Updates the countdown timer display.
+     */
+    function updateCountdown() {
+        const countdownCombinedDisplay = document.getElementById('countdownCombinedDisplay');
+        const stickyCountdownBar = document.getElementById('stickyCountdownBar');
+
+        const nextEvent = findNextImportantEvent();
+
+        if (!nextEvent) {
+            stickyCountdownBar.style.display = 'none';
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            return;
         }
 
-        /**
-         * Updates the countdown timer display.
-         */
-        function updateCountdown() {
-            const countdownCombinedDisplay = document.getElementById('countdownCombinedDisplay');
-            const stickyCountdownBar = document.getElementById('stickyCountdownBar');
+        stickyCountdownBar.style.display = 'flex';
 
-            const nextEvent = findNextImportantEvent();
+        const now = new Date().getTime();
+        const distance = nextEvent.targetDate.getTime() - now;
 
-            if (!nextEvent) {
-                stickyCountdownBar.style.display = 'none'; // Hide if no future registration days
-                if (countdownInterval) {
-                    clearInterval(countdownInterval);
-                }
-                return;
+        if (distance < 0) {
+            countdownCombinedDisplay.textContent = `Anmeldeschluss für ${nextEvent.name}feriendienst: Abgelaufen!`;
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
             }
-
-            stickyCountdownBar.style.display = 'flex'; // Ensure it's visible (using flex for styling)
-
-            const now = new Date().getTime();
-            const distance = nextEvent.targetDate.getTime() - now;
-
-            if (distance < 0) {
-                countdownCombinedDisplay.textContent = `Anmeldeschluss für ${nextEvent.name}feriendienst: Abgelaufen!`;
-                if (countdownInterval) {
-                    clearInterval(countdownInterval);
-                }
-                // After a short delay, try to find the *next* next event
-                setTimeout(() => {
-                    updateCountdown(); // Re-run to find the next event
-                }, 5000); // Wait 5 seconds before checking for the next event
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Format the timer part
-            let timerString = '';
-            if (days > 0) {
-                timerString += `${days}T `;
-            }
-            timerString += `${String(hours).padStart(2, '0')}Std ${String(minutes).padStart(2, '0')}Min ${String(seconds).padStart(2, '0')}Sek`;
-
-
-            countdownCombinedDisplay.textContent = `Anmeldeschluss für ${nextEvent.name}feriendienst in ${timerString}`;
+            setTimeout(() => {
+                updateCountdown();
+            }, 5000);
+            return;
         }
 
-        /**
-         * Toggles dark mode on and off.
-         * Stores the preference in localStorage.
-         */
-        function toggleDarkMode() {
-            const body = document.body;
-            body.classList.toggle('dark-mode');
-            const isDarkMode = body.classList.contains('dark-mode');
-            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Update button icon
-            const darkModeToggleIcon = document.querySelector('#darkModeToggle i');
-            if (isDarkMode) {
-                darkModeToggleIcon.classList.remove('fa-moon');
-                darkModeToggleIcon.classList.add('fa-sun');
-            } else {
-                darkModeToggleIcon.classList.remove('fa-sun');
-                darkModeToggleIcon.classList.add('fa-moon');
-            }
+        let timerString = '';
+        if (days > 0) {
+            timerString += `${days}T `;
+        }
+        timerString += `${String(hours).padStart(2, '0')}Std ${String(minutes).padStart(2, '0')}Min ${String(seconds).padStart(2, '0')}Sek`;
+
+        countdownCombinedDisplay.textContent = `Anmeldeschluss für ${nextEvent.name}feriendienst in ${timerString}`;
+    }
+
+
+    /**
+     * Toggles dark mode on and off.
+     * Stores the preference in localStorage.
+     */
+    function toggleDarkMode() {
+        const body = document.body;
+        body.classList.toggle('dark-mode');
+        const isDarkMode = body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+
+        // Update button icon
+        const darkModeToggleIcon = document.querySelector('#darkModeToggle i');
+        if (isDarkMode) {
+            darkModeToggleIcon.classList.remove('fa-moon');
+            darkModeToggleIcon.classList.add('fa-sun');
+        } else {
+            darkModeToggleIcon.classList.remove('fa-sun');
+            darkModeToggleIcon.classList.add('fa-moon');
+        }
+    }
+
+    /**
+     * Toggles the collapsed/expanded state of a collapsible section.
+     * @param {HTMLButtonElement} button The button that triggered the toggle.
+     */
+    function toggleCollapsible(button) {
+        const targetId = button.dataset.target;
+        const content = document.getElementById(targetId);
+        const icon = button.querySelector('i');
+
+        const isExpanded = content.classList.contains('expanded');
+
+        if (isExpanded) {
+            content.classList.remove('expanded');
+            button.classList.remove('expanded');
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('expanded');
+            button.classList.add('expanded');
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+
+    /**
+     * Parses a German date string (DD.MM.YYYY or D[D]. MonthName) into a Date object.
+     * Handles single dates or date ranges.
+     * Returns the *latest* date in a range, or the single date.
+     * Returns null if no valid date is found.
+     * This function is now primarily used for parsing dates within the 'text' property of details,
+     * which might not always be in a strict YYYY-MM-DD format.
+     */
+    function parseGermanDate(dateString) {
+        const monthMap = {
+            'januar': 0, 'februar': 1, 'märz': 2, 'april': 3, 'mai': 4, 'juni': 5,
+            'juli': 6, 'august': 7, 'september': 8, 'oktober': 9, 'november': 10, 'dezember': 11
+        };
+
+        let dates = [];
+
+        // Try matching DD.MM.YYYY or D.M.YYYY format
+        const regexNumericDate = /(\d{1,2})\.(\d{1,2})\.(\d{4})/;
+        let matchNumeric = dateString.match(regexNumericDate);
+        if (matchNumeric) {
+            const day = parseInt(matchNumeric[1], 10);
+            const month = parseInt(matchNumeric[2], 10) - 1; // Month is 0-indexed
+            const year = parseInt(matchNumeric[3], 10);
+            dates.push(new Date(year, month, day));
         }
 
-        /**
-         * Toggles the collapsed/expanded state of a collapsible section.
-         * @param {HTMLButtonElement} button The button that triggered the toggle.
-         */
-        function toggleCollapsible(button) {
-            const targetId = button.dataset.target;
-            const content = document.getElementById(targetId);
-            const icon = button.querySelector('i');
-
-            const isExpanded = content.classList.contains('expanded');
-
-            if (isExpanded) {
-                content.classList.remove('expanded');
-                button.classList.remove('expanded');
-                icon.classList.remove('fa-chevron-up');
-                icon.classList.add('fa-chevron-down');
-                button.setAttribute('aria-expanded', 'false');
-            } else {
-                content.classList.add('expanded');
-                button.classList.add('expanded');
-                icon.classList.remove('fa-chevron-down');
-                icon.classList.add('fa-chevron-up');
-                button.setAttribute('aria-expanded', 'true');
-            }
-        }
-
-
-        /**
-         * Parses a German date string (DD.MM.YYYY or D[D]. MonthName) into a Date object.
-         * Handles single dates or date ranges.
-         * Returns the *latest* date in a range, or the single date.
-         * Returns null if no valid date is found.
-         */
-        function parseGermanDate(dateString) {
-            const monthMap = {
-                'januar': 0, 'februar': 1, 'märz': 2, 'april': 3, 'mai': 4, 'juni': 5,
-                'juli': 6, 'august': 7, 'september': 8, 'oktober': 9, 'november': 10, 'dezember': 11
-            };
-
-            let dates = [];
-
-            // Try matching DD.MM.YYYY or D.M.YYYY format
-            const regexNumericDate = /(\d{1,2})\.(\d{1,2})\.(\d{4})/;
-            let matchNumeric = dateString.match(regexNumericDate);
-            if (matchNumeric) {
-                const day = parseInt(matchNumeric[1], 10);
-                const month = parseInt(matchNumeric[2], 10) - 1; // Month is 0-indexed
-                const year = parseInt(matchNumeric[3], 10);
+        // Try matching D[D]. MonthName format (e.g., "3. Mai 2025")
+        const regexMonthNameDate = /(\d{1,2})\.\s*(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\s*(\d{4})/i;
+        let matchMonthName = dateString.match(regexMonthNameDate);
+        if (matchMonthName) {
+            const day = parseInt(matchMonthName[1], 10);
+            const monthName = matchMonthName[2].toLowerCase();
+            const month = monthMap[monthName];
+            const year = parseInt(matchMonthName[3], 10);
+            if (month !== undefined) {
                 dates.push(new Date(year, month, day));
             }
+        }
 
-            // Try matching D[D]. MonthName format
-            const regexMonthNameDate = /(\d{1,2})\.\s*(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\s*(\d{4})/i;
-            let matchMonthName = dateString.match(regexMonthNameDate);
-            if (matchMonthName) {
-                const day = parseInt(matchMonthName[1], 10);
-                const monthName = matchMonthName[2].toLowerCase();
-                const month = monthMap[monthName];
-                const year = parseInt(matchMonthName[3], 10);
-                if (month !== undefined) {
-                    dates.push(new Date(year, month, day));
-                }
+        // Try matching date ranges (e.g., "03.07. - 13.08.2025")
+        const regexDateRange = /(\d{1,2}\.\d{1,2}\.\d{4})\s*-\s*(\d{1,2}\.\d{1,2}\.\d{4})/;
+        let matchRange = dateString.match(regexDateRange);
+        if (matchRange) {
+            const date1 = parseGermanDate(matchRange[1]);
+            const date2 = parseGermanDate(matchRange[2]);
+            if (date1) dates.push(date1);
+            if (date2) dates.push(date2);
+        }
+
+
+        if (dates.length === 0) {
+            return null;
+        } else if (dates.length === 1) {
+            return dates[0];
+        } else {
+            // If multiple dates are found (e.g., a range), take the latest date for the "past" check.
+            return new Date(Math.max(...dates.map(d => d.getTime())));
+        }
+    }
+
+
+    /**
+     * Generates and downloads an ICS calendar file.
+     * @param {string} filename The name of the file to download (e.g., "Winterferien").
+     * @param {string} dtstart The start date in INSEE-YYYYMMDD format (e.g., "20250203").
+     * @param {string} dtend The end date in INSEE-YYYYMMDD format. For all-day events, this is the day *after* the event ends.
+     * @param {string} summary The summary/title of the event.
+     * @param {string} description The description of the event.
+     * @param {string} [location='Kita'] The location of the event.
+     */
+    function downloadICS(filename, dtstart, dtend, summary, description, location = 'Kita') {
+        const uid = Date.now().toString(36) + Math.random().toString(36).substr(2); // Unique ID for the event
+        const now = new Date();
+        const created = now.toISOString().replace(/[-:]|\.\d{3}/g, '', 'Z'); // Current timestamp in INSEE-YYYYMMDDTHHMMSSZ
+
+        const icsContent = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Google Inc//Google Calendar 70.9054//EN',
+            'CALSCALE:GREGORIAN',
+            'BEGIN:VEVENT',
+            `DTSTAMP:${created}`,
+            `UID:${uid}@ferienplan.kita.de`, // Unique ID for the event
+            `DTSTART;VALUE=DATE:${dtstart}`, // All-day event start
+            `DTEND;VALUE=DATE:${dtend}`,     // All-day event end (exclusive)
+            `SUMMARY:${summary}`,
+            `DESCRIPTION:${description}`,
+            `LOCATION:${location}`,
+            'END:VEVENT',
+            'END:VCALENDAR'
+        ].join('\n');
+
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${filename}.ics`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url); // Clean up the object URL
+    }
+
+    /**
+     * Applies filters and sorting, then updates visual highlighting.
+     */
+    function applyFiltersAndSorting() {
+        const filterSelect = document.getElementById('filterOptions');
+        const sortSelect = document.getElementById('sortOptions');
+        const cardsContainer = document.getElementById('cards-container');
+
+        const selectedFilter = filterSelect.value;
+        const selectedSort = sortSelect.value;
+
+        // Start with the complete set of original card *elements*
+        let displayedCards = [...allCards]; // Create a shallow copy
+
+        // 1. Filter cards
+        displayedCards = displayedCards.filter(cardElement => {
+            const startDateStr = cardElement.dataset.startDate;
+            const endDateStr = cardElement.dataset.endDate;
+
+            if (!startDateStr || !endDateStr) return true;
+
+            const startDate = new Date(startDateStr);
+            startDate.setHours(0, 0, 0, 0);
+            const endDate = new Date(endDateStr);
+            endDate.setHours(0, 0, 0, 0);
+
+            if (selectedFilter === 'upcoming') {
+                const today = new Date();
+                today.setHours(0,0,0,0);
+                return startDate >= today || (startDate <= today && endDate >= today);
             }
+            return true;
+        });
 
-            if (dates.length === 0) {
-                return null;
-            } else if (dates.length === 1) {
-                return dates[0];
+        // 2. Sort filtered cards
+        displayedCards.sort((a, b) => {
+            const dateA = new Date(a.dataset.startDate);
+            const dateB = new Date(b.dataset.startDate);
+
+            if (selectedSort === 'asc') {
+                return dateA.getTime() - dateB.getTime();
             } else {
-                // If multiple dates are found (e.g., a range like "03.07. - 13.08.2025"),
-                // take the latest date for the "past" check.
-                return new Date(Math.max(...dates.map(d => d.getTime())));
+                return dateB.getTime() - dateA.getTime();
             }
-        }
+        });
 
+        // 3. Re-append sorted and filtered cards to the DOM
+        cardsContainer.innerHTML = '';
+        displayedCards.forEach(card => cardsContainer.appendChild(card));
 
-        /**
-         * Generates and downloads an ICS calendar file.
-         * @param {string} filename The name of the file to download (e.g., "Winterferien").
-         * @param {string} dtstart The start date in INSEE-YYYYMMDD format (e.g., "20250203").
-         * @param {string} dtend The end date in INSEE-YYYYMMDD format. For all-day events, this is the day *after* the event ends.
-         * @param {string} summary The summary/title of the event.
-         * @param {string} description The description of the event.
-         * @param {string} [location='Kita'] The location of the event.
-         */
-        function downloadICS(filename, dtstart, dtend, summary, description, location = 'Kita') {
-            const uid = Date.now().toString(36) + Math.random().toString(36).substr(2); // Unique ID for the event
-            const now = new Date();
-            const created = now.toISOString().replace(/[-:]|\.\d{3}/g, '', 'Z'); // Current timestamp in INSEE-YYYYMMDDTHHMMSSZ
+        // 4. After filtering and sorting, re-apply the visual highlighting
+        updateVisualHighlighting();
+    }
 
-            const icsContent = [
-                'BEGIN:VCALENDAR',
-                'VERSION:2.0',
-                'PRODID:-//Google Inc//Google Calendar 70.9054//EN',
-                'CALSCALE:GREGORIAN',
-                'BEGIN:VEVENT',
-                `DTSTAMP:${created}`,
-                `UID:${uid}@ferienplan.kita.de`, // Unique ID for the event
-                `DTSTART;VALUE=DATE:${dtstart}`, // All-day event start
-                `DTEND;VALUE=DATE:${dtend}`,     // All-day event end (exclusive)
-                `SUMMARY:${summary}`,
-                `DESCRIPTION:${description}`,
-                `LOCATION:${location}`,
-                'END:VEVENT',
-                'END:VCALENDAR'
-            ].join('\n');
+    /**
+     * Applies visual highlighting (past, current, upcoming) to cards and strikethrough to past list items.
+     * This function should be called after filtering and sorting.
+     */
+    function updateVisualHighlighting() {
+        const cards = document.querySelectorAll('.card');
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
-            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${filename}.ics`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url); // Clean up the object URL
-        }
+        let soonestUpcomingStartDate = Infinity;
+        let soonestUpcomingCard = null;
 
-        /**
-         * Checks if a given date is in the past compared to the current date.
-         * @param {string} dateString - Date in 'YYYY-MM-DD' format.
-         * @returns {boolean} True if the date is in the past, false otherwise.
-         */
-        function isDateInPast(dateString) {
-            const today = new Date();
-            today.setHours(0, 0, 0, 0); // Normalize today to start of day
+        cards.forEach(card => {
+            const startDateStr = card.dataset.startDate;
+            const endDateStr = card.dataset.endDate;
 
-            const checkDate = new Date(dateString);
-            checkDate.setHours(0, 0, 0, 0); // Normalize checkDate to start of day
+            card.classList.remove('past-card', 'current-card', 'upcoming-card');
 
-            return checkDate < today;
-        }
-
-        /**
-         * Checks if a given date is in the future compared to the current date.
-         * @param {string} dateString - Date in 'YYYY-MM-DD' format.
-         * @returns {boolean} True if the date is in the future, false otherwise.
-         */
-        function isDateInFuture(dateString) {
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            const checkDate = new Date(dateString);
-            checkDate.setHours(0, 0, 0, 0);
-
-            return checkDate > today;
-        }
-
-        /**
-         * Checks if a given date is today.
-         * @param {string} dateString - Date in 'YYYY-MM-DD' format.
-         * @returns {boolean} True if the date is today, false otherwise.
-         */
-        function isDateToday(dateString) {
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            const checkDate = new Date(dateString);
-            checkDate.setHours(0, 0, 0, 0);
-
-            return checkDate.getTime() === today.getTime();
-        }
-
-        /**
-         * Applies filters and sorting, then updates visual highlighting.
-         */
-        function applyFiltersAndSorting() {
-            const filterSelect = document.getElementById('filterOptions');
-            const sortSelect = document.getElementById('sortOptions');
-            const cardsContainer = document.getElementById('cards-container');
-
-            const selectedFilter = filterSelect.value;
-            const selectedSort = sortSelect.value;
-
-            // Start with the complete set of original cards
-            let processedCards = [...allCards]; // Create a shallow copy to avoid modifying the original array
-
-            // 1. Filter cards
-            processedCards = processedCards.filter(card => {
-                const startDateStr = card.dataset.startDate;
-                const endDateStr = card.dataset.endDate;
-
-                if (!startDateStr || !endDateStr) return true; // Keep if dates are missing
-
+            if (!startDateStr || !endDateStr) {
+                console.warn('Card missing start or end date:', card);
+            } else {
                 const startDate = new Date(startDateStr);
                 startDate.setHours(0, 0, 0, 0);
                 const endDate = new Date(endDateStr);
                 endDate.setHours(0, 0, 0, 0);
 
-                if (selectedFilter === 'upcoming') {
-                    const today = new Date();
-                    today.setHours(0,0,0,0);
-                    // An event is "upcoming" if its start date is in the future OR if it's currently active.
-                    return startDate >= today || (startDate <= today && endDate >= today);
+                if (endDate < today) {
+                    card.classList.add('past-card');
+                } else if (startDate <= today && endDate >= today) {
+                    card.classList.add('current-card');
+                } else if (startDate > today) {
+                    if (startDate.getTime() < soonestUpcomingStartDate) {
+                        soonestUpcomingStartDate = startDate.getTime();
+                        soonestUpcomingCard = card;
+                    }
                 }
-                return true; // 'all' filter, keep all cards
-            });
+            }
 
-            // 2. Sort filtered cards
-            processedCards.sort((a, b) => {
-                const dateA = new Date(a.dataset.startDate);
-                const dateB = new Date(b.dataset.startDate);
-
-                if (selectedSort === 'asc') {
-                    return dateA.getTime() - dateB.getTime();
-                } else { // 'desc'
-                    return dateB.getTime() - dateA.getTime();
-                }
-            });
-
-            // 3. Re-append sorted and filtered cards to the DOM
-            // Clear current content
-            cardsContainer.innerHTML = '';
-            // Append sorted cards
-            processedCards.forEach(card => cardsContainer.appendChild(card));
-
-            // 4. After filtering and sorting, re-apply the visual highlighting
-            updateVisualHighlighting();
-        }
-
-        /**
-         * Applies visual highlighting (past, current, upcoming) to cards and strikethrough to past list items.
-         * This function should be called after filtering and sorting.
-         */
-        function updateVisualHighlighting() {
-            const cards = document.querySelectorAll('.card'); // Get cards currently in DOM
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            let soonestUpcomingStartDate = Infinity;
-            let soonestUpcomingCard = null;
-
-            cards.forEach(card => {
-                const startDateStr = card.dataset.startDate;
-                const endDateStr = card.dataset.endDate;
-
-                // Remove all highlighting classes first
-                card.classList.remove('past-card', 'current-card', 'upcoming-card');
-
-                if (!startDateStr || !endDateStr) {
-                    console.warn('Card missing start or end date:', card);
-                    // Even if card dates are missing, still process list items
+            const listItems = card.querySelectorAll('.list-item span, .deadline-highlight span');
+            listItems.forEach(spanElement => {
+                const dateInItem = parseGermanDate(spanElement.textContent);
+                if (dateInItem && dateInItem < today) {
+                    spanElement.classList.add('line-through');
                 } else {
-                    const startDate = new Date(startDateStr);
-                    startDate.setHours(0, 0, 0, 0);
-                    const endDate = new Date(endDateStr);
-                    endDate.setHours(0, 0, 0, 0);
-
-                    // Check for Past
-                    if (endDate < today) {
-                        card.classList.add('past-card');
-                    }
-                    // Check for Current (today is within the event period)
-                    else if (startDate <= today && endDate >= today) {
-                        card.classList.add('current-card');
-                    }
-                    // Check for Upcoming (find the soonest one among non-past/non-current cards)
-                    else if (startDate > today) {
-                        if (startDate.getTime() < soonestUpcomingStartDate) {
-                            soonestUpcomingStartDate = startDate.getTime();
-                            soonestUpcomingCard = card;
-                        }
-                    }
+                    spanElement.classList.remove('line-through');
                 }
-
-                // Process individual list items for strikethrough
-                const listItems = card.querySelectorAll('.list-item span, .deadline-highlight span');
-                listItems.forEach(spanElement => {
-                    const dateInItem = parseGermanDate(spanElement.textContent);
-                    if (dateInItem && dateInItem < today) {
-                        spanElement.classList.add('line-through');
-                    } else {
-                        spanElement.classList.remove('line-through');
-                    }
-                });
             });
+        });
 
-            // Apply 'upcoming-card' class to the soonest upcoming event after iterating all cards
-            if (soonestUpcomingCard) {
-                soonestUpcomingCard.classList.add('upcoming-card');
-            }
+        if (soonestUpcomingCard) {
+            soonestUpcomingCard.classList.add('upcoming-card');
+        }
+    }
+
+
+    // Initial setup when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Check for dark mode preference on load
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            document.querySelector('#darkModeToggle i').classList.remove('fa-moon');
+            document.querySelector('#darkModeToggle i').classList.add('fa-sun');
         }
 
-
-        // Initial setup when the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check for dark mode preference on load
-            if (localStorage.getItem('darkMode') === 'enabled') {
-                document.body.classList.add('dark-mode');
-                document.querySelector('#darkModeToggle i').classList.remove('fa-moon');
-                document.querySelector('#darkModeToggle i').classList.add('fa-sun');
+        // --- LOAD DATA ---
+        try {
+            const response = await fetch('/data/2025.json'); // Changed path to root-relative
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+            allCardsData = await response.json();
 
-            // Store all cards initially
-            allCards = Array.from(document.querySelectorAll('.card')).map(card => card.cloneNode(true)); // Deep clone to preserve event listeners if any
+            // Generate HTML elements from fetched data
+            allCardsData.forEach(cardData => {
+                const cardElement = createCardElement(cardData);
+                allCards.push(cardElement); // Store the generated HTML elements
+            });
 
             // Apply filters and sorting initially (this will also trigger visual highlighting)
             applyFiltersAndSorting();
 
-            // Add event listeners for filter and sort changes
-            document.getElementById('filterOptions').addEventListener('change', applyFiltersAndSorting);
-            document.getElementById('sortOptions').addEventListener('change', applyFiltersAndSorting);
-
-            // Add event listener for dark mode toggle
-            document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
-
-            // Setup collapsible sections: Add click listeners and set initial state to collapsed
-            document.querySelectorAll('.collapsible-header .toggle-button').forEach(button => {
-                const targetId = button.dataset.target;
-                const content = document.getElementById(targetId);
-                const icon = button.querySelector('i');
-
-                // Ensure initial state is collapsed
-                content.classList.remove('expanded'); // Remove expanded if it was somehow present
-                content.classList.add('collapsed'); // Explicitly add collapsed
-                button.classList.remove('expanded'); // Button also starts unexpanded
-                button.setAttribute('aria-expanded', 'false');
-                icon.classList.remove('fa-chevron-up'); // Ensure correct initial icon
-                icon.classList.add('fa-chevron-down');
-
-                button.addEventListener('click', () => toggleCollapsible(button));
-            });
-
-            // Initialize and start the countdown timer
-            updateCountdown();
-            countdownInterval = setInterval(updateCountdown, 1000);
+        } catch (error) {
+            console.error('Failed to load schedule data:', error);
+            document.getElementById('cards-container').innerHTML = '<p class="text-red-500 text-center text-lg">Fehler beim Laden der Termine. Bitte versuchen Sie es später erneut.</p>';
+        }
+        // --- END LOAD DATA ---
 
 
-            // Scroll to Top Button Logic
-            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        // Add event listeners for filter and sort changes
+        document.getElementById('filterOptions').addEventListener('change', applyFiltersAndSorting);
+        document.getElementById('sortOptions').addEventListener('change', applyFiltersAndSorting);
 
-            // Show/hide button on scroll
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) { // Show button after scrolling down 300px
-                    scrollToTopBtn.classList.add('show');
-                } else {
-                    scrollToTopBtn.classList.remove('show');
-                }
-            });
+        // Add event listener for dark mode toggle
+        document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
 
-            // Scroll to top on button click
-            scrollToTopBtn.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth' // Smooth scroll
-                });
+        // Setup collapsible sections: Add click listeners and set initial state to collapsed
+        document.querySelectorAll('.collapsible-header .toggle-button').forEach(button => {
+            const targetId = button.dataset.target;
+            const content = document.getElementById(targetId);
+            const icon = button.querySelector('i');
+
+            // Ensure initial state is collapsed
+            content.classList.remove('expanded');
+            content.classList.add('collapsed');
+            button.classList.remove('expanded');
+            button.setAttribute('aria-expanded', 'false');
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
+
+            button.addEventListener('click', () => toggleCollapsible(button));
+        });
+
+        // Initialize and start the countdown timer
+        updateCountdown();
+        countdownInterval = setInterval(updateCountdown, 1000);
+
+
+        // Scroll to Top Button Logic
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        // Show/hide button on scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        // Scroll to top on button click
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
-    </script>
+    });
+</script>
 </body>
 </html>
