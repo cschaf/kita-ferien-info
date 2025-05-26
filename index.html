@@ -1207,17 +1207,17 @@
          */
         function findNextImportantEvent() {
             const now = new Date();
-            // We want to count down to the *end* of the registration day, so set time to end of day
-            now.setHours(23, 59, 59, 999);
+            // We want to count down to 15:00 on the registration day
+            // now.setHours(23, 59, 59, 999); // Old: end of day
 
             let nextEvent = null;
             let minDiff = Infinity;
 
             for (const event of importantCountdownDates) {
                 const targetDate = new Date(event.date);
-                targetDate.setHours(23, 59, 59, 999); // Set to end of day for countdown
+                targetDate.setHours(15, 0, 0, 0); // Set to 15:00:00.000
 
-                // If the event date is in the future (or today, but hasn't passed its end yet)
+                // If the event date and time is in the future
                 if (targetDate.getTime() > now.getTime()) {
                     const diff = targetDate.getTime() - now.getTime();
                     if (diff < minDiff) {
@@ -1230,7 +1230,7 @@
         }
 
         /**
-         * Updates the countdown timer display. 
+         * Updates the countdown timer display.
          */
         function updateCountdown() {
             const countdownCombinedDisplay = document.getElementById('countdownCombinedDisplay');
@@ -1252,7 +1252,7 @@
             const distance = nextEvent.targetDate.getTime() - now;
 
             if (distance < 0) {
-                countdownCombinedDisplay.textContent = `Anmeldeschluss für ${nextEvent.name}dienst: Abgelaufen!`;
+                countdownCombinedDisplay.textContent = `Anmeldeschluss für ${nextEvent.name}feriendienst: Abgelaufen!`;
                 if (countdownInterval) {
                     clearInterval(countdownInterval);
                 }
@@ -1276,7 +1276,7 @@
             timerString += `${String(hours).padStart(2, '0')}Std ${String(minutes).padStart(2, '0')}Min ${String(seconds).padStart(2, '0')}Sek`;
 
 
-            countdownCombinedDisplay.textContent = `Anmeldeschluss für ${nextEvent.name}dienst in ${timerString}`;
+            countdownCombinedDisplay.textContent = `Anmeldeschluss für ${nextEvent.name}feriendienst in ${timerString}`;
         }
 
         /**
