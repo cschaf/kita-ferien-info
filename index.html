@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferienplan 2025</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Ferienplan 2025</title> <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -798,6 +797,8 @@
                 opacity: 1 !important;
                 color: #000000 !important;
                 background-color: #ffffff !important;
+                /* Prevent card from breaking across pages */
+                page-break-inside: avoid;
             }
             .card .section-title,
             .card .list-item strong,
@@ -933,6 +934,10 @@
         <div id="controls-content" class="collapsible-content">
             <div class="controls-group">
                 <div>
+                    <label for="yearSelector">Jahr:</label>
+                    <select id="yearSelector"></select>
+                </div>
+                <div>
                     <label for="filterOptions">Filter:</label>
                     <select id="filterOptions">
                         <option value="all">Alle Termine</option>
@@ -980,14 +985,14 @@
 </button>
 
 <script>
-    let allCardsData = []; // Store the raw JSON data
-    let allCards = [];    // Store the generated HTML card elements
+    let allCardsData = []; // Speichert die Rohdaten aus der JSON-Datei
+    let allCards = [];    // Speichert die generierten HTML-Karten-Elemente
     let countdownInterval;
 
     /**
-     * Creates an HTML card element from a data object.
-     * @param {Object} cardData - The data object for the card.
-     * @returns {HTMLElement} The created card element.
+     * Erstellt ein HTML-Karten-Element aus einem Datenobjekt.
+     * @param {Object} cardData - Das Datenobjekt für die Karte.
+     * @returns {HTMLElement} Das erstellte Karten-Element.
      */
     function createCardElement(cardData) {
         const card = document.createElement('section');
@@ -1011,8 +1016,7 @@
             }
 
             const span = document.createElement('span');
-            // Check if text should be strong, currently only in list-item
-            // If you want "strong" only for deadlines, adjust this logic
+            // Überprüfen, ob der Text fett gedruckt werden soll (derzeit nur in list-item)
             span.innerHTML = detail.text.includes('strong>') ? detail.text : `<span>${detail.text}</span>`;
 
 
@@ -1041,32 +1045,32 @@
 
 
     /**
-     * Finds the next important registration date from the predefined list.
-     * @returns {object|null} An object with name and targetDate, or null if no future registration days.
+     * Findet das nächste wichtige Anmeldedatum aus der vordefinierten Liste.
+     * @returns {object|null} Ein Objekt mit Name und Zieldatum, oder null, wenn keine zukünftigen Anmeldetage vorhanden sind.
      */
     function findNextImportantEvent() {
         const now = new Date();
         let nextEvent = null;
         let minDiff = Infinity;
 
-        // Iterate through the allCardsData to find deadline events
+        // Iteriert durch die allCardsData, um Deadline-Ereignisse zu finden
         for (const card of allCardsData) {
             for (const detail of card.details) {
                 if (detail.isDeadline && detail.icsData) {
-                    // Use dtstart from icsData for the countdown as it's the specific date
+                    // Verwendet dtstart aus icsData für den Countdown, da es das spezifische Datum ist
                     const targetDateString = detail.icsData.dtstart;
                     if (targetDateString) {
                         const year = parseInt(targetDateString.substring(0, 4), 10);
-                        const month = parseInt(targetDateString.substring(4, 6), 10) - 1; // 0-indexed
+                        const month = parseInt(targetDateString.substring(4, 6), 10) - 1; // 0-indiziert
                         const day = parseInt(targetDateString.substring(6, 8), 10);
                         const targetDate = new Date(year, month, day);
-                        targetDate.setHours(15, 0, 0, 0); // Set to 15:00:00.000 for countdown
+                        targetDate.setHours(15, 0, 0, 0); // Setzt auf 15:00:00.000 für den Countdown
 
                         if (targetDate.getTime() > now.getTime()) {
                             const diff = targetDate.getTime() - now.getTime();
                             if (diff < minDiff) {
                                 minDiff = diff;
-                                nextEvent = { name: card.title.replace('ferien', ''), targetDate: targetDate }; // e.g., "Winter" from "Winterferien"
+                                nextEvent = { name: card.title.replace('ferien', ''), targetDate: targetDate }; // z.B. "Winter" von "Winterferien"
                             }
                         }
                     }
@@ -1077,7 +1081,7 @@
     }
 
     /**
-     * Updates the countdown timer display.
+     * Aktualisiert die Anzeige des Countdown-Timers.
      */
     function updateCountdown() {
         const countdownCombinedDisplay = document.getElementById('countdownCombinedDisplay');
@@ -1125,8 +1129,8 @@
 
 
     /**
-     * Toggles dark mode on and off.
-     * Stores the preference in localStorage.
+     * Schaltet den Dark Mode ein und aus.
+     * Speichert die Präferenz im localStorage.
      */
     function toggleDarkMode() {
         const body = document.body;
@@ -1134,7 +1138,7 @@
         const isDarkMode = body.classList.contains('dark-mode');
         localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
 
-        // Update button icon
+        // Aktualisiert das Button-Icon
         const darkModeToggleIcon = document.querySelector('#darkModeToggle i');
         if (isDarkMode) {
             darkModeToggleIcon.classList.remove('fa-moon');
@@ -1146,8 +1150,8 @@
     }
 
     /**
-     * Toggles the collapsed/expanded state of a collapsible section.
-     * @param {HTMLButtonElement} button The button that triggered the toggle.
+     * Schaltet den eingeklappten/ausgeklappten Zustand eines kollabierbaren Abschnitts um.
+     * @param {HTMLButtonElement} button Der Button, der den Umschalter ausgelöst hat.
      */
     function toggleCollapsible(button) {
         const targetId = button.dataset.target;
@@ -1173,12 +1177,12 @@
 
 
     /**
-     * Parses a German date string (DD.MM.YYYY or D[D]. MonthName) into a Date object.
-     * Handles single dates or date ranges.
-     * Returns the *latest* date in a range, or the single date.
-     * Returns null if no valid date is found.
-     * This function is now primarily used for parsing dates within the 'text' property of details,
-     * which might not always be in a strictYYYY-MM-DD format.
+     * Parst einen deutschen Datumsstring (TT.MM.JJJJ oder T[T]. Monatsname) in ein Date-Objekt.
+     * Behandelt einzelne Daten oder Datumsbereiche.
+     * Gibt das *späteste* Datum in einem Bereich zurück, oder das einzelne Datum.
+     * Gibt null zurück, wenn kein gültiges Datum gefunden wird.
+     * Diese Funktion wird nun hauptsächlich zum Parsen von Daten innerhalb der 'text'-Eigenschaft von Details verwendet,
+     * die möglicherweise nicht immer im strikten YYYY-MM-DD-Format vorliegen.
      */
     function parseGermanDate(dateString) {
         const monthMap = {
@@ -1188,17 +1192,17 @@
 
         let dates = [];
 
-        // Try matching DD.MM.YYYY or D.M.YYYY format
+        // Versucht, das Format TT.MM.JJJJ oder T.M.JJJJ abzugleichen
         const regexNumericDate = /(\d{1,2})\.(\d{1,2})\.(\d{4})/;
         let matchNumeric = dateString.match(regexNumericDate);
         if (matchNumeric) {
             const day = parseInt(matchNumeric[1], 10);
-            const month = parseInt(matchNumeric[2], 10) - 1; // Month is 0-indexed
+            const month = parseInt(matchNumeric[2], 10) - 1; // Monat ist 0-indiziert
             const year = parseInt(matchNumeric[3], 10);
             dates.push(new Date(year, month, day));
         }
 
-        // Try matching D[D]. MonthName format (e.g., "3. Mai 2025")
+        // Versucht, das Format T[T]. Monatsname (z.B. "3. Mai 2025") abzugleichen
         const regexMonthNameDate = /(\d{1,2})\.\s*(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\s*(\d{4})/i;
         let matchMonthName = dateString.match(regexMonthNameDate);
         if (matchMonthName) {
@@ -1211,7 +1215,7 @@
             }
         }
 
-        // Try matching date ranges (e.g., "03.07. - 13.08.2025")
+        // Versucht, Datumsbereiche (z.B. "03.07. - 13.08.2025") abzugleichen
         const regexDateRange = /(\d{1,2}\.\d{1,2}\.\d{4})\s*-\s*(\d{1,2}\.\d{1,2}\.\d{4})/;
         let matchRange = dateString.match(regexDateRange);
         if (matchRange) {
@@ -1227,25 +1231,25 @@
         } else if (dates.length === 1) {
             return dates[0];
         } else {
-            // If multiple dates are found (e.g., a range), take the latest date for the "past" check.
+            // Wenn mehrere Daten gefunden werden (z.B. ein Bereich), nimm das späteste Datum für die "Vergangen"-Prüfung.
             return new Date(Math.max(...dates.map(d => d.getTime())));
         }
     }
 
 
     /**
-     * Generates and downloads an ICS calendar file.
-     * @param {string} filename The name of the file to download (e.g., "Winterferien").
-     * @param {string} dtstart The start date in INSEE-YYYYMMDD format (e.g., "20250203").
-     * @param {string} dtend The end date in INSEE-YYYYMMDD format. For all-day events, this is the day *after* the event ends.
-     * @param {string} summary The summary/title of the event.
-     * @param {string} description The description of the event.
-     * @param {string} [location='Kita'] The location of the event.
+     * Generiert und lädt eine ICS-Kalenderdatei herunter.
+     * @param {string} filename Der Name der herunterzuladenden Datei (z.B. "Winterferien").
+     * @param {string} dtstart Das Startdatum im INSEE-YYYYMMDD-Format (z.B. "20250203").
+     * @param {string} dtend Das Enddatum im INSEE-YYYYMMDD-Format. Für ganztägige Ereignisse ist dies der Tag *nach* dem Ende des Ereignisses.
+     * @param {string} summary Die Zusammenfassung/der Titel des Ereignisses.
+     * @param {string} description Die Beschreibung des Ereignisses.
+     * @param {string} [location='Kita'] Der Ort des Ereignisses.
      */
     function downloadICS(filename, dtstart, dtend, summary, description, location = 'Kita') {
-        const uid = Date.now().toString(36) + Math.random().toString(36).substr(2); // Unique ID for the event
+        const uid = Date.now().toString(36) + Math.random().toString(36).substr(2); // Eindeutige ID für das Ereignis
         const now = new Date();
-        const created = now.toISOString().replace(/[-:]|\.\d{3}/g, '', 'Z'); // Current timestamp in INSEE-YYYYMMDDTHHMMSSZ
+        const created = now.toISOString().replace(/[-:]|\.\d{3}/g, '', 'Z'); // Aktueller Zeitstempel im INSEE-YYYYMMDDTHHMMSSZ
 
         const icsContent = [
             'BEGIN:VCALENDAR',
@@ -1254,9 +1258,9 @@
             'CALSCALE:GREGORIAN',
             'BEGIN:VEVENT',
             `DTSTAMP:${created}`,
-            `UID:${uid}@ferienplan.kita.de`, // Unique ID for the event
-            `DTSTART;VALUE=DATE:${dtstart}`, // All-day event start
-            `DTEND;VALUE=DATE:${dtend}`,     // All-day event end (exclusive)
+            `UID:${uid}@ferienplan.kita.de`, // Eindeutige ID für das Ereignis
+            `DTSTART;VALUE=DATE:${dtstart}`, // Start des ganztägigen Ereignisses
+            `DTEND;VALUE=DATE:${dtend}`,     // Ende des ganztägigen Ereignisses (exklusiv)
             `SUMMARY:${summary}`,
             `DESCRIPTION:${description}`,
             `LOCATION:${location}`,
@@ -1272,11 +1276,11 @@
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        URL.revokeObjectURL(url); // Clean up the object URL
+        URL.revokeObjectURL(url); // Bereinigt die Objekt-URL
     }
 
     /**
-     * Applies filters and sorting, then updates visual highlighting.
+     * Wendet Filter und Sortierung an und aktualisiert dann die visuelle Hervorhebung.
      */
     function applyFiltersAndSorting() {
         const filterSelect = document.getElementById('filterOptions');
@@ -1286,10 +1290,10 @@
         const selectedFilter = filterSelect.value;
         const selectedSort = sortSelect.value;
 
-        // Start with the complete set of original card *elements*
-        let displayedCards = [...allCards]; // Create a shallow copy
+        // Beginnt mit der vollständigen Menge der ursprünglichen Karten-Elemente
+        let displayedCards = [...allCards]; // Erstellt eine flache Kopie
 
-        // 1. Filter cards
+        // 1. Karten filtern
         displayedCards = displayedCards.filter(cardElement => {
             const startDateStr = cardElement.dataset.startDate;
             const endDateStr = cardElement.dataset.endDate;
@@ -1309,7 +1313,7 @@
             return true;
         });
 
-        // 2. Sort filtered cards
+        // 2. Gefilterte Karten sortieren
         displayedCards.sort((a, b) => {
             const dateA = new Date(a.dataset.startDate);
             const dateB = new Date(b.dataset.startDate);
@@ -1321,17 +1325,17 @@
             }
         });
 
-        // 3. Re-append sorted and filtered cards to the DOM
+        // 3. Sortierte und gefilterte Karten wieder an das DOM anhängen
         cardsContainer.innerHTML = '';
         displayedCards.forEach(card => cardsContainer.appendChild(card));
 
-        // 4. After filtering and sorting, re-apply the visual highlighting
+        // 4. Nach dem Filtern und Sortieren die visuelle Hervorhebung erneut anwenden
         updateVisualHighlighting();
     }
 
     /**
-     * Applies visual highlighting (past, current, upcoming) to cards and strikethrough to past list items.
-     * This function should be called after filtering and sorting.
+     * Wendet visuelle Hervorhebung (vergangen, aktuell, kommend) auf Karten und Durchstreichung auf vergangene Listenelemente an.
+     * Diese Funktion sollte nach dem Filtern und Sortieren aufgerufen werden.
      */
     function updateVisualHighlighting() {
         const cards = document.querySelectorAll('.card');
@@ -1383,6 +1387,87 @@
         }
     }
 
+    /**
+     * Lädt die Daten für das angegebene Jahr und rendert die Karten neu.
+     * Aktualisiert auch den Haupttitel und den Dokumenttitel.
+     * @param {number} year Das Jahr, für das die Daten geladen werden sollen.
+     */
+    async function loadAndRenderData(year) {
+        const cardsContainer = document.getElementById('cards-container');
+        const mainTitle = document.getElementById('mainTitle');
+
+        // Update main title and document title
+        mainTitle.textContent = `Ferienplan ${year}`;
+        document.title = `Ferienplan ${year}`;
+
+
+        // Clear existing cards
+        cardsContainer.innerHTML = '';
+        allCards.length = 0;
+        allCardsData.length = 0;
+
+        // Clear and stop existing countdown
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        document.getElementById('stickyCountdownBar').style.display = 'none'; // Hide until new data is loaded
+
+        try {
+            const dataFilePath = `data/${year}.json`; // Relativer Pfad für GitHub Pages
+            const response = await fetch(dataFilePath);
+            if (!response.ok) {
+                // Wenn die Datei nicht gefunden wird, zeigen wir eine Meldung an
+                if (response.status === 404) {
+                    cardsContainer.innerHTML = `<p class="text-gray-600 text-center text-lg mt-8">Keine Termine für das Jahr ${year} gefunden.</p>`;
+                }
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            allCardsData = await response.json();
+
+            // Generate HTML elements from fetched data
+            allCardsData.forEach(cardData => {
+                const cardElement = createCardElement(cardData);
+                allCards.push(cardElement); // Store the generated HTML elements
+            });
+
+            // Apply filters and sorting initially (this will also trigger visual highlighting)
+            applyFiltersAndSorting();
+
+            // Restart countdown for new data
+            updateCountdown();
+            countdownInterval = setInterval(updateCountdown, 1000);
+
+        } catch (error) {
+            console.error(`Fehler beim Laden der Termine für ${year}:`, error);
+            // Wenn noch keine Fehlermeldung angezeigt wird, füge eine hinzu
+            if (!cardsContainer.querySelector('.text-red-500') && !cardsContainer.querySelector('.text-gray-600')) {
+                cardsContainer.innerHTML = '<p class="text-red-500 text-center text-lg">Fehler beim Laden der Termine. Bitte versuchen Sie es später erneut.</p>';
+            }
+        }
+    }
+
+    /**
+     * Füllt das Jahresauswahl-Dropdown mit Optionen.
+     */
+    function populateYearSelector() {
+        const yearSelector = document.getElementById('yearSelector');
+        const currentYear = new Date().getFullYear();
+        const startYear = 2025; // Startjahr für die Auswahl
+        const endYear = currentYear + 2; // Aktuelles Jahr + 2 Jahre in die Zukunft
+
+        yearSelector.innerHTML = ''; // Vorhandene Optionen leeren
+
+        for (let year = startYear; year <= endYear; year++) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            yearSelector.appendChild(option);
+        }
+
+        // Das aktuelle Jahr als Standard auswählen
+        yearSelector.value = currentYear;
+    }
+
 
     // Initial setup when the DOM is fully loaded
     document.addEventListener('DOMContentLoaded', async () => {
@@ -1393,40 +1478,20 @@
             document.querySelector('#darkModeToggle i').classList.add('fa-sun');
         }
 
-        // --- LOAD DATA ---
-        try {
-            const currentYear = new Date().getFullYear();
-            const dataFilePath = `data/${currentYear}.json`; // Changed path to relative
+        // Populate year selector
+        populateYearSelector();
 
-            // Update the main title with the current year
-            document.getElementById('mainTitle').textContent = `Ferienplan ${currentYear}`;
-
-            const response = await fetch(dataFilePath);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            allCardsData = await response.json();
-
-            // Generate HTML elements from fetched data
-            allCards.length = 0; // Clear existing cards
-            allCardsData.forEach(cardData => {
-                const cardElement = createCardElement(cardData);
-                allCards.push(cardElement); // Store the generated HTML elements
-            });
-
-            // Apply filters and sorting initially (this will also trigger visual highlighting)
-            applyFiltersAndSorting();
-
-        } catch (error) {
-            console.error('Failed to load schedule data:', error);
-            document.getElementById('cards-container').innerHTML = '<p class="text-red-500 text-center text-lg">Fehler beim Laden der Termine. Bitte versuchen Sie es später erneut.</p>';
-        }
-        // --- END LOAD DATA ---
+        // Load data for the initial year (current year)
+        const initialYear = new Date().getFullYear();
+        await loadAndRenderData(initialYear);
 
 
         // Add event listeners for filter and sort changes
         document.getElementById('filterOptions').addEventListener('change', applyFiltersAndSorting);
         document.getElementById('sortOptions').addEventListener('change', applyFiltersAndSorting);
+        document.getElementById('yearSelector').addEventListener('change', (event) => {
+            loadAndRenderData(parseInt(event.target.value, 10));
+        });
 
         // Add event listener for dark mode toggle
         document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
@@ -1447,10 +1512,6 @@
 
             button.addEventListener('click', () => toggleCollapsible(button));
         });
-
-        // Initialize and start the countdown timer
-        updateCountdown();
-        countdownInterval = setInterval(updateCountdown, 1000);
 
 
         // Scroll to Top Button Logic
