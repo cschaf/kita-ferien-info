@@ -1,24 +1,30 @@
-# Ferienplan 2025 der Kita
+# Ferienplan 2025
 
-Dies ist ein digitaler und interaktiver Überblick über die Ferienzeiten, Schließtage und wichtigen Anmeldefristen der Kita für das Jahr 2025.
+Dies ist ein einfacher, interaktiver Ferienplan für das Jahr 2025, der die Ferienzeiten und Schließtage einer Kita übersichtlich darstellt.
 
 ## Demo
 **[Link zur Seite](https://cschaf.github.io/kita-ferien-info/)**
 
-## Zweck
-
-Der Hauptzweck dieses Dokuments ist es, Eltern und Mitarbeitenden eine klare, leicht zugängliche und übersichtliche Darstellung aller relevanten Termine für das Kita-Jahr 2025 zu bieten.
-
 ## Funktionen
 
-* **Übersichtliche Darstellung:** Alle Ferienzeiten, Feiertage und Schließtage sind klar strukturiert und leicht lesbar.
-* **Hervorhebung wichtiger Fristen:** Die letzten Anmeldetage für den Feriendienst sind optisch hervorgehoben, um sicherzustellen, dass keine wichtigen Termine verpasst werden.
-* **Kalenderintegration:** Für jeden relevanten Termin (Ferien, Schließtage, Anmeldefristen) gibt es einen Button, mit dem Sie einen Kalendereintrag (ICS-Datei) herunterladen und direkt in Ihren persönlichen digitalen Kalender importieren können. Dies erleichtert die Planung und Organisation.
+* **Dark Mode:** Wechseln Sie zwischen hellem und dunklem Design für eine angenehmere Ansicht, besonders bei schlechten Lichtverhältnissen. Ihre Präferenz wird gespeichert.
 
-## Nutzung
+* **Filterung:** Filtern Sie die Termine, um nur kommende Ereignisse anzuzeigen.
 
-Öffnen Sie einfach die HTML-Datei in Ihrem Webbrowser. Sie können die verschiedenen Abschnitte durchscrollen, um die gewünschten Informationen zu finden. Klicken Sie auf die "Kalender"-Buttons, um Termine zu Ihrem persönlichen Kalender hinzuzufügen.
+* **Sortierung:** Sortieren Sie die Termine auf- oder absteigend nach Datum.
 
-## Disclaimer
+* **Automatische Durchstreichung:** Termine und einzelne Aufzählungspunkte, die in der Vergangenheit liegen, werden automatisch durchgestrichen, um die Übersichtlichkeit zu erhöhen.
 
-Bitte beachten Sie, dass alle Angaben in diesem Ferienplan ohne Gewähr sind. Es wird empfohlen, sich bei wichtigen Terminen zusätzlich bei der Kita zu vergewissern.
+* **Kalender-Export:** Fügen Sie wichtige Termine direkt zu Ihrem persönlichen Kalender hinzu (ICS-Datei).
+
+* **Druckfunktion:** Eine optimierte Ansicht zum Ausdrucken des Ferienplans.
+
+* **"Nach oben scrollen"-Button:** Ein praktischer Button, der erscheint, wenn Sie nach unten scrollen, und Sie sanft zum Seitenanfang zurückbringt.
+
+## Verwendung
+
+Öffnen Sie einfach die `index.html`-Datei in Ihrem Webbrowser. Es ist keine Installation oder spezielle Konfiguration erforderlich.
+
+## Hinweis
+
+Dieses Projekt ist ein privates Vorhaben und steht in keiner direkten Verbindung zur Kita. Die hier bereitgestellten Informationen wurden allgemein von der Kita an alle verteilt. Alle Angaben sind ohne Gewähr.
