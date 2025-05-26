@@ -316,8 +316,8 @@
         .print-button-container { /* New container for the print button */
             display: flex;
             justify-content: center;
-            margin-top: 2rem; /* Reduced space above button */
-            margin-bottom: 2rem; /* Reduced space below button */
+            margin-top: 1.5rem; /* Reduced space above button */
+            margin-bottom: 1.5rem; /* Reduced space below button */
             transition: margin 0.3s ease;
         }
         .print-button {
@@ -817,6 +817,17 @@
             }
             ul {
                 padding-left: 1.5rem; /* Standard ul padding for print */
+            }
+        }
+        /* Mobile-specific adjustment for dark mode toggle */
+        @media (max-width: 639px) { /* Targets screens smaller than sm breakpoint */
+            .dark-mode-toggle {
+                top: 0.75rem; /* Adjust top position */
+                right: 0.75rem; /* Adjust right position */
+            }
+            .header-content {
+                padding-right: 3rem; /* Add padding to the right to prevent overlap with button */
+                padding-left: 3rem; /* Add padding to the left for balance */
             }
         }
     </style>
