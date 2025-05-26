@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--suppress CssUnknownUnit -->
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -285,12 +284,20 @@
             justify-content: flex-end; /* Push content to the right */
             width: 100%; /* Take full width */
         }
+        .controls-title { /* New title for controls */
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 700; /* Bold */
+            color: #4f46e5; /* Indigo */
+            flex-grow: 1; /* Allow title to take space */
+            transition: color 0.3s ease;
+        }
 
         @media (min-width: 640px) { /* sm breakpoint */
-            .controls-container {
+            .controls-container .collapsible-content { /* Apply flex for larger screens */
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
+                gap: 1rem; /* Adjust gap for row layout */
             }
             .controls-group {
                 flex-direction: row;
@@ -306,6 +313,13 @@
         }
 
         /* Print Button Styling */
+        .print-button-container { /* New container for the print button */
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem; /* Reduced space above button */
+            margin-bottom: 2rem; /* Reduced space below button */
+            transition: margin 0.3s ease;
+        }
         .print-button {
             background-color: #10b981; /* Emerald green */
             color: #ffffff;
@@ -340,9 +354,7 @@
             font-size: 1.25rem; /* text-xl */
             font-weight: 700; /* Bold */
             color: #4f46e5; /* Indigo */
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #e0e7ff;
-            padding-bottom: 0.5rem;
+            flex-grow: 1; /* Allow title to take space in header */
             transition: color 0.3s ease, border-color 0.3s ease;
         }
         .legend-items {
@@ -350,6 +362,7 @@
             flex-wrap: wrap;
             gap: 1rem;
             justify-content: center; /* Center items on larger screens */
+            margin-top: 0; /* Reset margin as it's now handled by collapsible-header */
         }
         .legend-item {
             display: flex;
@@ -545,14 +558,17 @@
             border-color: #6366f1;
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4);
         }
+        body.dark-mode .controls-title {
+            color: #9f7aea;
+        }
 
         /* Dark mode for print button */
-        body.dark-mode .print-button {
+        body.dark-mode .print-button-container .print-button { /* Target button inside new container */
             background-color: #059669;
             color: #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        body.dark-mode .print-button:hover {
+        body.dark-mode .print-button-container .print-button:hover {
             background-color: #047857;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
@@ -564,7 +580,6 @@
         }
         body.dark-mode .legend-title {
             color: #9f7aea;
-            border-bottom-color: #4a5568;
         }
         body.dark-mode .legend-item {
             color: #e2e8f0;
@@ -691,6 +706,62 @@
             background-color: #4f46e5; /* Darker indigo on hover */
         }
 
+        /* New styles for collapsible sections */
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.5rem; /* Padding for the border */
+            border-bottom: 1px solid #e0e7ff;
+            margin-bottom: 1rem; /* Space after the header, before content */
+        }
+        body.dark-mode .collapsible-header {
+            border-bottom-color: #4a5568;
+        }
+
+        .collapsible-header .toggle-button {
+            background: none;
+            border: none;
+            color: #4f46e5; /* Indigo */
+            cursor: pointer;
+            font-size: 1.25rem; /* Icon size */
+            transition: transform 0.3s ease-in-out, color 0.3s ease;
+            padding: 0.25rem;
+            border-radius: 50%;
+            width: 2.25rem; /* Slightly larger clickable area */
+            height: 2.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0; /* Prevent it from shrinking */
+        }
+        .collapsible-header .toggle-button:hover {
+            background-color: rgba(79, 70, 229, 0.1); /* Light indigo hover */
+        }
+        body.dark-mode .collapsible-header .toggle-button {
+            color: #9f7aea; /* Lighter indigo */
+        }
+        body.dark-mode .collapsible-header .toggle-button:hover {
+            background-color: rgba(159, 122, 234, 0.2);
+        }
+
+        .collapsible-header .toggle-button.expanded i {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out; /* Add opacity for smoother visual fade */
+            opacity: 0;
+            pointer-events: none; /* Disable interaction when collapsed */
+        }
+        .collapsible-content.expanded {
+            max-height: 500px; /* Sufficiently large to contain content */
+            opacity: 1;
+            pointer-events: auto;
+        }
+
 
         /* Print-specific styles */
         @media print {
@@ -707,12 +778,14 @@
             }
             .header-section,
             .controls-container, /* Hide the entire controls container for print */
+            .collapsible-header, /* Hide collapsible headers/toggles for print */
             .calendar-button,
             .note-disclaimer-section, /* Hide combined section for print */
             .legend-container, /* Hide legend for print */
             .footer-section,
             .dark-mode-toggle, /* Hide footer and toggle for print */
-            .scroll-to-top-btn { /* Hide scroll to top button for print */
+            .scroll-to-top-btn, /* Hide scroll to top button for print */
+            .print-button-container { /* Hide print button container for print */
                 display: none !important;
             }
             .card {
@@ -768,52 +841,62 @@
     </div>
 
     <div class="legend-container">
-        <h2 class="legend-title">Legende</h2>
-        <div class="legend-items">
-            <div class="legend-item">
-                <span class="color-box past-color"></span>
-                <span>Vergangene Termine</span>
-            </div>
-            <div class="legend-item">
-                <span class="color-box current-color"></span>
-                <span>Aktuelle Termine</span>
-            </div>
-            <div class="legend-item">
-                <span class="color-box upcoming-color"></span>
-                <span>Nächste kommende Termine</span>
-            </div>
-            <div class="legend-item">
-                <span class="color-box deadline-color"></span>
-                <span>Wichtiger Hinweis</span>
-            </div>
-            <div class="legend-item">
-                <i class="fas fa-calendar-plus legend-icon"></i>
-                <span>Kalender-Eintrag hinzufügen</span>
+        <div class="collapsible-header">
+            <h2 class="legend-title">Legende</h2>
+            <button class="toggle-button" data-target="legend-content" aria-expanded="false" aria-controls="legend-content">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+        <div id="legend-content" class="collapsible-content">
+            <div class="legend-items">
+                <div class="legend-item">
+                    <span class="color-box past-color"></span>
+                    <span>Vergangene Termine</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box current-color"></span>
+                    <span>Aktuelle Termine</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box upcoming-color"></span>
+                    <span>Nächste kommende Termine</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box deadline-color"></span>
+                    <span>Wichtiger Hinweis</span>
+                </div>
+                <div class="legend-item">
+                    <i class="fas fa-calendar-plus legend-icon"></i>
+                    <span>Kalender-Eintrag hinzufügen</span>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="controls-container">
-        <div class="controls-group">
-            <div>
-                <label for="filterOptions">Filter:</label>
-                <select id="filterOptions">
-                    <option value="all">Alle Termine</option>
-                    <option value="upcoming">Nur kommende Termine</option>
-                </select>
-            </div>
-            <div>
-                <label for="sortOptions">Sortierung:</label>
-                <select id="sortOptions">
-                    <option value="asc">Älteste zuerst</option>
-                    <option value="desc">Neueste zuerst</option>
-                </select>
-            </div>
-        </div>
-        <div class="controls-right-aligned">
-            <button class="print-button" onclick="window.print()">
-                <i class="fas fa-print"></i> Drucken
+        <div class="collapsible-header">
+            <h2 class="controls-title">Filter & Sortierung</h2>
+            <button class="toggle-button" data-target="controls-content" aria-expanded="false" aria-controls="controls-content">
+                <i class="fas fa-chevron-down"></i>
             </button>
+        </div>
+        <div id="controls-content" class="collapsible-content">
+            <div class="controls-group">
+                <div>
+                    <label for="filterOptions">Filter:</label>
+                    <select id="filterOptions">
+                        <option value="all">Alle Termine</option>
+                        <option value="upcoming">Nur kommende Termine</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="sortOptions">Sortierung:</label>
+                    <select id="sortOptions">
+                        <option value="asc">Älteste zuerst</option>
+                        <option value="desc">Neueste zuerst</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1026,6 +1109,12 @@
             </ul>
         </section>
     </main>
+
+    <div class="print-button-container">
+        <button class="print-button" onclick="window.print()">
+            <i class="fas fa-print"></i> Drucken
+        </button>
+    </div>
 </div>
 
 <footer class="footer-section">
@@ -1067,6 +1156,33 @@
             darkModeToggleIcon.classList.add('fa-moon');
         }
     }
+
+    /**
+     * Toggles the collapsed/expanded state of a collapsible section.
+     * @param {HTMLButtonElement} button The button that triggered the toggle.
+     */
+    function toggleCollapsible(button) {
+        const targetId = button.dataset.target;
+        const content = document.getElementById(targetId);
+        const icon = button.querySelector('i');
+
+        const isExpanded = content.classList.contains('expanded');
+
+        if (isExpanded) {
+            content.classList.remove('expanded');
+            button.classList.remove('expanded');
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('expanded');
+            button.classList.add('expanded');
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
 
     /**
      * Parses a German date string (DD.MM.YYYY or D[D]. MonthName) into a Date object.
@@ -1346,6 +1462,24 @@
 
         // Add event listener for dark mode toggle
         document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+
+        // Setup collapsible sections: Add click listeners and set initial state to collapsed
+        document.querySelectorAll('.collapsible-header .toggle-button').forEach(button => {
+            const targetId = button.dataset.target;
+            const content = document.getElementById(targetId);
+            const icon = button.querySelector('i');
+
+            // Ensure initial state is collapsed
+            content.classList.remove('expanded'); // Remove expanded if it was somehow present
+            content.classList.add('collapsed'); // Explicitly add collapsed
+            button.classList.remove('expanded'); // Button also starts unexpanded
+            button.setAttribute('aria-expanded', 'false');
+            icon.classList.remove('fa-chevron-up'); // Ensure correct initial icon
+            icon.classList.add('fa-chevron-down');
+
+            button.addEventListener('click', () => toggleCollapsible(button));
+        });
+
 
         // Scroll to Top Button Logic
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
