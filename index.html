@@ -745,10 +745,6 @@
             background-color: rgba(159, 122, 234, 0.2);
         }
 
-        .collapsible-header .toggle-button.expanded i {
-            transform: rotate(180deg);
-        }
-
         .collapsible-content {
             max-height: 0;
             overflow: hidden;
@@ -785,7 +781,8 @@
             .footer-section,
             .dark-mode-toggle, /* Hide footer and toggle for print */
             .scroll-to-top-btn, /* Hide scroll to top button for print */
-            .print-button-container { /* Hide print button container for print */
+            .print-button-container,
+            .countdown-container { /* Hide print button container and countdown for print */
                 display: none !important;
             }
             .card {
@@ -830,6 +827,48 @@
                 padding-left: 3rem; /* Add padding to the left for balance */
             }
         }
+
+        /* Countdown Timer Styling */
+        .countdown-container {
+            background-color: #667eea; /* Light indigo background */
+            color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .countdown-text {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* semibold */
+            margin-bottom: 0.5rem;
+        }
+        .countdown-event-name {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 700; /* bold */
+            display: block; /* New line */
+            margin-bottom: 0.75rem;
+        }
+        .countdown-display {
+            font-size: 2.5rem; /* text-5xl */
+            font-weight: 800; /* extrabold */
+            letter-spacing: -0.05em; /* tracking-tight */
+            display: block;
+        }
+        @media (min-width: 768px) {
+            .countdown-display {
+                font-size: 3.5rem; /* md:text-6xl */
+            }
+        }
+
+        /* Dark Mode for Countdown Timer */
+        body.dark-mode .countdown-container {
+            background-color: #4338ca; /* Darker indigo for dark mode */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+        }
+
     </style>
 </head>
 <body class="p-4 md:p-8 lg:p-12">
@@ -844,6 +883,12 @@
             <p class="text-lg md:text-xl">Übersicht über Ferienzeiten und Schließtage der Kita</p>
         </div>
     </header>
+
+    <div id="countdownContainer" class="countdown-container">
+        <p class="countdown-text">Nächster wichtiger Termin:</p>
+        <span id="countdownEventName" class="countdown-event-name"></span>
+        <span id="countdownDisplay" class="countdown-display"></span>
+    </div>
 
     <div class="note-disclaimer-section">
         <p class="font-semibold text-lg mb-2 note-title">Wichtiger Hinweis zur Anmeldung:</p>
@@ -1146,6 +1191,101 @@
 <script>
     // Global variable to store all original cards
     let allCards = [];
+    let countdownInterval; // Variable to hold the countdown interval
+
+    // List of important dates for the countdown
+    const importantCountdownDates = [
+        // Using YYYY-MM-DD for easier Date object creation
+        { name: "Christi Himmelfahrt", date: "2025-05-29" },
+        { name: "Brückentag (Kita geschlossen)", date: "2025-05-30" },
+        { name: "Planungstag (Kita geschlossen)", date: "2025-06-10" },
+        { name: "Anmeldetag Sommerferien", date: "2025-06-13" },
+        { name: "Feriendienst Sommerferien (Teil 1)", date: "2025-07-03" },
+        { name: "Kita geschlossen (Sommer)", date: "2025-07-14" }, // Main closing period
+        { name: "Feriendienst Sommerferien (Teil 2)", date: "2025-08-04" },
+        { name: "Anmeldetag Herbstferien", date: "2025-09-19" },
+        { name: "Herbstferien", date: "2025-10-13" },
+        { name: "Anmeldetag Weihnachtsferien", date: "2025-12-05" },
+        { name: "Weihnachtsferien", date: "2025-12-22" }
+    ];
+
+    /**
+     * Finds the next important event date from the predefined list.
+     * @returns {object|null} An object with name and targetDate, or null if no future events.
+     */
+    function findNextImportantEvent() {
+        const now = new Date();
+        now.setHours(0, 0, 0, 0); // Normalize to start of today
+
+        let nextEvent = null;
+        let minDiff = Infinity;
+
+        for (const event of importantCountdownDates) {
+            const targetDate = new Date(event.date);
+            targetDate.setHours(0, 0, 0, 0); // Normalize to start of target day
+
+            // If the event date is today or in the future
+            if (targetDate >= now) {
+                const diff = targetDate.getTime() - now.getTime();
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    nextEvent = { name: event.name, targetDate: new Date(event.date) }; // Use original date for exact time countdown
+                }
+            }
+        }
+        return nextEvent;
+    }
+
+    /**
+     * Updates the countdown timer display.
+     */
+    function updateCountdown() {
+        const countdownDisplay = document.getElementById('countdownDisplay');
+        const countdownEventName = document.getElementById('countdownEventName');
+        const countdownContainer = document.getElementById('countdownContainer');
+
+        const nextEvent = findNextImportantEvent();
+
+        if (!nextEvent) {
+            countdownContainer.style.display = 'none'; // Hide if no future events
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            return;
+        }
+
+        countdownContainer.style.display = 'block'; // Ensure it's visible
+
+        const now = new Date().getTime();
+        const distance = nextEvent.targetDate.getTime() - now;
+
+        if (distance < 0) {
+            countdownDisplay.textContent = 'Der Termin ist vorbei!';
+            countdownEventName.textContent = nextEvent.name;
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            // Optional: Re-run findNextImportantEvent after a short delay
+            // to see if a *new* next event becomes available (e.g. if one just passed)
+            setTimeout(() => {
+                findNextImportantEvent();
+                if (findNextImportantEvent()) { // If there's still a future event
+                    countdownInterval = setInterval(updateCountdown, 1000); // Restart countdown
+                } else {
+                    countdownContainer.style.display = 'none'; // Hide if no more future events
+                }
+            }, 5000); // Check again in 5 seconds
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownEventName.textContent = nextEvent.name;
+        countdownDisplay.textContent = `${days}T ${hours}Std ${minutes}Min ${seconds}Sek`;
+    }
 
     /**
      * Toggles dark mode on and off.
@@ -1490,6 +1630,10 @@
 
             button.addEventListener('click', () => toggleCollapsible(button));
         });
+
+        // Initialize and start the countdown timer
+        updateCountdown();
+        countdownInterval = setInterval(updateCountdown, 1000);
 
 
         // Scroll to Top Button Logic
