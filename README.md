@@ -28,4 +28,3 @@ Dies ist ein einfacher, interaktiver Ferienplan für das Jahr 2025, der die Feri
 ## Hinweis
 
 Dieses Projekt ist ein privates Vorhaben und steht in keiner direkten Verbindung zur Kita. Die hier bereitgestellten Informationen wurden allgemein von der Kita an alle verteilt. Alle Angaben sind ohne Gewähr.
-
