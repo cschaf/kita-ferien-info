@@ -163,7 +163,7 @@
             border-color: #a5b4fc; /* Darker border on hover */
         }
         .calendar-button i {
-            margin-right: 0.25rem; /* Space between icon and text */
+            margin-right: 0.25rem;
         }
 
 
@@ -178,18 +178,18 @@
         }
         .past-card .section-title,
         .past-card .list-item strong {
-            color: #6c757d; /* Ensure all text within is grayed out */
+            color: #6c757d;
             transition: color 0.3s ease;
         }
         .past-card .deadline-highlight strong {
-            color: #868e96; /* Even lighter gray for past highlighted text */
+            color: #868e96;
             transition: color 0.3s ease;
         }
         .past-card .calendar-button {
-            background-color: #ced4da; /* Grayer button */
-            color: #495057; /* Darker gray text for button */
-            border-color: #adb5bd; /* Grayer border */
-            cursor: default; /* Indicate it's less interactive */
+            background-color: #ced4da;
+            color: #495057;
+            border-color: #adb5bd;
+            cursor: default;
             transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
         }
         .past-card .calendar-button:hover {
@@ -197,42 +197,42 @@
             border-color: #6c757d;
         }
         .past-card .deadline-highlight {
-            background-color: #e9ecef; /* Match card background */
-            border-left-color: #adb5bd; /* Grayer border for deadline highlight */
+            background-color: #e9ecef;
+            border-left-color: #adb5bd;
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         /* Styling for current event card */
         .current-card {
-            border: 2px solid #10b981; /* Emerald green border */
-            background-color: #ecfdf5; /* Light emerald background */
-            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.2); /* Stronger shadow */
+            border: 2px solid #10b981;
+            background-color: #ecfdf5;
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.2);
             opacity: 1;
             transition: all 0.3s ease-in-out;
         }
         .current-card .section-title {
-            color: #059669; /* Darker emerald for title */
+            color: #059669;
             transition: color 0.3s ease;
         }
         .current-card .list-item strong {
-            color: #065f46; /* Darker green for strong text */
+            color: #065f46;
             transition: color 0.3s ease;
         }
 
         /* Styling for upcoming event card */
         .upcoming-card {
-            border: 2px solid #3b82f6; /* Blue border */
-            background-color: #e0f2fe; /* Light blue background */
-            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.2); /* Stronger shadow */
+            border: 2px solid #3b82f6;
+            background-color: #e0f2fe;
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.2);
             opacity: 1;
             transition: all 0.3s ease-in-out;
         }
         .upcoming-card .section-title {
-            color: #1d4ed8; /* Darker blue for title */
+            color: #1d4ed8;
             transition: color 0.3s ease;
         }
         .upcoming-card .list-item strong {
-            color: #1e40af; /* Darker blue for strong text */
+            color: #1e40af;
             transition: color 0.3s ease;
         }
 
@@ -263,7 +263,7 @@
             background-color: #f9fafb;
             font-size: 1rem;
             color: #4b5563;
-            appearance: none; /* Remove default arrow */
+            appearance: none;
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 0.75rem center;
@@ -282,23 +282,23 @@
         }
         .controls-right-aligned {
             display: flex;
-            justify-content: flex-end; /* Push content to the right */
-            width: 100%; /* Take full width */
+            justify-content: flex-end;
+            width: 100%;
         }
-        .controls-title { /* New title for controls */
-            font-size: 1.25rem; /* text-xl */
-            font-weight: 700; /* Bold */
-            color: #4f46e5; /* Indigo */
-            flex-grow: 1; /* Allow title to take space */
+        .controls-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #4f46e5;
+            flex-grow: 1;
             transition: color 0.3s ease;
         }
 
-        @media (min-width: 640px) { /* sm breakpoint */
-            .controls-container .collapsible-content { /* Apply flex for larger screens */
+        @media (min-width: 640px) {
+            .controls-container .collapsible-content {
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
-                gap: 1rem; /* Adjust gap for row layout */
+                gap: 1rem;
             }
             .controls-group {
                 flex-direction: row;
@@ -309,20 +309,20 @@
                 flex: 1;
             }
             .controls-right-aligned {
-                width: auto; /* Allow it to shrink to content size */
+                width: auto;
             }
         }
 
         /* Print Button Styling */
-        .print-button-container { /* New container for the print button */
+        .print-button-container {
             display: flex;
             justify-content: center;
-            margin-top: 0.5rem; /* Reduced space above button */
-            margin-bottom: 0.5rem; /* Reduced space below button */
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
             transition: margin 0.3s ease;
         }
         .print-button {
-            background-color: #10b981; /* Emerald green */
+            background-color: #10b981;
             color: #ffffff;
             font-weight: 600;
             padding: 0.75rem 1.5rem;
@@ -334,7 +334,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         .print-button:hover {
-            background-color: #059669; /* Darker emerald */
+            background-color: #059669;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
         .print-button i {
@@ -352,18 +352,18 @@
             transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
         }
         .legend-title {
-            font-size: 1.25rem; /* text-xl */
-            font-weight: 700; /* Bold */
-            color: #4f46e5; /* Indigo */
-            flex-grow: 1; /* Allow title to take space in header */
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #4f46e5;
+            flex-grow: 1;
             transition: color 0.3s ease, border-color 0.3s ease;
         }
         .legend-items {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
-            justify-content: center; /* Center items on larger screens */
-            margin-top: 0; /* Reset margin as it's now handled by collapsible-header */
+            justify-content: center;
+            margin-top: 0;
         }
         .legend-item {
             display: flex;
@@ -377,50 +377,49 @@
             width: 1.25rem;
             height: 1.25rem;
             border-radius: 4px;
-            border: 1px solid #d1d5db; /* Default border for color boxes */
-            flex-shrink: 0; /* Prevent shrinking */
+            border: 1px solid #d1d5db;
+            flex-shrink: 0;
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .past-color {
-            background-color: #e9ecef; /* Matches past-card background */
+            background-color: #e9ecef;
             border-color: #dee2e6;
         }
         .current-color {
-            background-color: #ecfdf5; /* Matches current-card background */
-            border-color: #10b981; /* Matches current-card border */
+            background-color: #ecfdf5;
+            border-color: #10b981;
         }
         .upcoming-color {
-            background-color: #e0f2fe; /* Matches upcoming-card background */
-            border-color: #3b82f6; /* Matches upcoming-card border */
+            background-color: #e0f2fe;
+            border-color: #3b82f6;
         }
         .deadline-color {
-            background-color: #fff7ed; /* Matches deadline-highlight background */
-            border-color: #f97316; /* Matches deadline-highlight border */
+            background-color: #fff7ed;
+            border-color: #f97316;
         }
         .legend-icon {
-            color: #4f46e5; /* Match calendar button color */
+            color: #4f46e5;
             font-size: 1.25rem;
             transition: color 0.3s ease;
         }
 
-        /* Responsive adjustments for legend items */
-        @media (max-width: 639px) { /* Targets screens smaller than sm breakpoint */
+        @media (max-width: 639px) {
             .legend-items {
-                flex-direction: column; /* Stack items vertically */
-                align-items: flex-start; /* Align items to the left */
-                gap: 0.75rem; /* Adjust gap for stacked items */
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
             }
         }
 
         /* Footer Styling */
         .footer-section {
-            margin-top: 0.5rem; /* Reduced margin-top to bring it closer */
+            margin-top: 0.5rem;
             padding: 2rem 1.5rem;
-            background-color: #374151; /* Dark gray background */
-            color: #d1d5db; /* Light gray text */
+            background-color: #374151;
+            color: #d1d5db;
             text-align: center;
             border-radius: 12px;
-            font-size: 0.875rem; /* text-sm */
+            font-size: 0.875rem;
             line-height: 1.5;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
@@ -428,57 +427,57 @@
             margin-bottom: 0.5rem;
         }
         .footer-section a {
-            color: #a5b4fc; /* Light indigo for links */
+            color: #a5b4fc;
             text-decoration: underline;
             transition: color 0.3s ease;
         }
         .footer-section a:hover {
-            color: #c7d2fe; /* Lighter indigo on hover */
+            color: #c7d2fe;
         }
 
         /* Dark Mode Styles */
         body.dark-mode {
-            background-color: #1a202c; /* Dark background */
-            color: #e2e8f0; /* Light text color */
+            background-color: #1a202c;
+            color: #e2e8f0;
         }
         body.dark-mode .card {
-            background-color: #2d3748; /* Darker card background */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow for contrast */
-            border-color: #4a5568; /* Darker border */
+            background-color: #2d3748;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-color: #4a5568;
         }
         body.dark-mode .header-section {
-            background-color: #4338ca; /* Darker indigo */
+            background-color: #4338ca;
             color: #ffffff;
         }
         body.dark-mode .section-title {
-            color: #9f7aea; /* Lighter indigo for titles */
-            border-bottom-color: #4a5568; /* Darker border */
+            color: #9f7aea;
+            border-bottom-color: #4a5568;
         }
         body.dark-mode .list-item strong {
-            color: #e2e8f0; /* Lighter text for strong */
+            color: #e2e8f0;
         }
         body.dark-mode .deadline-highlight {
-            background-color: #4a2f00; /* Darker orange/brown for deadline */
-            border-left-color: #f97316; /* Keep orange border */
+            background-color: #4a2f00;
+            border-left-color: #f97316;
         }
         body.dark-mode .deadline-highlight strong {
-            color: #ef4444; /* Brighter red for deadline text */
+            color: #ef4444;
         }
         body.dark-mode .note-disclaimer-section {
-            background-color: #4a2f00; /* Darker orange/brown for note */
-            border-left-color: #f97316; /* Keep orange border */
-            color: #e2e8f0; /* Light text */
+            background-color: #4a2f00;
+            border-left-color: #f97316;
+            color: #e2e8f0;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
         body.dark-mode .note-disclaimer-section .disclaimer-text {
-            color: #a0aec0; /* Lighter gray for disclaimer */
-            border-top-color: #4a5568; /* Darker border */
+            color: #a0aec0;
+            border-top-color: #4a5568;
         }
         body.dark-mode .note-disclaimer-section .note-title {
-            color: #ef4444; /* Brighter red for note title */
+            color: #ef4444;
         }
         body.dark-mode .calendar-button {
-            background-color: #6366f1; /* Darker indigo button */
+            background-color: #6366f1;
             color: #ffffff;
             border-color: #4f46e5;
         }
@@ -489,9 +488,9 @@
 
         /* Dark mode for past cards */
         body.dark-mode .past-card {
-            background-color: #374151; /* Darker gray for past cards */
-            color: #a0aec0; /* Lighter gray text */
-            opacity: 0.8; /* Slightly less opaque */
+            background-color: #374151;
+            color: #a0aec0;
+            opacity: 0.8;
             border-color: #4a5568;
         }
         body.dark-mode .past-card .section-title,
@@ -499,7 +498,7 @@
             color: #a0aec0;
         }
         body.dark-mode .past-card .deadline-highlight strong {
-            color: #cbd5e0; /* Even lighter gray for past highlighted text */
+            color: #cbd5e0;
         }
         body.dark-mode .past-card .calendar-button {
             background-color: #4a5568;
@@ -511,34 +510,34 @@
             border-color: #4a5568;
         }
         body.dark-mode .past-card .deadline-highlight {
-            background-color: #374151; /* Match card background */
-            border-left-color: #6b7280; /* Grayer border for deadline highlight */
+            background-color: #374151;
+            border-left-color: #6b7280;
         }
 
         /* Dark mode for current card */
         body.dark-mode .current-card {
-            border-color: #10b981; /* Keep emerald green border */
-            background-color: #166534; /* Darker emerald background */
-            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4); /* Stronger shadow */
+            border-color: #10b981;
+            background-color: #166534;
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
         }
         body.dark-mode .current-card .section-title {
-            color: #34d399; /* Lighter emerald for title */
+            color: #34d399;
         }
         body.dark-mode .current-card .list-item strong {
-            color: #a7f3d0; /* Lighter green for strong text */
+            color: #a7f3d0;
         }
 
         /* Dark mode for upcoming card */
         body.dark-mode .upcoming-card {
-            border-color: #3b82f6; /* Keep blue border */
-            background-color: #1e3a8a; /* Darker blue background */
-            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4); /* Stronger shadow */
+            border-color: #3b82f6;
+            background-color: #1e3a8a;
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
         }
         body.dark-mode .upcoming-card .section-title {
-            color: #60a5fa; /* Lighter blue for title */
+            color: #60a5fa;
         }
         body.dark-mode .upcoming-card .list-item strong {
-            color: #93c5fd; /* Lighter blue for strong text */
+            color: #93c5fd;
         }
 
         /* Dark mode for controls */
@@ -553,7 +552,7 @@
             border-color: #4a5568;
             background-color: #4a5568;
             color: #e2e8f0;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%23e2e8f0' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e"); /* Lighter arrow for dark mode */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%23e2e8f0' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
         }
         body.dark-mode .controls-container select:focus {
             border-color: #6366f1;
@@ -564,7 +563,7 @@
         }
 
         /* Dark mode for print button */
-        body.dark-mode .print-button-container .print-button { /* Target button inside new container */
+        body.dark-mode .print-button-container .print-button {
             background-color: #059669;
             color: #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -610,10 +609,10 @@
 
         /* Dark mode for footer */
         body.dark-mode .footer-section {
-            background-color: #111827; /* Even darker background for footer */
+            background-color: #111827;
             color: #a0aec0;
-            border-top: 2px solid #374151; /* Add a subtle top border for separation */
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3); /* Add shadow to the top for separation */
+            border-top: 2px solid #374151;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
         }
         body.dark-mode .footer-section a {
             color: #c7d2fe;
@@ -627,10 +626,10 @@
             background-color: #4f46e5;
             color: #ffffff;
             font-weight: 600;
-            padding: 0.5rem; /* Smaller padding for icon-only button */
-            border-radius: 50%; /* Make it round */
-            width: 2.5rem; /* Fixed width for round button */
-            height: 2.5rem; /* Fixed height for round button */
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -638,11 +637,11 @@
             cursor: pointer;
             transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: absolute; /* Position it absolutely within the header */
-            top: 1rem; /* Adjust as needed */
-            right: 1.5rem; /* Adjust as needed */
-            z-index: 10; /* Ensure it's above other content */
-            font-size: 1.25rem; /* Icon size */
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            z-index: 10;
+            font-size: 1.25rem;
         }
         .dark-mode-toggle:hover {
             background-color: #4338ca;
@@ -658,19 +657,19 @@
         /* Strikethrough style for past items */
         .line-through {
             text-decoration: line-through;
-            color: #6c757d; /* Gray out the text when struck through */
-            transition: color 0.3s ease; /* Smooth transition */
+            color: #6c757d;
+            transition: color 0.3s ease;
         }
         body.dark-mode .line-through {
-            color: #a0aec0; /* Lighter gray for dark mode */
+            color: #a0aec0;
         }
 
         /* Scroll to Top Button */
         .scroll-to-top-btn {
             position: fixed;
-            bottom: 9rem; /* Adjusted to be above the sticky countdown bar and footer padding */
+            bottom: 9rem;
             right: 2rem;
-            background-color: #4f46e5; /* Indigo */
+            background-color: #4f46e5;
             color: #ffffff;
             width: 3rem;
             height: 3rem;
@@ -683,10 +682,10 @@
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-            opacity: 0; /* Hidden by default */
-            pointer-events: none; /* Disables interaction when hidden */
-            z-index: 1001; /* Ensure it's on top of the sticky bar */
-            transform: translateY(100px); /* Start off-screen */
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1001;
+            transform: translateY(100px);
         }
         .scroll-to-top-btn.show {
             opacity: 1;
@@ -694,17 +693,17 @@
             transform: translateY(0);
         }
         .scroll-to-top-btn:hover {
-            background-color: #4338ca; /* Darker indigo on hover */
-            transform: translateY(-3px); /* Slight lift on hover */
+            background-color: #4338ca;
+            transform: translateY(-3px);
         }
 
         /* Dark Mode for Scroll to Top Button */
         body.dark-mode .scroll-to-top-btn {
-            background-color: #6366f1; /* Lighter indigo for dark mode */
+            background-color: #6366f1;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
         body.dark-mode .scroll-to-top-btn:hover {
-            background-color: #4f46e5; /* Darker indigo on hover */
+            background-color: #4f46e5;
         }
 
         /* New styles for collapsible sections */
@@ -712,9 +711,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 0.5rem; /* Padding for the border */
+            padding-bottom: 0.5rem;
             border-bottom: 1px solid #e0e7ff;
-            margin-bottom: 1rem; /* Space after the header, before content */
+            margin-bottom: 1rem;
         }
         body.dark-mode .collapsible-header {
             border-bottom-color: #4a5568;
@@ -723,24 +722,24 @@
         .collapsible-header .toggle-button {
             background: none;
             border: none;
-            color: #4f46e5; /* Indigo */
+            color: #4f46e5;
             cursor: pointer;
-            font-size: 1.25rem; /* Icon size */
+            font-size: 1.25rem;
             transition: transform 0.3s ease-in-out, color 0.3s ease;
             padding: 0.25rem;
             border-radius: 50%;
-            width: 2.25rem; /* Slightly larger clickable area */
+            width: 2.25rem;
             height: 2.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0; /* Prevent it from shrinking */
+            flex-shrink: 0;
         }
         .collapsible-header .toggle-button:hover {
-            background-color: rgba(79, 70, 229, 0.1); /* Light indigo hover */
+            background-color: rgba(79, 70, 229, 0.1);
         }
         body.dark-mode .collapsible-header .toggle-button {
-            color: #9f7aea; /* Lighter indigo */
+            color: #9f7aea;
         }
         body.dark-mode .collapsible-header .toggle-button:hover {
             background-color: rgba(159, 122, 234, 0.2);
@@ -753,12 +752,12 @@
         .collapsible-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-out, opacity 0.5s ease-out; /* Add opacity for smoother visual fade */
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
             opacity: 0;
-            pointer-events: none; /* Disable interaction when collapsed */
+            pointer-events: none;
         }
         .collapsible-content.expanded {
-            max-height: 500px; /* Sufficiently large to contain content */
+            max-height: 500px;
             opacity: 1;
             pointer-events: auto;
         }
@@ -767,70 +766,70 @@
         /* Print-specific styles */
         @media print {
             body {
-                background-color: #ffffff; /* White background for print */
-                color: #000000; /* Black text for print */
+                background-color: #ffffff;
+                color: #000000;
                 margin: 0;
                 padding: 0;
-                padding-bottom: 0 !important; /* Remove sticky bar padding for print */
+                padding-bottom: 0 !important;
             }
             .main-container {
-                padding: 1cm; /* Standard print margins */
-                max-width: none; /* No max-width for print */
+                padding: 1cm;
+                max-width: none;
                 width: 100%;
             }
             .header-section,
-            .controls-container, /* Hide the entire controls container for print */
-            .collapsible-header, /* Hide collapsible headers/toggles for print */
+            .controls-container,
+            .collapsible-header,
             .calendar-button,
-            .note-disclaimer-section, /* Hide combined section for print */
-            .legend-container, /* Hide legend for print */
+            .note-disclaimer-section,
+            .legend-container,
             .footer-section,
-            .dark-mode-toggle, /* Hide footer and toggle for print */
-            .scroll-to-top-btn, /* Hide scroll to top button for print */
+            .dark-mode-toggle,
+            .scroll-to-top-btn,
             .print-button-container,
-            .sticky-countdown-bar { /* Hide sticky countdown bar for print */
+            .sticky-countdown-bar {
                 display: none !important;
             }
             .card {
-                box-shadow: none; /* No shadows in print */
-                border: 1px solid #ccc; /* Light border for cards */
+                box-shadow: none;
+                border: 1px solid #ccc;
                 margin-bottom: 1rem;
                 padding: 1rem;
-                opacity: 1 !important; /* Ensure past cards are fully visible for print */
-                color: #000000 !important; /* Ensure text is black */
-                background-color: #ffffff !important; /* Ensure background is white */
+                opacity: 1 !important;
+                color: #000000 !important;
+                background-color: #ffffff !important;
             }
             .card .section-title,
             .card .list-item strong,
             .card .deadline-highlight strong {
-                color: #000000 !important; /* Ensure all text is black */
+                color: #000000 !important;
             }
             .card.past-card {
-                opacity: 1 !important; /* Override opacity for print */
-                background-color: #f8f9fa !important; /* Slightly off-white for past cards in print */
+                opacity: 1 !important;
+                background-color: #f8f9fa !important;
                 border-color: #e9ecef !important;
             }
             .card.current-card,
             .card.upcoming-card {
-                border-color: #000000 !important; /* Black border for active/upcoming in print */
+                border-color: #000000 !important;
             }
             .list-item, .deadline-highlight {
-                padding-left: 0; /* Remove extra padding for print */
+                padding-left: 0;
                 margin-bottom: 0.25rem;
             }
             ul {
-                padding-left: 1.5rem; /* Standard ul padding for print */
+                padding-left: 1.5rem;
             }
         }
         /* Mobile-specific adjustment for dark mode toggle */
-        @media (max-width: 639px) { /* Targets screens smaller than sm breakpoint */
+        @media (max-width: 639px) {
             .dark-mode-toggle {
-                top: 0.75rem; /* Adjust top position */
-                right: 0.75rem; /* Adjust right position */
+                top: 0.75rem;
+                right: 0.75rem;
             }
             .header-content {
-                padding-right: 3rem; /* Add padding to the right to prevent overlap with button */
-                padding-left: 3rem; /* Add padding to the left for balance */
+                padding-right: 3rem;
+                padding-left: 3rem;
             }
         }
 
@@ -840,33 +839,33 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #667eea; /* Light indigo background */
+            background-color: #667eea;
             color: #ffffff;
-            padding: 0.75rem 1.5rem; /* Adjusted padding for a more compact look */
+            padding: 0.75rem 1.5rem;
             text-align: center;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15); /* Shadow to make it pop from bottom */
-            z-index: 1000; /* Ensure it's above most content */
-            display: flex; /* Use flexbox for internal alignment */
-            flex-direction: row; /* Always align content horizontally */
-            align-items: center; /* Center content vertically */
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
             justify-content: center;
             transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-            font-size: 0.95rem; /* Slightly smaller base font size */
+            font-size: 0.95rem;
         }
         .sticky-countdown-bar .countdown-combined-display {
-            font-weight: 600; /* Semibold for readability */
-            line-height: 1.4; /* Ensure good line spacing */
+            font-weight: 600;
+            line-height: 1.4;
         }
         @media (min-width: 768px) {
             .sticky-countdown-bar {
-                padding: 0.75rem 2rem; /* More padding on desktop */
-                font-size: 1.1rem; /* Slightly larger on desktop */
+                padding: 0.75rem 2rem;
+                font-size: 1.1rem;
             }
         }
 
         /* Dark Mode for Sticky Countdown Bar */
         body.dark-mode .sticky-countdown-bar {
-            background-color: #4338ca; /* Darker indigo */
+            background-color: #4338ca;
             box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4);
             color: #ffffff;
         }
@@ -880,7 +879,7 @@
         </button>
 
         <div class="header-content">
-            <h1 class="text-3xl md:text-4xl font-bold mb-2">Ferienplan 2025</h1>
+            <h1 id="mainTitle" class="text-3xl md:text-4xl font-bold mb-2">Ferienplan 2025</h1>
             <p class="text-lg md:text-xl">Übersicht über Ferienzeiten und Schließtage der Kita</p>
         </div>
     </header>
@@ -1179,7 +1178,7 @@
      * Returns the *latest* date in a range, or the single date.
      * Returns null if no valid date is found.
      * This function is now primarily used for parsing dates within the 'text' property of details,
-     * which might not always be in a strict YYYY-MM-DD format.
+     * which might not always be in a strictYYYY-MM-DD format.
      */
     function parseGermanDate(dateString) {
         const monthMap = {
@@ -1396,7 +1395,13 @@
 
         // --- LOAD DATA ---
         try {
-            const response = await fetch('/data/2025.json'); // Changed path to root-relative
+            const currentYear = new Date().getFullYear();
+            const dataFilePath = `/data/${currentYear}.json`; // Dynamically construct the file path
+
+            // Update the main title with the current year
+            document.getElementById('mainTitle').textContent = `Ferienplan ${currentYear}`;
+
+            const response = await fetch(dataFilePath);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
