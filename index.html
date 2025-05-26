@@ -42,6 +42,7 @@
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             transition: all 0.3s ease-in-out; /* Smooth transition for past-card effect */
+            border: 1px solid transparent; /* Default transparent border */
         }
         .header-section {
             background-color: #4f46e5; /* Indigo */
@@ -92,14 +93,34 @@
             font-weight: 800; /* Extra bold */
             font-size: 1.05rem; /* Slightly larger font */
         }
-        .note-section {
-            background-color: #eff6ff; /* Light blue background */
-            border-left: 5px solid #3b82f6; /* Blue border */
-            padding: 1rem;
-            border-radius: 8px;
+        /* Combined Note and Disclaimer Section */
+        .note-disclaimer-section {
+            background-color: #fff7ed; /* Matches deadline-highlight background */
+            border-left: 5px solid #f97316; /* Matches deadline-highlight border */
+            padding: 1.5rem; /* Slightly more padding than deadline-highlight for content */
+            border-radius: 12px; /* Rounded corners */
             margin-top: 2rem;
-            color: #1e40af; /* Darker blue text */
+            margin-bottom: 2rem; /* Space before next elements */
+            color: #374151; /* Default text color for readability */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
         }
+        .note-disclaimer-section p {
+            margin-bottom: 0.5rem; /* Space between paragraphs */
+        }
+        .note-disclaimer-section .disclaimer-text {
+            font-size: 0.875rem; /* text-sm */
+            color: #6b7280; /* Gray text for disclaimer part */
+            text-align: center; /* Center disclaimer text */
+            margin-top: 1rem; /* Space after note content */
+            padding-top: 1rem; /* Padding before disclaimer text */
+            border-top: 1px solid #e5e7eb; /* Light gray border above disclaimer */
+        }
+        .note-disclaimer-section .note-title {
+            color: #dc2626; /* Red color for the title of the note */
+            font-weight: 800; /* Extra bold for the title */
+        }
+
+
         .calendar-button {
             flex-shrink: 0; /* Prevent button from shrinking */
             background-color: #e0e7ff; /* Very light indigo */
@@ -121,18 +142,7 @@
         .calendar-button i {
             margin-right: 0.25rem; /* Space between icon and text */
         }
-        .disclaimer {
-            margin-top: 2rem; /* Space from the header */
-            margin-bottom: 2rem; /* Space to the first section */
-            font-size: 0.875rem; /* text-sm */
-            color: #6b7280; /* Gray text */
-            text-align: center;
-            padding: 1rem;
-            border-top: 1px solid #e5e7eb; /* Light gray border at the top */
-            background-color: #ffffff; /* Ensure it has a background */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-        }
+
 
         /* Styling for past event cards */
         .past-card {
@@ -164,316 +174,762 @@
             border-left-color: #adb5bd; /* Grayer border for deadline highlight */
         }
 
-        /* Responsive adjustments for list items and buttons */
-        @media (max-width: 768px) {
+        /* Styling for current event card */
+        .current-card {
+            border: 2px solid #10b981; /* Emerald green border */
+            background-color: #ecfdf5; /* Light emerald background */
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.2); /* Stronger shadow */
+            opacity: 1;
+        }
+        .current-card .section-title {
+            color: #059669; /* Darker emerald for title */
+        }
+        .current-card .list-item strong {
+            color: #065f46; /* Darker green for strong text */
+        }
+
+        /* Styling for upcoming event card */
+        .upcoming-card {
+            border: 2px solid #3b82f6; /* Blue border */
+            background-color: #e0f2fe; /* Light blue background */
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.2); /* Stronger shadow */
+            opacity: 1;
+        }
+        .upcoming-card .section-title {
+            color: #1d4ed8; /* Darker blue for title */
+        }
+        .upcoming-card .list-item strong {
+            color: #1e40af; /* Darker blue for strong text */
+        }
+
+        /* Filter and Sort Controls */
+        .controls-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .controls-container label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .controls-container select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background-color: #f9fafb;
+            font-size: 1rem;
+            color: #4b5563;
+            appearance: none; /* Remove default arrow */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1em;
+        }
+        .controls-container select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        .controls-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .controls-right-aligned {
+            display: flex;
+            justify-content: flex-end; /* Push content to the right */
+            width: 100%; /* Take full width */
+        }
+
+        @media (min-width: 640px) { /* sm breakpoint */
+            .controls-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .controls-group {
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+            }
+            .controls-group > div {
+                flex: 1;
+            }
+            .controls-right-aligned {
+                width: auto; /* Allow it to shrink to content size */
+            }
+        }
+
+        /* Print Button Styling */
+        .print-button {
+            background-color: #10b981; /* Emerald green */
+            color: #ffffff;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .print-button:hover {
+            background-color: #059669; /* Darker emerald */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .print-button i {
+            margin-right: 0.5rem;
+        }
+
+        /* Legend Styling */
+        .legend-container {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .legend-title {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 700; /* Bold */
+            color: #4f46e5; /* Indigo */
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e0e7ff;
+            padding-bottom: 0.5rem;
+        }
+        .legend-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center; /* Center items on larger screens */
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+        .color-box {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 4px;
+            border: 1px solid #d1d5db; /* Default border for color boxes */
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .past-color {
+            background-color: #e9ecef; /* Matches past-card background */
+            border-color: #dee2e6;
+        }
+        .current-color {
+            background-color: #ecfdf5; /* Matches current-card background */
+            border-color: #10b981; /* Matches current-card border */
+        }
+        .upcoming-color {
+            background-color: #e0f2fe; /* Matches upcoming-card background */
+            border-color: #3b82f6; /* Matches upcoming-card border */
+        }
+        .deadline-color {
+            background-color: #fff7ed; /* Matches deadline-highlight background */
+            border-color: #f97316; /* Matches deadline-highlight border */
+        }
+        .legend-icon {
+            color: #4f46e5; /* Match calendar button color */
+            font-size: 1.25rem;
+        }
+
+        /* Responsive adjustments for legend items */
+        @media (max-width: 639px) { /* Targets screens smaller than sm breakpoint */
+            .legend-items {
+                flex-direction: column; /* Stack items vertically */
+                align-items: flex-start; /* Align items to the left */
+                gap: 0.75rem; /* Adjust gap for stacked items */
+            }
+        }
+
+        /* Footer Styling */
+        .footer-section {
+            margin-top: 3rem;
+            padding: 2rem 1.5rem;
+            background-color: #374151; /* Dark gray background */
+            color: #d1d5db; /* Light gray text */
+            text-align: center;
+            border-radius: 12px;
+            font-size: 0.875rem; /* text-sm */
+            line-height: 1.5;
+        }
+        .footer-section p {
+            margin-bottom: 0.5rem;
+        }
+        .footer-section a {
+            color: #a5b4fc; /* Light indigo for links */
+            text-decoration: underline;
+        }
+        .footer-section a:hover {
+            color: #c7d2fe; /* Lighter indigo on hover */
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body {
+                background-color: #ffffff; /* White background for print */
+                color: #000000; /* Black text for print */
+                margin: 0;
+                padding: 0;
+            }
+            .main-container {
+                padding: 1cm; /* Standard print margins */
+                max-width: none; /* No max-width for print */
+                width: 100%;
+            }
+            .header-section,
+            .controls-container, /* Hide the entire controls container for print */
+            .calendar-button,
+            .note-disclaimer-section, /* Hide combined section for print */
+            .legend-container, /* Hide legend for print */
+            .footer-section { /* Hide footer for print */
+                display: none !important;
+            }
+            .card {
+                box-shadow: none; /* No shadows in print */
+                border: 1px solid #ccc; /* Light border for cards */
+                margin-bottom: 1rem;
+                padding: 1rem;
+                opacity: 1 !important; /* Ensure past cards are fully visible for print */
+                color: #000000 !important; /* Ensure text is black */
+                background-color: #ffffff !important; /* Ensure background is white */
+            }
+            .card .section-title,
+            .card .list-item strong,
+            .card .deadline-highlight strong {
+                color: #000000 !important; /* Ensure all text is black */
+            }
+            .card.past-card {
+                opacity: 1 !important; /* Override opacity for print */
+                background-color: #f8f9fa !important; /* Slightly off-white for past cards in print */
+                border-color: #e9ecef !important;
+            }
+            .card.current-card,
+            .card.upcoming-card {
+                border-color: #000000 !important; /* Black border for active/upcoming in print */
+            }
             .list-item, .deadline-highlight {
-                padding-left: 1rem; /* Adjust padding for smaller screens */
+                padding-left: 0; /* Remove extra padding for print */
+                margin-bottom: 0.25rem;
+            }
+            ul {
+                padding-left: 1.5rem; /* Standard ul padding for print */
             }
         }
     </style>
 </head>
 <body class="p-4 md:p-8 lg:p-12">
-    <div class="main-container">
-        <header class="header-section">
-            <h1 class="text-3xl md:text-4xl font-bold mb-2">Ferienplan 2025</h1>
-            <p class="text-lg md:text-xl">Übersicht über Ferienzeiten und Schließtage der Kita</p>
-        </header>
+<div class="main-container">
+    <header class="header-section">
+        <h1 class="text-3xl md:text-4xl font-bold mb-2">Ferienplan 2025</h1>
+        <p class="text-lg md:text-xl">Übersicht über Ferienzeiten und Schließtage der Kita</p>
+    </header>
 
-        <div class="disclaimer">
-            <p>Alle Angaben ohne Gewähr.</p>
+    <div class="note-disclaimer-section">
+        <p class="font-semibold text-lg mb-2 note-title">Wichtiger Hinweis zur Anmeldung:</p>
+        <p>Die Anmeldung für die Feriendienste erfolgt ausschließlich im Büro – persönlich, telefonisch oder per Mail!</p>
+        <p class="disclaimer-text">Alle Angaben ohne Gewähr.</p>
+    </div>
+
+    <div class="legend-container">
+        <h2 class="legend-title">Legende</h2>
+        <div class="legend-items">
+            <div class="legend-item">
+                <span class="color-box past-color"></span>
+                <span>Vergangene Termine</span>
+            </div>
+            <div class="legend-item">
+                <span class="color-box current-color"></span>
+                <span>Aktuelle Termine</span>
+            </div>
+            <div class="legend-item">
+                <span class="color-box upcoming-color"></span>
+                <span>Nächste kommende Termine</span>
+            </div>
+            <div class="legend-item">
+                <span class="color-box deadline-color"></span>
+                <span>Wichtiger Hinweis</span>
+            </div>
+            <div class="legend-item">
+                <i class="fas fa-calendar-plus legend-icon"></i>
+                <span>Kalender-Eintrag hinzufügen</span>
+            </div>
         </div>
+    </div>
 
-        <main>
-            <section class="card" data-end-date="2025-02-04">
-                <h2 class="section-title text-2xl md:text-3xl">Winterferien</h2>
-                <ul class="list-disc pl-5">
-                    <li class="list-item">
+    <div class="controls-container">
+        <div class="controls-group">
+            <div>
+                <label for="filterOptions">Filter:</label>
+                <select id="filterOptions">
+                    <option value="all">Alle Termine</option>
+                    <option value="upcoming">Nur kommende Termine</option>
+                </select>
+            </div>
+            <div>
+                <label for="sortOptions">Sortierung:</label>
+                <select id="sortOptions">
+                    <option value="asc">Älteste zuerst</option>
+                    <option value="desc">Neueste zuerst</option>
+                </select>
+            </div>
+        </div>
+        <div class="controls-right-aligned">
+            <button class="print-button" onclick="window.print()">
+                <i class="fas fa-print"></i> Drucken
+            </button>
+        </div>
+    </div>
+
+    <main id="cards-container">
+        <section class="card" data-start-date="2025-02-03" data-end-date="2025-02-04">
+            <h2 class="section-title text-2xl md:text-3xl">Winterferien</h2>
+            <ul class="list-disc pl-5">
+                <li class="list-item">
                         <span>
                             <strong>Zeitraum:</strong> 03.02. - 04.02.2025
                         </span>
-                        <button onclick="downloadICS('Feriendienst Winterferien', '20250203', '20250205', 'Feriendienst Winterferien', 'Feriendienst nur für Kinder von berufstätigen Eltern (Vorbereitung/Durchführung der Entwicklungsgespräche).')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="deadline-highlight">
+                    <button onclick="downloadICS('Feriendienst Winterferien', '20250203', '20250205', 'Feriendienst Winterferien', 'Feriendienst nur für Kinder von berufstätigen Eltern (Vorbereitung/Durchführung der Entwicklungsgespräche).')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="deadline-highlight">
                         <span>
                             <strong>Letzter Anmeldetag für den Feriendienst:</strong> 10.01.2025
                         </span>
-                        <button onclick="downloadICS('Anmeldetag Winterferien', '20250110', '20250111', 'Letzter Anmeldetag Winterferien', 'Letzter Anmeldetag für den Feriendienst Winterferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                </ul>
-            </section>
+                    <button onclick="downloadICS('Anmeldetag Winterferien', '20250110', '20250111', 'Letzter Anmeldetag Winterferien', 'Letzter Anmeldetag für den Feriendienst Winterferien.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+            </ul>
+        </section>
 
-            <section class="card" data-end-date="2025-04-21">
-                <h2 class="section-title text-2xl md:text-3xl">Osterferien</h2>
-                <ul class="list-disc pl-5">
-                    <li class="list-item">
+        <section class="card" data-start-date="2025-04-07" data-end-date="2025-04-21">
+            <h2 class="section-title text-2xl md:text-3xl">Osterferien</h2>
+            <ul class="list-disc pl-5">
+                <li class="list-item">
                         <span>
                             <strong>Zeitraum:</strong> 07.04. - 21.04.2025
                         </span>
-                    </li>
-                    <li class="list-item">
+                </li>
+                <li class="list-item">
                         <span>
                             <strong>Feriendienst:</strong> 07.04. - 17.04.2025
                         </span>
-                        <button onclick="downloadICS('Feriendienst Osterferien', '20250407', '20250418', 'Feriendienst Osterferien', 'Feriendienst vom 07.04.2025 bis 17.04.2025.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="deadline-highlight">
+                    <button onclick="downloadICS('Feriendienst Osterferien', '20250407', '20250418', 'Feriendienst Osterferien', 'Feriendienst vom 07.04.2025 bis 17.04.2025.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="deadline-highlight">
                         <span>
                             <strong>Letzter Anmeldetag für den Feriendienst:</strong> 14.03.2025
                         </span>
-                        <button onclick="downloadICS('Anmeldetag Osterferien', '20250314', '20250315', 'Letzter Anmeldetag Osterferien', 'Letzter Anmeldetag für den Feriendienst Osterferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                </ul>
-            </section>
+                    <button onclick="downloadICS('Anmeldetag Osterferien', '20250314', '20250315', 'Letzter Anmeldetag Osterferien', 'Letzter Anmeldetag für den Feriendienst Osterferien.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+            </ul>
+        </section>
 
-            <section class="card" data-end-date="2025-06-10">
-                <h2 class="section-title text-2xl md:text-3xl">Feiertage & Brückentage</h2>
-                <ul class="list-disc pl-5">
-                    <li class="list-item">
+        <section class="card" data-start-date="2025-05-01" data-end-date="2025-06-10">
+            <h2 class="section-title text-2xl md:text-3xl">Feiertage & Brückentage</h2>
+            <ul class="list-disc pl-5">
+                <li class="list-item">
                         <span>
                             <strong>Feiertag 1. Mai 2025 (Tag der Arbeit)</strong>
                         </span>
-                        <button onclick="downloadICS('Feiertag Tag der Arbeit', '20250501', '20250502', 'Feiertag Tag der Arbeit', 'Gesetzlicher Feiertag.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
+                    <button onclick="downloadICS('Feiertag Tag der Arbeit', '20250501', '20250502', 'Feiertag Tag der Arbeit', 'Gesetzlicher Feiertag.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="list-item">
                         <span>
                             Kita geschlossen: 02. Mai 2025 (Brückentag)
                         </span>
-                        <button onclick="downloadICS('Kita geschlossen Brückentag', '20250502', '20250503', 'Kita geschlossen (Brückentag)', 'Kita geschlossen aufgrund Brückentag nach dem 1. Mai.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
+                    <button onclick="downloadICS('Kita geschlossen Brückentag', '20250502', '20250503', 'Kita geschlossen (Brückentag)', 'Kita geschlossen aufgrund Brückentag nach dem 1. Mai.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="list-item">
                         <span>
                             <strong>Feiertag 29. Mai 2025 (Christi Himmelfahrt)</strong>
                         </span>
-                        <button onclick="downloadICS('Feiertag Christi Himmelfahrt', '20250529', '20250530', 'Feiertag Christi Himmelfahrt', 'Gesetzlicher Feiertag.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
+                    <button onclick="downloadICS('Feiertag Christi Himmelfahrt', '20250529', '20250530', 'Feiertag Christi Himmelfahrt', 'Gesetzlicher Feiertag.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="list-item">
                         <span>
                             Kita geschlossen: 30. Mai 2025 (Brückentag)
                         </span>
-                        <button onclick="downloadICS('Kita geschlossen Brückentag', '20250530', '20250531', 'Kita geschlossen (Brückentag)', 'Kita geschlossen aufgrund Brückentag nach Christi Himmelfahrt.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
+                    <button onclick="downloadICS('Kita geschlossen Brückentag', '20250530', '20250531', 'Kita geschlossen (Brückentag)', 'Kita geschlossen aufgrund Brückentag nach Christi Himmelfahrt.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="list-item">
                         <span>
                             <strong>Kita geschlossen:</strong> 10.06.2025 (Planungstag für alle Mitarbeitenden)
                         </span>
-                        <button onclick="downloadICS('Kita geschlossen Planungstag', '20250610', '20250611', 'Kita geschlossen (Planungstag)', 'Planungstag für alle Mitarbeitenden.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                </ul>
-            </section>
+                    <button onclick="downloadICS('Kita geschlossen Planungstag', '20250610', '20250611', 'Kita geschlossen (Planungstag)', 'Planungstag für alle Mitarbeitende.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+            </ul>
+        </section>
 
-            <section class="card" data-end-date="2025-08-13">
-                <h2 class="section-title text-2xl md:text-3xl">Sommerferien</h2>
-                <ul class="list-disc pl-5">
-                    <li class="list-item">
+        <section class="card" data-start-date="2025-07-03" data-end-date="2025-08-13">
+            <h2 class="section-title text-2xl md:text-3xl">Sommerferien</h2>
+            <ul class="list-disc pl-5">
+                <li class="list-item">
                         <span>
                             <strong>Zeitraum:</strong> 03.07. - 13.08.2025
                         </span>
-                    </li>
-                    <li class="list-item">
+                </li>
+                <li class="list-item">
                         <span>
                             <strong>Feriendienst (Teil 1):</strong> 03.07. - 11.07.2025
                         </span>
-                        <button onclick="downloadICS('Feriendienst Sommerferien Teil 1', '20250703', '20250712', 'Feriendienst Sommerferien (Teil 1)', 'Feriendienst vom 03.07.2025 bis 11.07.2025.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
+                    <button onclick="downloadICS('Feriendienst Sommerferien Teil 1', '20250703', '20250712', 'Feriendienst Sommerferien (Teil 1)', 'Feriendienst vom 03.07.2025 bis 11.07.2025.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="list-item">
                         <span>
                             <strong>Feriendienst (Teil 2):</strong> 04.08. - 13.08.2025
                         </span>
-                        <button onclick="downloadICS('Feriendienst Sommerferien Teil 2', '20250804', '20250814', 'Feriendienst Sommerferien (Teil 2)', 'Feriendienst vom 04.08.2025 bis 13.08.2025.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
+                    <button onclick="downloadICS('Feriendienst Sommerferien Teil 2', '20250804', '20250814', 'Feriendienst Sommerferien (Teil 2)', 'Feriendienst vom 04.08.2025 bis 13.08.2025.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="list-item">
                         <span>
                             <strong>Kita geschlossen:</strong> 14.07.2025 bis 01.08.2025
                         </span>
-                        <button onclick="downloadICS('Kita geschlossen Sommer', '20250714', '20250802', 'Kita geschlossen (Sommer)', 'Kita geschlossen während der Sommerferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="deadline-highlight">
+                    <button onclick="downloadICS('Kita geschlossen Sommer', '20250714', '20250802', 'Kita geschlossen (Sommer)', 'Kita geschlossen während der Sommerferien.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="deadline-highlight">
                         <span>
                             <strong>Letzter Anmeldetag für den Feriendienst:</strong> 13.06.2025
                         </span>
-                        <button onclick="downloadICS('Anmeldetag Sommerferien', '20250613', '20250614', 'Letzter Anmeldetag Sommerferien', 'Letzter Anmeldetag für den Feriendienst Sommerferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                </ul>
-            </section>
+                    <button onclick="downloadICS('Anmeldetag Sommerferien', '20250613', '20250614', 'Letzter Anmeldetag Sommerferien', 'Letzter Anmeldetag für den Feriendienst Sommerferien.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+            </ul>
+        </section>
 
-            <section class="card" data-end-date="2025-10-24">
-                <h2 class="section-title text-2xl md:text-3xl">Herbstferien</h2>
-                <ul class="list-disc pl-5">
-                    <li class="list-item">
+        <section class="card" data-start-date="2025-10-13" data-end-date="2025-10-24">
+            <h2 class="section-title text-2xl md:text-3xl">Herbstferien</h2>
+            <ul class="list-disc pl-5">
+                <li class="list-item">
                         <span>
                             <strong>Zeitraum:</strong> 13.10. - 24.10.2025
                         </span>
-                    </li>
-                    <li class="list-item">
+                </li>
+                <li class="list-item">
                         <span>
                             <strong>Feriendienst:</strong> 13.10. - 24.10.2025
                         </span>
-                        <button onclick="downloadICS('Feriendienst Herbstferien', '20251013', '20251025', 'Feriendienst Herbstferien', 'Feriendienst vom 13.10.2025 bis 24.10.2025.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="deadline-highlight">
+                    <button onclick="downloadICS('Feriendienst Herbstferien', '20251013', '20251025', 'Feriendienst Herbstferien', 'Feriendienst vom 13.10.2025 bis 24.10.2025.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="deadline-highlight">
                         <span>
                             <strong>Letzter Anmeldetag für den Feriendienst:</strong> 19.09.2025
                         </span>
-                        <button onclick="downloadICS('Anmeldetag Herbstferien', '20250919', '20250920', 'Letzter Anmeldetag Herbstferien', 'Letzter Anmeldetag für den Feriendienst Herbstferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                </ul>
-            </section>
+                    <button onclick="downloadICS('Anmeldetag Herbstferien', '20250919', '20250920', 'Letzter Anmeldetag Herbstferien', 'Letzter Anmeldetag für den Feriendienst Herbstferien.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+            </ul>
+        </section>
 
-            <section class="card" data-end-date="2026-01-02">
-                <h2 class="section-title text-2xl md:text-3xl">Weihnachtsferien</h2>
-                <ul class="list-disc pl-5">
-                    <li class="list-item">
+        <section class="card" data-start-date="2025-12-22" data-end-date="2026-01-02">
+            <h2 class="section-title text-2xl md:text-3xl">Weihnachtsferien</h2>
+            <ul class="list-disc pl-5">
+                <li class="list-item">
                         <span>
                             <strong>Zeitraum:</strong> 22.12.2025 bis 01.01.2026
                         </span>
-                    </li>
-                    <li class="list-item">
+                </li>
+                <li class="list-item">
                         <span>
                             <strong>Feriendienst:</strong> 22.12.2025 (ausschließlich für Kinder von berufstätigen Eltern)
                         </span>
-                        <button onclick="downloadICS('Feriendienst Weihnachtsferien', '20251222', '20251223', 'Feriendienst Weihnachtsferien', 'Feriendienst ausschließlich für Kinder von berufstätigen Eltern.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
+                    <button onclick="downloadICS('Feriendienst Weihnachtsferien', '20251222', '20251223', 'Feriendienst Weihnachtsferien', 'Feriendienst ausschließlich für Kinder von berufstätigen Eltern.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="list-item">
                         <span>
                             <strong>Kita geschlossen:</strong> 23.12.2025 - 02.01.2026
                         </span>
-                        <button onclick="downloadICS('Kita geschlossen Weihnachten', '20251223', '20260103', 'Kita geschlossen (Weihnachten)', 'Kita geschlossen über die Weihnachtsferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="list-item">
+                    <button onclick="downloadICS('Kita geschlossen Weihnachten', '20251223', '20260103', 'Kita geschlossen (Weihnachten)', 'Kita geschlossen über die Weihnachtsferien.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="list-item">
                         <span>
                             <strong>Kita geschlossen:</strong> 02.01.2026 (Planungstag Mitarbeitende)
                         </span>
-                        <button onclick="downloadICS('Kita geschlossen Planungstag 2026', '20260102', '20260103', 'Kita geschlossen (Planungstag 2026)', 'Planungstag für Mitarbeitende im neuen Jahr.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                    <li class="deadline-highlight">
+                    <button onclick="downloadICS('Kita geschlossen Planungstag 2026', '20260102', '20260103', 'Kita geschlossen (Planungstag 2026)', 'Planungstag für Mitarbeitende im neuen Jahr.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+                <li class="deadline-highlight">
                         <span>
                             <strong>Letzter Anmeldetag für den Feriendienst:</strong> 05.12.2025
                         </span>
-                        <button onclick="downloadICS('Anmeldetag Weihnachtsferien', '20251205', '20251206', 'Letzter Anmeldetag Weihnachtsferien', 'Letzter Anmeldetag für den Feriendienst Weihnachtsferien.')" class="calendar-button">
-                            <i class="fas fa-calendar-plus"></i> Kalender
-                        </button>
-                    </li>
-                </ul>
-            </section>
+                    <button onclick="downloadICS('Anmeldetag Weihnachtsferien', '20251205', '20251206', 'Letzter Anmeldetag Weihnachtsferien', 'Letzter Anmeldetag für den Feriendienst Weihnachtsferien.')" class="calendar-button">
+                        <i class="fas fa-calendar-plus"></i> Kalender
+                    </button>
+                </li>
+            </ul>
+        </section>
+    </main>
+</div>
 
-            <section class="note-section">
-                <p class="font-semibold text-lg mb-2">Wichtiger Hinweis zur Anmeldung:</p>
-                <p>Die Anmeldung für die Feriendienste erfolgt ausschließlich im Büro – persönlich, telefonisch oder per Mail!</p>
-            </section>
-        </main>
-    </div>
+<footer class="footer-section">
+    <p>Dies ist ein privates Projekt und steht in keiner Verbindung zur Kita.</p>
+    <p>Die Informationen auf dieser Seite wurden allgemein von der Kita an alle verteilt.</p>
+    <p>Ich habe nicht mehr Informationen als alle anderen auch. Alle Angaben sind ohne Gewähr.</p>
+    <p>
+        <a href="images/2025-Ferien.jpg" target="_blank" rel="noopener noreferrer">
+            Link zur originalen Liste mit den Terminen (JPG)
+        </a>
+    </p>
+</footer>
 
-    <script>
-        /**
-         * Generates and downloads an ICS calendar file.
-         * @param {string} filename The name of the file to download (e.g., "Winterferien").
-         * @param {string} dtstart The start date in YYYYMMDD format (e.g., "20250203").
-         * @param {string} dtend The end date in YYYYMMDD format. For all-day events, this is the day *after* the event ends.
-         * @param {string} summary The summary/title of the event.
-         * @param {string} description The description of the event.
-         * @param {string} [location='Kita'] The location of the event.
-         */
-        function downloadICS(filename, dtstart, dtend, summary, description, location = 'Kita') {
-            const uid = Date.now().toString(36) + Math.random().toString(36).substr(2); // Unique ID for the event
-            const now = new Date();
-            const created = now.toISOString().replace(/[-:]|\.\d{3}/g, ''); // Current timestamp in YYYYMMDDTHHMMSSZ
+<script>
+    // Global variable to store all original cards
+    let allCards = [];
 
-            const icsContent = [
-                'BEGIN:VCALENDAR',
-                'VERSION:2.0',
-                'PRODID:-//Google Inc//Google Calendar 70.9054//EN',
-                'CALSCALE:GREGORIAN',
-                'BEGIN:VEVENT',
-                `DTSTAMP:${created}`,
-                `UID:${uid}@ferienplan.kita.de`, // Unique ID for the event
-                `DTSTART;VALUE=DATE:${dtstart}`, // All-day event start
-                `DTEND;VALUE=DATE:${dtend}`,     // All-day event end (exclusive)
-                `SUMMARY:${summary}`,
-                `DESCRIPTION:${description}`,
-                `LOCATION:${location}`,
-                'END:VEVENT',
-                'END:VCALENDAR'
-            ].join('\n');
+    /**
+     * Generates and downloads an ICS calendar file.
+     * @param {string} filename The name of the file to download (e.g., "Winterferien").
+     * @param {string} dtstart The start date in INSEE-YYYYMMDD format (e.g., "20250203").
+     * @param {string} dtend The end date in INSEE-YYYYMMDD format. For all-day events, this is the day *after* the event ends.
+     * @param {string} summary The summary/title of the event.
+     * @param {string} description The description of the event.
+     * @param {string} [location='Kita'] The location of the event.
+     */
+    function downloadICS(filename, dtstart, dtend, summary, description, location = 'Kita') {
+        const uid = Date.now().toString(36) + Math.random().toString(36).substr(2); // Unique ID for the event
+        const now = new Date();
+        const created = now.toISOString().replace(/[-:]|\.\d{3}/g, '', 'Z'); // Current timestamp in INSEE-YYYYMMDDTHHMMSSZ
 
-            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${filename}.ics`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url); // Clean up the object URL
-        }
+        const icsContent = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Google Inc//Google Calendar 70.9054//EN',
+            'CALSCALE:GREGORIAN',
+            'BEGIN:VEVENT',
+            `DTSTAMP:${created}`,
+            `UID:${uid}@ferienplan.kita.de`, // Unique ID for the event
+            `DTSTART;VALUE=DATE:${dtstart}`, // All-day event start
+            `DTEND;VALUE=DATE:${dtend}`,     // All-day event end (exclusive)
+            `SUMMARY:${summary}`,
+            `DESCRIPTION:${description}`,
+            `LOCATION:${location}`,
+            'END:VEVENT',
+            'END:VCALENDAR'
+        ].join('\n');
 
-        /**
-         * Checks if a given date is in the past compared to the current date.
-         * @param {string} dateString - Date in 'YYYY-MM-DD' format.
-         * @returns {boolean} True if the date is in the past, false otherwise.
-         */
-        function isDateInPast(dateString) {
-            const today = new Date();
-            today.setHours(0, 0, 0, 0); // Normalize today to start of day
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${filename}.ics`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url); // Clean up the object URL
+    }
 
-            const checkDate = new Date(dateString);
-            checkDate.setHours(0, 0, 0, 0); // Normalize checkDate to start of day
+    /**
+     * Checks if a given date is in the past compared to the current date.
+     * @param {string} dateString - Date in 'YYYY-MM-DD' format.
+     * @returns {boolean} True if the date is in the past, false otherwise.
+     */
+    function isDateInPast(dateString) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Normalize today to start of day
 
-            return checkDate < today;
-        }
+        const checkDate = new Date(dateString);
+        checkDate.setHours(0, 0, 0, 0); // Normalize checkDate to start of day
 
-        /**
-         * Updates the styling of cards based on whether their end date is in the past.
-         */
-        function updateCardStyles() {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                const endDate = card.dataset.endDate; // Get the end date from data attribute
-                if (endDate && isDateInPast(endDate)) {
-                    card.classList.add('past-card');
-                } else {
-                    card.classList.remove('past-card');
+        return checkDate < today;
+    }
+
+    /**
+     * Checks if a given date is in the future compared to the current date.
+     * @param {string} dateString - Date in 'YYYY-MM-DD' format.
+     * @returns {boolean} True if the date is in the future, false otherwise.
+     */
+    function isDateInFuture(dateString) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const checkDate = new Date(dateString);
+        checkDate.setHours(0, 0, 0, 0);
+
+        return checkDate > today;
+    }
+
+    /**
+     * Checks if a given date is today.
+     * @param {string} dateString - Date in 'YYYY-MM-DD' format.
+     * @returns {boolean} True if the date is today, false otherwise.
+     */
+    function isDateToday(dateString) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const checkDate = new Date(dateString);
+        checkDate.setHours(0, 0, 0, 0);
+
+        return checkDate.getTime() === today.getTime();
+    }
+
+    /**
+     * Applies filters and sorting, then updates visual highlighting.
+     */
+    function applyFiltersAndSorting() {
+        const filterSelect = document.getElementById('filterOptions');
+        const sortSelect = document.getElementById('sortOptions');
+        const cardsContainer = document.getElementById('cards-container');
+
+        const selectedFilter = filterSelect.value;
+        const selectedSort = sortSelect.value;
+
+        // Start with the complete set of original cards
+        let processedCards = [...allCards]; // Create a shallow copy to avoid modifying the original array
+
+        // 1. Filter cards
+        processedCards = processedCards.filter(card => {
+            const startDateStr = card.dataset.startDate;
+            const endDateStr = card.dataset.endDate;
+
+            if (!startDateStr || !endDateStr) return true; // Keep if dates are missing
+
+            const startDate = new Date(startDateStr);
+            startDate.setHours(0, 0, 0, 0);
+            const endDate = new Date(endDateStr);
+            endDate.setHours(0, 0, 0, 0);
+
+            if (selectedFilter === 'upcoming') {
+                const today = new Date();
+                today.setHours(0,0,0,0);
+                // An event is "upcoming" if its start date is in the future OR if it's currently active.
+                return startDate >= today || (startDate <= today && endDate >= today);
+            }
+            return true; // 'all' filter, keep all cards
+        });
+
+        // 2. Sort filtered cards
+        processedCards.sort((a, b) => {
+            const dateA = new Date(a.dataset.startDate);
+            const dateB = new Date(b.dataset.startDate);
+
+            if (selectedSort === 'asc') {
+                return dateA.getTime() - dateB.getTime();
+            } else { // 'desc'
+                return dateB.getTime() - dateA.getTime();
+            }
+        });
+
+        // 3. Re-append sorted and filtered cards to the DOM
+        // Clear current content
+        cardsContainer.innerHTML = '';
+        // Append sorted cards
+        processedCards.forEach(card => cardsContainer.appendChild(card));
+
+        // 4. After filtering and sorting, re-apply the visual highlighting
+        updateVisualHighlighting();
+    }
+
+    /**
+     * Applies visual highlighting (past, current, upcoming) to cards.
+     * This function should be called after filtering and sorting.
+     */
+    function updateVisualHighlighting() {
+        const cards = document.querySelectorAll('.card'); // Get cards currently in DOM
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        let soonestUpcomingStartDate = Infinity;
+        let soonestUpcomingCard = null;
+
+        cards.forEach(card => {
+            const startDateStr = card.dataset.startDate;
+            const endDateStr = card.dataset.endDate;
+
+            // Remove all highlighting classes first
+            card.classList.remove('past-card', 'current-card', 'upcoming-card');
+
+            if (!startDateStr || !endDateStr) {
+                console.warn('Card missing start or end date:', card);
+                return;
+            }
+
+            const startDate = new Date(startDateStr);
+            startDate.setHours(0, 0, 0, 0);
+            const endDate = new Date(endDateStr);
+            endDate.setHours(0, 0, 0, 0);
+
+            // Check for Past
+            if (endDate < today) {
+                card.classList.add('past-card');
+            }
+            // Check for Current (today is within the event period)
+            else if (startDate <= today && endDate >= today) {
+                card.classList.add('current-card');
+            }
+            // Check for Upcoming (find the soonest one among non-past/non-current cards)
+            else if (startDate > today) {
+                if (startDate.getTime() < soonestUpcomingStartDate) {
+                    soonestUpcomingStartDate = startDate.getTime();
+                    soonestUpcomingCard = card;
                 }
-            });
-        }
+            }
+        });
 
-        // Run the function when the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', updateCardStyles);
-    </script>
+        // Apply 'upcoming-card' class to the soonest upcoming event after iterating all cards
+        if (soonestUpcomingCard) {
+            soonestUpcomingCard.classList.add('upcoming-card');
+        }
+    }
+
+
+    // Initial setup when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        // Store all cards initially
+        allCards = Array.from(document.querySelectorAll('.card')).map(card => card.cloneNode(true)); // Deep clone to preserve event listeners if any
+
+        // Apply filters and sorting initially (this will also trigger visual highlighting)
+        applyFiltersAndSorting();
+
+        // Add event listeners for filter and sort changes
+        document.getElementById('filterOptions').addEventListener('change', applyFiltersAndSorting);
+        document.getElementById('sortOptions').addEventListener('change', applyFiltersAndSorting);
+    });
+</script>
 </body>
 </html>
