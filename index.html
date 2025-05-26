@@ -17,7 +17,7 @@
             display: flex; /* Use flexbox for overall layout to push footer down */
             flex-direction: column; /* Stack content vertically */
             transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for dark mode */
-            padding-bottom: 4rem; /* Add padding to the bottom of the body to prevent content from being hidden by the sticky footer */
+            padding-bottom: 8rem; /* Increased padding to allow scrolling past the sticky bar on mobile */
         }
         .main-container {
             flex-grow: 1; /* Allow main content to grow and push footer down */
@@ -317,8 +317,8 @@
         .print-button-container { /* New container for the print button */
             display: flex;
             justify-content: center;
-            margin-top: 1.5rem; /* Reduced space above button */
-            margin-bottom: 1.5rem; /* Reduced space below button */
+            margin-top: 0.5rem; /* Reduced space above button */
+            margin-bottom: 0.5rem; /* Reduced space below button */
             transition: margin 0.3s ease;
         }
         .print-button {
@@ -414,7 +414,7 @@
 
         /* Footer Styling */
         .footer-section {
-            margin-top: 3rem;
+            margin-top: 0.5rem; /* Reduced margin-top to bring it closer */
             padding: 2rem 1.5rem;
             background-color: #374151; /* Dark gray background */
             color: #d1d5db; /* Light gray text */
@@ -668,7 +668,7 @@
         /* Scroll to Top Button */
         .scroll-to-top-btn {
             position: fixed;
-            bottom: 5rem; /* Adjusted to be above the sticky countdown bar */
+            bottom: 9rem; /* Adjusted to be above the sticky countdown bar and footer padding */
             right: 2rem;
             background-color: #4f46e5; /* Indigo */
             color: #ffffff;
