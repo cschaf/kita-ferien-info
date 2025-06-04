@@ -66,8 +66,6 @@
             /* This div will wrap the title and paragraph to keep them together */
             text-align: center;
             flex-grow: 1; /* Allow content to take available space */
-            position: relative; /* Ensure it participates in stacking context */
-            z-index: 5;      /* Lower z-index than buttons */
         }
         .section-title {
             color: #4f46e5; /* Indigo for section titles */
@@ -824,44 +822,15 @@
                 padding-left: 1.5rem;
             }
         }
-        /* Mobile-specific adjustment for dark mode toggle and language switcher */
+        /* Mobile-specific adjustment for dark mode toggle */
         @media (max-width: 639px) {
-            #languageSwitcherContainer {
-                right: 3.75rem; /* Position language switcher next to dark mode toggle */
-                top: 0.75rem;
-            }
-            #language-menu-button { /* Ensure button is not too wide on mobile */
-                padding-left: 0.5rem; /* Reduced padding for smaller overall button */
-                padding-right: 0.5rem;
-                padding-top: 0.5rem; /* py-2 equivalent */
-                padding-bottom: 0.5rem;
-            }
-            #language-menu { /* Dropdown menu itself */
-                width: auto; /* Allow content to determine width */
-                min-width: 12rem; /* Or w-48, approx 192px, as a minimum */
-                max-width: calc(100vw - 4rem); /* Prevent overflow, leave some margin */
-                right: 0; /* Align to the right of its container */
-            }
-            /* current-language-name is hidden on xs screens by "hidden sm:inline" in HTML */
-
             .dark-mode-toggle {
                 top: 0.75rem;
                 right: 0.75rem;
             }
             .header-content {
-                padding-right: 6.5rem; /* Make space for both buttons. DarkMode ~2.5rem + Lang (flag only) ~2rem + space ~0.75 = ~5.25rem. 6.5rem gives some buffer. */
-                padding-left: 0.5rem;
-                margin-top: 0.1rem;
-                /* If title still too squished, consider reducing font size for title on very small screens, */
-                /* or adjusting button positions to be even more compact if possible. */
-            }
-        }
-        /* Ensure header content is reasonably centered on larger screens too */
-        @media (min-width: 640px) {
-            /* languageSwitcherContainer uses its inline style for positioning */
-            .header-content {
-                 padding-left: 9rem; /* Adjusted to accommodate both buttons */
-                 padding-right: 9rem; /* Adjusted to accommodate both buttons */
+                padding-right: 3rem;
+                padding-left: 3rem;
             }
         }
 
@@ -907,55 +876,59 @@
 <div class="main-container">
     <header class="header-section">
         <!-- Language Switcher Dropdown -->
-        <div id="languageSwitcherContainer" class="relative inline-block text-left" style="position: absolute; top: 1rem; right: 4.5rem; z-index: 20;">
-            <button type="button" class="inline-flex items-center justify-center w-full rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-3 py-2 bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="language-menu-button" aria-expanded="false" aria-haspopup="true">
-                <i class="fas fa-flag current-flag-icon mr-2"></i> <!-- Default German flag -->
-                <span id="current-language-name" class="hidden sm:inline">Deutsch</span>
-                <i class="fas fa-chevron-down sm:ml-2 h-5 w-5"></i>
+        <div id="languageSwitcherContainer" class="relative inline-block text-left" style="position: absolute; top: 1rem; right: 4.5rem;">
+            <!-- Simplified Button HTML for Debugging Clickability -->
+            <button id="language-menu-button" type="button" class="inline-flex items-center justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-2 py-2 bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false" aria-haspopup="true">
+                <span>LANG</span>
             </button>
+            <!-- End Simplified Button HTML -->
             <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="language-menu-button" id="language-menu">
                 <div class="py-1" role="none">
-                    <a href="#" class="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" id="lang-de" data-lang-code="de" data-lang-name="Deutsch" data-flag-class="fas fa-flag mr-2">
-                        <i class="fas fa-flag mr-2"></i> Deutsch <!-- Placeholder German flag -->
+                    <!-- Dropdown items will be populated by JavaScript if needed, or can be static HTML if content is fixed -->
+                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" id="lang-de" data-lang-code="de">
+                        <img src="images/flags/de.svg" alt="DE Flag" class="w-5 h-auto mr-3"> Deutsch
                     </a>
-                    <a href="#" class="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" id="lang-en" data-lang-code="en" data-lang-name="Englisch" data-flag-class="fas fa-flag-usa mr-2">
-                        <i class="fas fa-flag-usa mr-2"></i> Englisch
+                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" id="lang-en" data-lang-code="en">
+                        <img src="images/flags/gb.svg" alt="GB Flag" class="w-5 h-auto mr-3"> English
                     </a>
-                    <a href="#" class="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" id="lang-ar" data-lang-code="ar" data-lang-name="Arabisch" data-flag-class="fas fa-flag mr-2"> <!-- Placeholder SA flag -->
-                        <i class="fas fa-flag mr-2"></i> Arabisch
+                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" id="lang-ar" data-lang-code="ar">
+                        <img src="images/flags/sa.svg" alt="SA Flag" class="w-5 h-auto mr-3"> العربية
                     </a>
-                    <a href="#" class="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" id="lang-tr" data-lang-code="tr" data-lang-name="Türkisch" data-flag-class="fas fa-flag mr-2"> <!-- Placeholder TR flag -->
-                        <i class="fas fa-flag mr-2"></i> Türkisch
+                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" id="lang-tr" data-lang-code="tr">
+                        <img src="images/flags/tr.svg" alt="TR Flag" class="w-5 h-auto mr-3"> Türkçe
                     </a>
-                    <a href="#" class="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" id="lang-pl" data-lang-code="pl" data-lang-name="Polnisch" data-flag-class="fas fa-flag mr-2"> <!-- Placeholder PL flag -->
-                        <i class="fas fa-flag mr-2"></i> Polnisch
+                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" id="lang-pl" data-lang-code="pl">
+                        <img src="images/flags/pl.svg" alt="PL Flag" class="w-5 h-auto mr-3"> Polski
                     </a>
-                    <a href="#" class="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" id="lang-ru" data-lang-code="ru" data-lang-name="Russisch" data-flag-class="fas fa-flag mr-2"> <!-- Placeholder RU flag -->
-                        <i class="fas fa-flag mr-2"></i> Russisch
+                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem" id="lang-ru" data-lang-code="ru">
+                        <img src="images/flags/ru.svg" alt="RU Flag" class="w-5 h-auto mr-3"> Русский
                     </a>
                 </div>
             </div>
         </div>
-        <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode" data-translate-aria-label="darkModeToggleLabel">
+        <!-- Dark Mode Toggle Temporarily Commented Out for Debugging -->
+        <!--
+        <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
             <i class="fas fa-moon"></i>
         </button>
+        -->
 
         <div class="header-content">
-            <h1 id="mainTitle" class="text-3xl md:text-4xl font-bold mb-2" data-translate="header.mainTitle" data-translate-year-aware>Ferienplan 2025</h1>
-            <p class="text-lg md:text-xl" data-translate="header.subtitle">Übersicht über Ferienzeiten und Schließtage der Kita</p>
+            <h1 id="mainTitle" class="text-3xl md:text-4xl font-bold mb-2">Ferienplan 2025</h1>
+            <p class="text-lg md:text-xl">Übersicht über Ferienzeiten und Schließtage der Kita</p>
         </div>
     </header>
 
     <div class="note-disclaimer-section">
-        <p class="font-semibold text-lg mb-2 note-title" data-translate="note.title">Wichtiger Hinweis zur Anmeldung:</p>
-        <p data-translate="note.registrationInfo">Die Anmeldung für die Feriendienste erfolgt ausschließlich im Büro – persönlich, telefonisch oder per Mail!</p>
-        <p class="disclaimer-text" data-translate="note.disclaimer">Alle Angaben ohne Gewähr.</p>
+        <p class="font-semibold text-lg mb-2 note-title">Wichtiger Hinweis zur Anmeldung:</p>
+        <p>Die Anmeldung für die Feriendienste erfolgt ausschließlich im Büro – persönlich, telefonisch oder per Mail!</p>
+        <p class="disclaimer-text">Alle Angaben ohne Gewähr.</p>
     </div>
 
     <div class="legend-container">
         <div class="collapsible-header">
-            <h2 class="legend-title" data-translate="legend.title">Legende</h2>
-            <button class="toggle-button" data-target="legend-content" aria-expanded="false" aria-controls="legend-content" data-translate-aria-label="legend.toggleButton">
+            <h2 class="legend-title">Legende</h2>
+            <button class="toggle-button" data-target="legend-content" aria-expanded="false" aria-controls="legend-content">
                 <i class="fas fa-chevron-down"></i>
             </button>
         </div>
@@ -963,23 +936,23 @@
             <div class="legend-items">
                 <div class="legend-item">
                     <span class="color-box past-color"></span>
-                    <span data-translate="legend.item.past">Vergangene Termine</span>
+                    <span>Vergangene Termine</span>
                 </div>
                 <div class="legend-item">
                     <span class="color-box current-color"></span>
-                    <span data-translate="legend.item.current">Aktuelle Termine</span>
+                    <span>Aktuelle Termine</span>
                 </div>
                 <div class="legend-item">
                     <span class="color-box upcoming-color"></span>
-                    <span data-translate="legend.item.upcoming">Nächste kommende Termine</span>
+                    <span>Nächste kommende Termine</span>
                 </div>
                 <div class="legend-item">
                     <span class="color-box deadline-color"></span>
-                    <span data-translate="legend.item.deadline">Wichtiger Hinweis</span>
+                    <span>Wichtiger Hinweis</span>
                 </div>
                 <div class="legend-item">
                     <i class="fas fa-calendar-plus legend-icon"></i>
-                    <span data-translate="legend.item.calendarAdd">Kalender-Eintrag hinzufügen</span>
+                    <span>Kalender-Eintrag hinzufügen</span>
                 </div>
             </div>
         </div>
@@ -987,29 +960,29 @@
 
     <div class="controls-container">
         <div class="collapsible-header">
-            <h2 class="controls-title" data-translate="controls.title">Filter & Sortierung</h2>
-            <button class="toggle-button" data-target="controls-content" aria-expanded="false" aria-controls="controls-content" data-translate-aria-label="controls.toggleButton">
+            <h2 class="controls-title">Filter & Sortierung</h2>
+            <button class="toggle-button" data-target="controls-content" aria-expanded="false" aria-controls="controls-content">
                 <i class="fas fa-chevron-down"></i>
             </button>
         </div>
         <div id="controls-content" class="collapsible-content">
             <div class="controls-group">
                 <div>
-                    <label for="yearSelector" data-translate="controls.yearLabel">Jahr:</label>
+                    <label for="yearSelector">Jahr:</label>
                     <select id="yearSelector"></select>
                 </div>
                 <div>
-                    <label for="filterOptions" data-translate="controls.filterLabel">Filter:</label>
+                    <label for="filterOptions">Filter:</label>
                     <select id="filterOptions">
-                        <option value="all" data-translate="controls.filterOptions.all">Alle Termine</option>
-                        <option value="upcoming" data-translate="controls.filterOptions.upcoming">Nur kommende Termine</option>
+                        <option value="all">Alle Termine</option>
+                        <option value="upcoming">Nur kommende Termine</option>
                     </select>
                 </div>
                 <div>
-                    <label for="sortOptions" data-translate="controls.sortLabel">Sortierung:</label>
+                    <label for="sortOptions">Sortierung:</label>
                     <select id="sortOptions">
-                        <option value="asc" data-translate="controls.sortOptions.asc">Älteste zuerst</option>
-                        <option value="desc" data-translate="controls.sortOptions.desc">Neueste zuerst</option>
+                        <option value="asc">Älteste zuerst</option>
+                        <option value="desc">Neueste zuerst</option>
                     </select>
                 </div>
             </div>
@@ -1017,47 +990,40 @@
     </div>
 
     <main id="cards-container">
-        <!-- Dynamically generated cards will be translated by JavaScript later -->
     </main>
 
     <div class="print-button-container">
         <button class="print-button" onclick="window.print()">
-            <i class="fas fa-print"></i> <span data-translate="button.print">Drucken</span>
+            <i class="fas fa-print"></i> Drucken
         </button>
     </div>
 </div>
 
 <div id="stickyCountdownBar" class="sticky-countdown-bar">
-    <span id="countdownCombinedDisplay" class="countdown-combined-display">
-        <!-- Countdown text is generated by JavaScript and will be translated there -->
-    </span>
+    <span id="countdownCombinedDisplay" class="countdown-combined-display"></span>
 </div>
 
 <footer class="footer-section">
-    <p data-translate="footer.privateProject">Dies ist ein privates Projekt und steht in keiner direkten Verbindung zur Kita.</p>
-    <p data-translate="footer.infoSource">Die Informationen auf dieser Seite wurden allgemein von der Kita an alle verteilt.</p>
-    <p data-translate="footer.noExtraInfo">Ich habe nicht mehr Informationen als alle anderen auch. Alle Angaben sind ohne Gewähr.</p>
+    <p>Dies ist ein privates Projekt und steht in keiner direkten Verbindung zur Kita.</p>
+    <p>Die Informationen auf dieser Seite wurden allgemein von der Kita an alle verteilt.</p>
+    <p>Ich habe nicht mehr Informationen als alle anderen auch. Alle Angaben sind ohne Gewähr.</p>
     <p>
-        <a href="images/2025-Ferien.jpg" target="_blank" rel="noopener noreferrer" data-translate="footer.originalListLink">
+        <a href="images/2025-Ferien.jpg" target="_blank" rel="noopener noreferrer">
             Link zur originalen Liste mit den Terminen (JPG)
         </a>
     </p><br><br>
 </footer>
 
-<button id="scrollToTopBtn" class="scroll-to-top-btn" aria-label="Nach oben scrollen" data-translate-aria-label="button.scrollToTop">
+<button id="scrollToTopBtn" class="scroll-to-top-btn" aria-label="Nach oben scrollen">
     <i class="fas fa-arrow-up"></i>
 </button>
 
 <script>
-    let allCardsData = []; // Speichert die Rohdaten aus der JSON-Datei
-    let allCards = [];    // Speichert die generierten HTML-Karten-Elemente
+    // Original site logic (card creation, date parsing, dark mode, etc.)
+    let allCardsData = [];
+    let allCards = [];
     let countdownInterval;
 
-    /**
-     * Erstellt ein HTML-Karten-Element aus einem Datenobjekt.
-     * @param {Object} cardData - Das Datenobjekt für die Karte.
-     * @returns {HTMLElement} Das erstellte Karten-Element.
-     */
     function createCardElement(cardData) {
         const card = document.createElement('section');
         card.classList.add('card');
@@ -1066,6 +1032,9 @@
 
         const title = document.createElement('h2');
         title.classList.add('section-title', 'text-2xl', 'md:text-3xl');
+        // Title translation will be handled by updatePageLanguage if cardData.title is a key
+        // or if card titles are part of a dynamic content update process.
+        // For now, if cardData.title is a direct string, it won't be translated here.
         title.textContent = cardData.title;
         card.appendChild(title);
 
@@ -1078,18 +1047,10 @@
             if (detail.isDeadline) {
                 li.classList.add('deadline-highlight');
             }
-
             const span = document.createElement('span');
-            // TODO: Detail text translation might be complex if it contains mixed content or needs variable replacement.
-            // For now, assuming detail.text is either a direct translation key or pre-translated content.
-            // If detail.text were a key:
-            // span.textContent = getTranslation(detail.text, currentTranslations) || detail.text;
-            // Or if it contains variables that need to be interpolated after fetching a template string from translations:
-            // let template = getTranslation(detail.textKey, currentTranslations) || "";
-            // span.innerHTML = template.replace("{variable}", detail.variableValue);
+            // Detail text translation: complex, needs specific keys if parts are static.
+            // Assuming detail.text is pre-translated or handled by a more specific mechanism.
             span.innerHTML = detail.text.includes('strong>') ? detail.text : `<span>${detail.text}</span>`;
-
-
             li.appendChild(span);
 
             if (detail.icsData) {
@@ -1114,34 +1075,25 @@
         return card;
     }
 
-
-    /**
-     * Findet das nächste wichtige Anmeldedatum aus der vordefinierten Liste.
-     * @returns {object|null} Ein Objekt mit Name und Zieldatum, oder null, wenn keine zukünftigen Anmeldetage vorhanden sind.
-     */
     function findNextImportantEvent() {
         const now = new Date();
         let nextEvent = null;
         let minDiff = Infinity;
-
-        // Iteriert durch die allCardsData, um Deadline-Ereignisse zu finden
         for (const card of allCardsData) {
             for (const detail of card.details) {
                 if (detail.isDeadline && detail.icsData) {
-                    // Verwendet dtstart aus icsData für den Countdown, da es das spezifische Datum ist
                     const targetDateString = detail.icsData.dtstart;
                     if (targetDateString) {
                         const year = parseInt(targetDateString.substring(0, 4), 10);
-                        const month = parseInt(targetDateString.substring(4, 6), 10) - 1; // 0-indiziert
+                        const month = parseInt(targetDateString.substring(4, 6), 10) - 1;
                         const day = parseInt(targetDateString.substring(6, 8), 10);
                         const targetDate = new Date(year, month, day);
-                        targetDate.setHours(15, 0, 0, 0); // Setzt auf 15:00:00.000 für den Countdown
-
+                        targetDate.setHours(15, 0, 0, 0);
                         if (targetDate.getTime() > now.getTime()) {
                             const diff = targetDate.getTime() - now.getTime();
                             if (diff < minDiff) {
                                 minDiff = diff;
-                                nextEvent = { name: card.title.replace('ferien', ''), targetDate: targetDate }; // z.B. "Winter" von "Winterferien"
+                                nextEvent = { name: card.title.replace('ferien', ''), targetDate: targetDate };
                             }
                         }
                     }
@@ -1151,47 +1103,37 @@
         return nextEvent;
     }
 
-    /**
-     * Aktualisiert die Anzeige des Countdown-Timers.
-     */
     function updateCountdown() {
         const countdownCombinedDisplay = document.getElementById('countdownCombinedDisplay');
         const stickyCountdownBar = document.getElementById('stickyCountdownBar');
-
         const nextEvent = findNextImportantEvent();
+
+        if (!countdownCombinedDisplay || !stickyCountdownBar) { // Elements might not exist if header is removed
+             console.warn("[Debug] Countdown display elements not found.");
+             if(countdownInterval) clearInterval(countdownInterval);
+             return;
+        }
 
         if (!nextEvent) {
             const noEventMsg = getTranslation('countdown.noUpcomingEvent', currentTranslations) || "Kein bevorstehendes Anmeldedatum.";
             countdownCombinedDisplay.textContent = noEventMsg;
-            // stickyCountdownBar.style.display = 'none'; // Keep it displayed to show the message
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-            }
+            stickyCountdownBar.style.display = 'flex'; // Keep bar visible for message
+            if (countdownInterval) clearInterval(countdownInterval);
             return;
         }
 
         stickyCountdownBar.style.display = 'flex';
-
         const now = new Date().getTime();
         const distance = nextEvent.targetDate.getTime() - now;
-
-        // Event name might need translation if they are keys like "Summer Vacation" -> "events.summerVacation"
-        // For now, assuming nextEvent.name is directly usable or pre-translated.
-        const eventNameDisplay = nextEvent.name; // Potentially: getTranslation(`events.${nextEvent.nameKey}`, currentTranslations) || nextEvent.name;
-
+        const eventNameDisplay = nextEvent.name; // Event name translation deferred
 
         if (distance < 0) {
             let expiredMsg = getTranslation('countdown.expired', currentTranslations) || "Abgelaufen!";
             let deadlineForMsgPart = getTranslation('countdown.deadlineFor', currentTranslations) || "Anmeldeschluss für {eventName}feriendienst";
             deadlineForMsgPart = deadlineForMsgPart.replace('{eventName}', eventNameDisplay);
             countdownCombinedDisplay.textContent = `${deadlineForMsgPart}: ${expiredMsg}`;
-
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-            }
-            setTimeout(() => {
-                updateCountdown(); // Re-check for a new event after a while
-            }, 60000); // Check every minute if expired
+            if (countdownInterval) clearInterval(countdownInterval);
+            setTimeout(() => updateCountdown(), 60000);
             return;
         }
 
@@ -1206,12 +1148,7 @@
         }
         timerString += `${String(hours).padStart(2, '0')}Std ${String(minutes).padStart(2, '0')}Min ${String(seconds).padStart(2, '0')}Sek`;
 
-        let deadlineForMsg = getTranslation('countdown.deadlineFor', currentTranslations) || "Anmeldeschluss für {eventName}feriendienst";
-        deadlineForMsg = deadlineForMsg.replace('{eventName}', eventNameDisplay);
-        let endsInMsg = getTranslation('countdown.endsIn', currentTranslations) || "in {timeString}";
-        endsInMsg = endsInMsg.replace('{timeString}', timerString);
-
-        countdownCombinedDisplay.textContent = `${deadlineForMsg} ${endsInMsg}`;
+        countdownCombinedDisplay.textContent = `Anmeldeschluss für ${nextEvent.name}feriendienst in ${timerString}`;
     }
 
 
@@ -1503,13 +1440,9 @@
             const dataFilePath = `data/${year}.json`; // Relativer Pfad für GitHub Pages
             const response = await fetch(dataFilePath);
             if (!response.ok) {
+                // Wenn die Datei nicht gefunden wird, zeigen wir eine Meldung an
                 if (response.status === 404) {
-                    let noEventsMsg = getTranslation('dataMessages.noEventsForYear', currentTranslations) || "Keine Termine für das Jahr {year} gefunden.";
-                    cardsContainer.innerHTML = `<p class="text-gray-600 text-center text-lg mt-8">${noEventsMsg.replace('{year}', year)}</p>`;
-                } else {
-                    // Generic error for other HTTP issues
-                    let errorMsg = getTranslation('dataMessages.errorLoadingEvents', currentTranslations) || "Fehler beim Laden der Termine. Bitte versuchen Sie es später erneut.";
-                    cardsContainer.innerHTML = `<p class="text-red-500 text-center text-lg">${errorMsg}</p>`;
+                    cardsContainer.innerHTML = `<p class="text-gray-600 text-center text-lg mt-8">Keine Termine für das Jahr ${year} gefunden.</p>`;
                 }
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -1530,9 +1463,9 @@
 
         } catch (error) {
             console.error(`Fehler beim Laden der Termine für ${year}:`, error);
-            if (!cardsContainer.querySelector('.text-red-500') && !cardsContainer.querySelector('.text-gray-600')) { // Avoid double error messages
-                let errorMsg = getTranslation('dataMessages.errorLoadingEvents', currentTranslations) || "Fehler beim Laden der Termine. Bitte versuchen Sie es später erneut.";
-                cardsContainer.innerHTML = `<p class="text-red-500 text-center text-lg">${errorMsg}</p>`;
+            // Wenn noch keine Fehlermeldung angezeigt wird, füge eine hinzu
+            if (!cardsContainer.querySelector('.text-red-500') && !cardsContainer.querySelector('.text-gray-600')) {
+                cardsContainer.innerHTML = '<p class="text-red-500 text-center text-lg">Fehler beim Laden der Termine. Bitte versuchen Sie es später erneut.</p>';
             }
         }
     }
@@ -1560,57 +1493,50 @@
     }
 
 
-    /**
-     * Retrieves a nested value from an object using a dot-separated key.
-     * @param {string} key - The dot-separated key (e.g., "header.mainTitle").
-     * @param {object} translations - The translations object.
-     * @returns {string|undefined} The translated string or undefined if not found.
-     */
+    // --- START LANGUAGE SWITCHER AND TRANSLATION LOGIC ---
+    let currentTranslations = {};
+
+    const languageConfig = {
+        'de': { name: 'Deutsch', flagImageUrl: 'images/flags/de.svg' },
+        'en': { name: 'English', flagImageUrl: 'images/flags/gb.svg' },
+        'ar': { name: 'العربية', flagImageUrl: 'images/flags/sa.svg' },
+        'tr': { name: 'Türkçe', flagImageUrl: 'images/flags/tr.svg' },
+        'pl': { name: 'Polski', flagImageUrl: 'images/flags/pl.svg' },
+        'ru': { name: 'Русский', flagImageUrl: 'images/flags/ru.svg' }
+    };
+
     function getTranslation(key, translations) {
         return key.split('.').reduce((obj, k) => (obj && obj[k] !== undefined) ? obj[k] : undefined, translations);
     }
 
-    /**
-     * Fetches translation data for the given language code.
-     * @param {string} langCode - The language code (e.g., 'de', 'en').
-     * @returns {Promise<object|null>} A promise that resolves to the translations object or null on error.
-     */
     async function fetchTranslations(langCode) {
         const filePath = `locales/${langCode}.json`;
         try {
             const response = await fetch(filePath);
             if (!response.ok) {
-                console.error(`Error fetching translation file for ${langCode}: ${response.statusText}`);
-                // Fallback to German if the requested language file is not found
+                console.error(`[Debug] Error fetching translation file for ${langCode}: ${response.statusText}`);
                 if (langCode !== 'de') {
-                    console.warn(`Falling back to German translations.`);
+                    console.warn(`[Debug] Falling back to German translations.`);
                     return await fetchTranslations('de');
                 }
                 return null;
             }
             return await response.json();
         } catch (error) {
-            console.error(`Error loading or parsing translation file for ${langCode}:`, error);
-            // Fallback to German on any other error as well
+            console.error(`[Debug] Error loading or parsing translation file for ${langCode}:`, error);
             if (langCode !== 'de') {
-                console.warn(`Falling back to German translations due to error.`);
+                console.warn(`[Debug] Falling back to German translations due to error.`);
                 return await fetchTranslations('de');
             }
             return null;
         }
     }
 
-    let currentTranslations = {}; // To store loaded translations globally
-
-    /**
-     * Updates the page content based on the selected language.
-     * @param {string} langCode - The language code (e.g., 'de', 'en').
-     */
     async function updatePageLanguage(langCode) {
+        console.log(`[Debug] updatePageLanguage called with: ${langCode}`);
         currentTranslations = await fetchTranslations(langCode) || {};
         document.documentElement.lang = langCode;
 
-        // RTL/LTR switching
         if (langCode === 'ar') {
             document.documentElement.dir = 'rtl';
             document.body.classList.add('rtl-layout');
@@ -1625,72 +1551,141 @@
         document.querySelectorAll('[data-translate]').forEach(element => {
             const key = element.dataset.translate;
             let translation = getTranslation(key, currentTranslations);
-
             if (translation !== undefined) {
                 if (element.dataset.translateYearAware !== undefined) {
                     translation = translation.replace('{year}', currentYear);
                 }
                 element.textContent = translation;
             } else {
-                console.warn(`Translation not found for key: ${key} in language: ${langCode}`);
+                console.warn(`[Debug] Translation not found for key: ${key} in lang: ${langCode}`);
             }
         });
-
         document.querySelectorAll('[data-translate-aria-label]').forEach(element => {
             const key = element.dataset.translateAriaLabel;
             const translation = getTranslation(key, currentTranslations);
             if (translation !== undefined) {
                 element.setAttribute('aria-label', translation);
             } else {
-                console.warn(`ARIA label translation not found for key: ${key} in language: ${langCode}`);
+                console.warn(`[Debug] ARIA label translation not found for key: ${key} in lang: ${langCode}`);
             }
         });
 
-        // Specific logic for language switcher display names if they were part of [data-translate]
-        // For now, languageConfig handles button text, and static text in dropdown is not covered by this function yet.
-        // If dropdown items themselves need translation via data-translate, that's a future step.
+        updateCountdown(); // Refresh countdown text with new language
+        // If cards are already rendered, their static "Calendar" button text would need re-translation.
+        // This can be done by re-calling applyFiltersAndSorting() or a more targeted update.
+        // For simplicity in this step, we assume cards are re-rendered on year change, which would pick up new lang.
+        // Or, ensure card elements are updated here if they exist.
+        document.querySelectorAll('.calendar-button').forEach(button => {
+            const calendarButtonText = getTranslation('card.calendarButton', currentTranslations) || 'Kalender';
+            // Preserve the icon, only change text part
+            const icon = button.querySelector('i.fa-calendar-plus');
+            if (icon) {
+                button.innerHTML = `<i class="fas fa-calendar-plus"></i> ${calendarButtonText}`;
+            } else { // Fallback if icon not found for some reason
+                button.textContent = calendarButtonText;
+            }
+        });
 
-        console.log(`Page language updated to: ${langCode} with year ${currentYear}`);
-        // Future: Trigger translation of dynamic content (cards, countdown, etc.)
+
+        console.log(`[Debug] Page language updated to: ${langCode} with year ${currentYear}`);
     }
 
-    // Configuration for language properties
-    const languageConfig = {
-        'de': { name: 'Deutsch', flagImageUrl: 'images/flags/de.svg' },
-        'en': { name: 'English', flagImageUrl: 'images/flags/gb.svg' },
-        'ar': { name: 'العربية', flagImageUrl: 'images/flags/sa.svg' },
-        'tr': { name: 'Türkçe', flagImageUrl: 'images/flags/tr.svg' },
-        'pl': { name: 'Polski', flagImageUrl: 'images/flags/pl.svg' },
-        'ru': { name: 'Русский', flagImageUrl: 'images/flags/ru.svg' }
-    };
-
-    // Initial setup when the DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', async () => {
-        // Language Switcher Logic
-        const languageMenuButton = document.getElementById('language-menu-button');
-        const languageMenu = document.getElementById('language-menu');
+    function setButtonLanguage(langCode) {
         const currentLanguageNameSpan = document.getElementById('current-language-name');
-        const currentLanguageFlagImage = document.getElementById('current-flag-image'); // Changed from Icon to Image
+        const currentLanguageFlagImage = document.getElementById('current-flag-image');
+        const languageMenuButtonText = languageMenuButton.querySelector('span'); // For simplified LANG button
 
-        function setButtonLanguage(langCode) {
-            const config = languageConfig[langCode];
-            if (config && currentLanguageNameSpan && currentLanguageFlagImage) {
+        const config = languageConfig[langCode];
+        if (config) {
+            if (currentLanguageNameSpan) { // For original button structure
                 currentLanguageNameSpan.textContent = config.name;
+            } else if (languageMenuButtonText) { // For simplified button structure
+                languageMenuButtonText.textContent = langCode.toUpperCase(); // e.g., "DE", "EN"
+            }
+
+            if (currentLanguageFlagImage) { // For original button structure
                 currentLanguageFlagImage.src = config.flagImageUrl;
                 currentLanguageFlagImage.alt = `Flag of ${config.name}`;
             }
+        } else {
+            console.error('[Debug] setButtonLanguage: Missing config for langCode:', langCode);
+            if (languageMenuButtonText) languageMenuButtonText.textContent = "ERR";
+        }
+    }
+
+
+    // Initial setup when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', async () => {
+        console.log('[Debug] DOMContentLoaded: Verifying elements for language switcher setup...');
+        const languageMenuButton = document.getElementById('language-menu-button');
+        const languageMenu = document.getElementById('language-menu');
+
+        if (!languageMenuButton) {
+            console.error('[Debug] CRITICAL: language-menu-button NOT FOUND in DOM at setup time.');
+            return;
+        }
+        if (!languageMenu) {
+            console.error('[Debug] CRITICAL: language-menu NOT FOUND in DOM at setup time.');
+            // Not returning, as button might still need to function or show an error.
+        }
+        console.log('[Debug] Language button and menu elements obtained:', languageMenuButton, languageMenu);
+
+        if (languageMenu && !languageMenu.classList.contains('hidden')) {
+            console.warn('[Debug] Menu was not initially hidden by class. Adding hidden class and setting style.display to none.');
+            languageMenu.classList.add('hidden');
+            languageMenu.style.display = 'none';
+        } else if (languageMenu && languageMenu.classList.contains('hidden') && languageMenu.style.display !== 'none') {
+            console.warn('[Debug] Menu has hidden class but style.display is not none. Setting style.display = "none".');
+            languageMenu.style.display = 'none';
         }
 
-        if (languageMenuButton && languageMenu && currentLanguageNameSpan && currentLanguageFlagImage) { // Check for Image
-            languageMenuButton.addEventListener('click', (event) => {
+        if (languageMenuButton && languageMenu) {
+            console.log('[Debug] Attaching event listeners to language switcher.');
+            languageMenuButton.addEventListener('click', function (event) {
+                console.log('[Debug] #language-menu-button clicked!', event);
                 event.stopPropagation();
+
+                if (!languageMenu) {
+                    console.error('[Debug] Language menu element is null in click handler!');
+                    return;
+                }
+
                 const isExpanded = languageMenuButton.getAttribute('aria-expanded') === 'true';
-                languageMenuButton.setAttribute('aria-expanded', !isExpanded);
-                languageMenu.classList.toggle('hidden');
+                const isMenuHiddenByStyle = languageMenu.style.display === 'none' || languageMenu.style.display === '';
+                const isMenuHiddenByClass = languageMenu.classList.contains('hidden');
+
+                console.log('[Debug] Before toggle: menu style.display:', languageMenu.style.display, 'menu hidden class?', isMenuHiddenByClass, 'aria-expanded?', isExpanded);
+
+                if (isMenuHiddenByStyle || isMenuHiddenByClass) {
+                    languageMenu.style.display = 'block';
+                    languageMenu.classList.remove('hidden');
+                    languageMenuButton.setAttribute('aria-expanded', 'true');
+                    console.log('[Debug] Tried to show menu. New display:', languageMenu.style.display, 'classList:', languageMenu.classList.toString());
+                } else {
+                    languageMenu.style.display = 'none';
+                    languageMenu.classList.add('hidden');
+                    languageMenuButton.setAttribute('aria-expanded', 'false');
+                    console.log('[Debug] Tried to hide menu. New display:', languageMenu.style.display, 'classList:', languageMenu.classList.toString());
+                }
+
+                console.log('[Debug] After toggle attempt: menu style.display:', languageMenu.style.display, 'menu hidden class?', languageMenu.classList.contains('hidden'), 'aria-expanded?', languageMenuButton.getAttribute('aria-expanded'));
             });
 
-            document.addEventListener('click', (event) => {
-                if (!languageMenuButton.contains(event.target) && !languageMenu.contains(event.target)) {
+            document.addEventListener('click', function (event) {
+                if (!languageMenuButton || !languageMenu) {
+                    console.error("[Debug] Document click listener: Button or Menu not found.");
+                    return;
+                }
+                console.log('[Debug] Document clicked. Target:', event.target);
+                const isClickInsideButton = languageMenuButton.contains(event.target);
+                const isClickInsideMenu = languageMenu.contains(event.target);
+                const isMenuVisible = !languageMenu.classList.contains('hidden') && languageMenu.style.display === 'block';
+
+                console.log('[Debug] Is click inside button?', isClickInsideButton, 'Is click inside menu?', isClickInsideMenu, 'Is menu visible?', isMenuVisible);
+
+                if (!isClickInsideButton && !isClickInsideMenu && isMenuVisible) {
+                    console.log('[Debug] Closing menu due to outside click.');
+                    languageMenu.style.display = 'none';
                     languageMenu.classList.add('hidden');
                     languageMenuButton.setAttribute('aria-expanded', 'false');
                 }
@@ -1700,59 +1695,59 @@
                 item.addEventListener('click', (event) => {
                     event.preventDefault();
                     const selectedLangCode = item.dataset.langCode;
-                    // const selectedLangName = item.dataset.langName; // No longer strictly needed from here
-                    // const selectedFlagImageUrl = item.dataset.flagImageUrl; // No longer strictly needed from here
-
                     if (selectedLangCode && languageConfig[selectedLangCode]) {
                         localStorage.setItem('selectedLanguage', selectedLangCode);
-                        setButtonLanguage(selectedLangCode); // Update button display using langCode
-                        updatePageLanguage(selectedLangCode); // Call page update function
+                        setButtonLanguage(selectedLangCode);
+                        updatePageLanguage(selectedLangCode);
                     }
-
-                    languageMenu.classList.add('hidden');
-                    languageMenuButton.setAttribute('aria-expanded', 'false');
+                    if(languageMenu) {
+                        languageMenu.style.display = 'none';
+                        languageMenu.classList.add('hidden');
+                    }
+                    if(languageMenuButton) {
+                        languageMenuButton.setAttribute('aria-expanded', 'false');
+                    }
                 });
             });
         }
 
-        // Load saved language or default to German
         const savedLangCode = localStorage.getItem('selectedLanguage');
         if (savedLangCode && languageConfig[savedLangCode]) {
             setButtonLanguage(savedLangCode);
-            updatePageLanguage(savedLangCode);
+            await updatePageLanguage(savedLangCode);
         } else {
             const defaultLangCode = 'de';
-            localStorage.setItem('selectedLanguage', defaultLangCode); // Optionally save default if not set
+            localStorage.setItem('selectedLanguage', defaultLangCode);
             setButtonLanguage(defaultLangCode);
-            updatePageLanguage(defaultLangCode);
+            await updatePageLanguage(defaultLangCode);
         }
 
-        // Check for dark mode preference on load
         if (localStorage.getItem('darkMode') === 'enabled') {
             document.body.classList.add('dark-mode');
-            document.querySelector('#darkModeToggle i').classList.remove('fa-moon');
-            document.querySelector('#darkModeToggle i').classList.add('fa-sun');
+            const darkModeToggleIcon = document.querySelector('#darkModeToggle i');
+            if(darkModeToggleIcon) {
+                darkModeToggleIcon.classList.remove('fa-moon');
+                darkModeToggleIcon.classList.add('fa-sun');
+            }
         }
 
-        // Populate year selector
         populateYearSelector();
+        const initialYear = document.getElementById('yearSelector').value || new Date().getFullYear();
+        await loadAndRenderData(parseInt(initialYear, 10));
 
-        // Load data for the initial year (current year)
-        const initialYear = new Date().getFullYear();
-        await loadAndRenderData(initialYear);
-
-
-        // Add event listeners for filter and sort changes
         document.getElementById('filterOptions').addEventListener('change', applyFiltersAndSorting);
         document.getElementById('sortOptions').addEventListener('change', applyFiltersAndSorting);
         document.getElementById('yearSelector').addEventListener('change', (event) => {
-            loadAndRenderData(parseInt(event.target.value, 10));
+            const selectedYear = parseInt(event.target.value, 10);
+            loadAndRenderData(selectedYear).then(() => {
+                 // Re-apply translations which might depend on year or newly loaded data
+                updatePageLanguage(localStorage.getItem('selectedLanguage') || 'de');
+            });
         });
 
-        // Add event listener for dark mode toggle
         document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
 
-        // Setup collapsible sections: Add click listeners and set initial state to collapsed
+        document.querySelectorAll('.collapsible-header .toggle-button').forEach(button => {
         document.querySelectorAll('.collapsible-header .toggle-button').forEach(button => {
             const targetId = button.dataset.target;
             const content = document.getElementById(targetId);
