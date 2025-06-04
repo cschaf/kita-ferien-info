@@ -1,0 +1,72 @@
+{
+  "header": {
+    "mainTitle": "Holiday Schedule {year}",
+    "subtitle": "Overview of holidays and closing days for the daycare center"
+  },
+  "darkModeToggleLabel": "Toggle dark mode",
+  "languageSwitcher": {
+    "currentLanguage": "German",
+    "english": "English",
+    "arabic": "Arabic",
+    "turkish": "Turkish",
+    "polish": "Polish",
+    "russian": "Russian"
+  },
+  "note": {
+    "title": "Important Information about Registration:",
+    "registrationInfo": "Registration for holiday services is exclusively done in the office – in person, by phone, or by email!",
+    "disclaimer": "All information without guarantee."
+  },
+  "legend": {
+    "title": "Legend",
+    "toggleButton": "Toggle legend",
+    "item": {
+      "past": "Past Dates",
+      "current": "Current Dates",
+      "upcoming": "Next Upcoming Dates",
+      "deadline": "Important Notice",
+      "calendarAdd": "Add to Calendar"
+    }
+  },
+  "controls": {
+    "title": "Filter & Sorting",
+    "toggleButton": "Toggle filter and sorting",
+    "yearLabel": "Year:",
+    "filterLabel": "Filter:",
+    "filterOptions": {
+      "all": "All Dates",
+      "upcoming": "Upcoming Dates Only"
+    },
+    "sortLabel": "Sort:",
+    "sortOptions": {
+      "asc": "Oldest first",
+      "desc": "Newest first"
+    }
+  },
+  "button": {
+    "print": "Print",
+    "scrollToTop": "Scroll to top"
+  },
+  "footer": {
+    "privateProject": "This is a private project and is not directly affiliated with the daycare center.",
+    "infoSource": "The information on this page was generally distributed by the daycare center to everyone.",
+    "noExtraInfo": "I do not have more information than anyone else. All information is without guarantee.",
+    "originalListLink": "Link to the original list of dates (JPG)"
+  },
+  "countdown": {
+    "deadlineFor": "Registration deadline for {eventName} service",
+    "endsIn": "in {timeString}",
+    "expired": "Expired!",
+    "noUpcomingEvent": "No upcoming registration deadline."
+  },
+  "card": {
+    "calendarButton": "Calendar"
+  },
+  "dataMessages": {
+    "noEventsForYear": "No events found for the year {year}.",
+    "errorLoadingEvents": "Error loading events. Please try again later."
+  },
+  "general": {
+      "loading": "Loading..."
+  }
+}

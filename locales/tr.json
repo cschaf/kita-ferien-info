@@ -1,0 +1,72 @@
+{
+  "header": {
+    "mainTitle": "Tatil Planı {year}",
+    "subtitle": "Kreşin tatil zamanları ve kapalı olduğu günlere genel bakış"
+  },
+  "darkModeToggleLabel": "Karanlık modu aç/kapat",
+  "languageSwitcher": {
+    "currentLanguage": "Almanca",
+    "english": "İngilizce",
+    "arabic": "Arapça",
+    "turkish": "Türkçe",
+    "polish": "Lehçe",
+    "russian": "Rusça"
+  },
+  "note": {
+    "title": "Kayıtla İlgili Önemli Not:",
+    "registrationInfo": "Tatil hizmetleri için kayıt sadece ofiste yapılır – şahsen, telefonla veya e-posta ile!",
+    "disclaimer": "Tüm bilgiler garantisizdir."
+  },
+  "legend": {
+    "title": "Açıklama",
+    "toggleButton": "Açıklamayı göster/gizle",
+    "item": {
+      "past": "Geçmiş Tarihler",
+      "current": "Güncel Tarihler",
+      "upcoming": "Yaklaşan Sonraki Tarihler",
+      "deadline": "Önemli Not",
+      "calendarAdd": "Takvime Ekle"
+    }
+  },
+  "controls": {
+    "title": "Filtrele & Sırala",
+    "toggleButton": "Filtreleme ve sıralamayı göster/gizle",
+    "yearLabel": "Yıl:",
+    "filterLabel": "Filtre:",
+    "filterOptions": {
+      "all": "Tüm Tarihler",
+      "upcoming": "Sadece Yaklaşan Tarihler"
+    },
+    "sortLabel": "Sırala:",
+    "sortOptions": {
+      "asc": "Önce en eski",
+      "desc": "Önce en yeni"
+    }
+  },
+  "button": {
+    "print": "Yazdır",
+    "scrollToTop": "Yukarı kaydır"
+  },
+  "footer": {
+    "privateProject": "Bu özel bir projedir ve kreşle doğrudan bir bağlantısı yoktur.",
+    "infoSource": "Bu sayfadaki bilgiler genel olarak kreş tarafından herkese dağıtılmıştır.",
+    "noExtraInfo": "Herkesten daha fazla bilgiye sahip değilim. Tüm bilgiler garantisizdir.",
+    "originalListLink": "Tarihlerin orijinal listesine bağlantı (JPG)"
+  },
+  "countdown": {
+    "deadlineFor": "{eventName} hizmeti için son kayıt tarihi",
+    "endsIn": "{timeString} içinde",
+    "expired": "Süresi doldu!",
+    "noUpcomingEvent": "Yaklaşan kayıt tarihi yok."
+  },
+  "card": {
+    "calendarButton": "Takvim"
+  },
+  "dataMessages": {
+    "noEventsForYear": "{year} yılı için etkinlik bulunamadı.",
+    "errorLoadingEvents": "Etkinlikler yüklenirken hata oluştu. Lütfen daha sonra tekrar deneyin."
+  },
+  "general": {
+      "loading": "Yükleniyor..."
+  }
+}

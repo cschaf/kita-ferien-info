@@ -1,0 +1,72 @@
+{
+  "header": {
+    "mainTitle": "Ferienplan {year}",
+    "subtitle": "Übersicht über Ferienzeiten und Schließtage der Kita"
+  },
+  "darkModeToggleLabel": "Toggle dark mode",
+  "languageSwitcher": {
+    "currentLanguage": "Deutsch",
+    "english": "Englisch",
+    "arabic": "Arabisch",
+    "turkish": "Türkisch",
+    "polish": "Polnisch",
+    "russian": "Russisch"
+  },
+  "note": {
+    "title": "Wichtiger Hinweis zur Anmeldung:",
+    "registrationInfo": "Die Anmeldung für die Feriendienste erfolgt ausschließlich im Büro – persönlich, telefonisch oder per Mail!",
+    "disclaimer": "Alle Angaben ohne Gewähr."
+  },
+  "legend": {
+    "title": "Legende",
+    "toggleButton": "Legende ein/ausblenden",
+    "item": {
+      "past": "Vergangene Termine",
+      "current": "Aktuelle Termine",
+      "upcoming": "Nächste kommende Termine",
+      "deadline": "Wichtiger Hinweis",
+      "calendarAdd": "Kalender-Eintrag hinzufügen"
+    }
+  },
+  "controls": {
+    "title": "Filter & Sortierung",
+    "toggleButton": "Filter und Sortierung ein/ausblenden",
+    "yearLabel": "Jahr:",
+    "filterLabel": "Filter:",
+    "filterOptions": {
+      "all": "Alle Termine",
+      "upcoming": "Nur kommende Termine"
+    },
+    "sortLabel": "Sortierung:",
+    "sortOptions": {
+      "asc": "Älteste zuerst",
+      "desc": "Neueste zuerst"
+    }
+  },
+  "button": {
+    "print": "Drucken",
+    "scrollToTop": "Nach oben scrollen"
+  },
+  "footer": {
+    "privateProject": "Dies ist ein privates Projekt und steht in keiner direkten Verbindung zur Kita.",
+    "infoSource": "Die Informationen auf dieser Seite wurden allgemein von der Kita an alle verteilt.",
+    "noExtraInfo": "Ich habe nicht mehr Informationen als alle anderen auch. Alle Angaben sind ohne Gewähr.",
+    "originalListLink": "Link zur originalen Liste mit den Terminen (JPG)"
+  },
+  "countdown": {
+    "deadlineFor": "Anmeldeschluss für {eventName}feriendienst",
+    "endsIn": "in {timeString}",
+    "expired": "Abgelaufen!",
+    "noUpcomingEvent": "Kein bevorstehendes Anmeldedatum."
+  },
+  "card": {
+    "calendarButton": "Kalender"
+  },
+  "dataMessages": {
+    "noEventsForYear": "Keine Termine für das Jahr {year} gefunden.",
+    "errorLoadingEvents": "Fehler beim Laden der Termine. Bitte versuchen Sie es später erneut."
+  },
+  "general": {
+      "loading": "Laden..."
+  }
+}

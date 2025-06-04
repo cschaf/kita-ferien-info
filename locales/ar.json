@@ -1,0 +1,72 @@
+{
+  "header": {
+    "mainTitle": "جدول العطلات {year}",
+    "subtitle": "نظرة عامة على أوقات العطلات وأيام إغلاق الحضانة"
+  },
+  "darkModeToggleLabel": "تبديل الوضع الداكن",
+  "languageSwitcher": {
+    "currentLanguage": "الألمانية",
+    "english": "الإنجليزية",
+    "arabic": "العربية",
+    "turkish": "التركية",
+    "polish": "البولندية",
+    "russian": "الروسية"
+  },
+  "note": {
+    "title": "ملاحظة هامة بخصوص التسجيل:",
+    "registrationInfo": "يتم التسجيل لخدمات العطلات حصريًا في المكتب – شخصيًا، عبر الهاتف أو البريد الإلكتر الإلكتروني!",
+    "disclaimer": "جميع المعلومات بدون ضمان."
+  },
+  "legend": {
+    "title": "مفتاح الرموز",
+    "toggleButton": "إظهار/إخفاء مفتاح الرموز",
+    "item": {
+      "past": "المواعيد الماضية",
+      "current": "المواعيد الحالية",
+      "upcoming": "المواعيد القادمة التالية",
+      "deadline": "ملاحظة هامة",
+      "calendarAdd": "إضافة إلى التقويم"
+    }
+  },
+  "controls": {
+    "title": "التصفية والفرز",
+    "toggleButton": "إظهار/إخفاء التصفية والفرز",
+    "yearLabel": "السنة:",
+    "filterLabel": "التصفية:",
+    "filterOptions": {
+      "all": "جميع المواعيد",
+      "upcoming": "المواعيد القادمة فقط"
+    },
+    "sortLabel": "الفرز:",
+    "sortOptions": {
+      "asc": "الأقدم أولاً",
+      "desc": "الأحدث أولاً"
+    }
+  },
+  "button": {
+    "print": "طباعة",
+    "scrollToTop": "الانتقال إلى الأعلى"
+  },
+  "footer": {
+    "privateProject": "هذا مشروع خاص ولا يرتبط مباشرة بالحضانة.",
+    "infoSource": "المعلومات الواردة في هذه الصفحة تم توزيعها بشكل عام من قبل الحضانة على الجميع.",
+    "noExtraInfo": "ليس لدي معلومات أكثر من أي شخص آخر. جميع المعلومات بدون ضمان.",
+    "originalListLink": "رابط إلى القائمة الأصلية بالمواعيد (JPG)"
+  },
+  "countdown": {
+    "deadlineFor": "الموعد النهائي للتسجيل لخدمة {eventName}",
+    "endsIn": "في {timeString}",
+    "expired": "انتهى!",
+    "noUpcomingEvent": "لا يوجد موعد تسجيل قادم."
+  },
+  "card": {
+    "calendarButton": "التقويم"
+  },
+  "dataMessages": {
+    "noEventsForYear": "لم يتم العثور على مواعيد للسنة {year}.",
+    "errorLoadingEvents": "خطأ في تحميل المواعيد. يرجى المحاولة مرة أخرى لاحقًا."
+  },
+  "general": {
+      "loading": "جار التحميل..."
+  }
+}

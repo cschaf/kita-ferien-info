@@ -1,0 +1,72 @@
+{
+  "header": {
+    "mainTitle": "Harmonogram Wakacji {year}",
+    "subtitle": "Przegląd okresów wakacyjnych i dni zamknięcia przedszkola"
+  },
+  "darkModeToggleLabel": "Przełącz tryb ciemny",
+  "languageSwitcher": {
+    "currentLanguage": "Niemiecki",
+    "english": "Angielski",
+    "arabic": "Arabski",
+    "turkish": "Turecki",
+    "polish": "Polski",
+    "russian": "Rosyjski"
+  },
+  "note": {
+    "title": "Ważna informacja dotycząca rejestracji:",
+    "registrationInfo": "Rejestracja na usługi wakacyjne odbywa się wyłącznie w biurze – osobiście, telefonicznie lub mailowo!",
+    "disclaimer": "Wszystkie informacje bez gwarancji."
+  },
+  "legend": {
+    "title": "Legenda",
+    "toggleButton": "Pokaż/ukryj legendę",
+    "item": {
+      "past": "Minione daty",
+      "current": "Aktualne daty",
+      "upcoming": "Następne nadchodzące daty",
+      "deadline": "Ważna uwaga",
+      "calendarAdd": "Dodaj do kalendarza"
+    }
+  },
+  "controls": {
+    "title": "Filtrowanie i Sortowanie",
+    "toggleButton": "Pokaż/ukryj filtrowanie i sortowanie",
+    "yearLabel": "Rok:",
+    "filterLabel": "Filtr:",
+    "filterOptions": {
+      "all": "Wszystkie daty",
+      "upcoming": "Tylko nadchodzące daty"
+    },
+    "sortLabel": "Sortuj:",
+    "sortOptions": {
+      "asc": "Najstarsze najpierw",
+      "desc": "Najnowsze najpierw"
+    }
+  },
+  "button": {
+    "print": "Drukuj",
+    "scrollToTop": "Przewiń na górę"
+  },
+  "footer": {
+    "privateProject": "To jest prywatny projekt i nie jest bezpośrednio powiązany z przedszkolem.",
+    "infoSource": "Informacje na tej stronie zostały ogólnie rozpowszechnione przez przedszkole dla wszystkich.",
+    "noExtraInfo": "Nie posiadam więcej informacji niż ktokolwiek inny. Wszystkie informacje są bez gwarancji.",
+    "originalListLink": "Link do oryginalnej listy z datami (JPG)"
+  },
+  "countdown": {
+    "deadlineFor": "Termin zapisów na usługę {eventName}",
+    "endsIn": "za {timeString}",
+    "expired": "Minęło!",
+    "noUpcomingEvent": "Brak nadchodzących terminów rejestracji."
+  },
+  "card": {
+    "calendarButton": "Kalendarz"
+  },
+  "dataMessages": {
+    "noEventsForYear": "Nie znaleziono wydarzeń na rok {year}.",
+    "errorLoadingEvents": "Błąd podczas ładowania wydarzeń. Spróbuj ponownie później."
+  },
+  "general": {
+      "loading": "Ładowanie..."
+  }
+}
