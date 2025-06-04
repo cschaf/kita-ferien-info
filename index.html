@@ -66,6 +66,8 @@
             /* This div will wrap the title and paragraph to keep them together */
             text-align: center;
             flex-grow: 1; /* Allow content to take available space */
+            position: relative; /* Ensure it participates in stacking context */
+            z-index: 5;      /* Lower z-index than buttons */
         }
         .section-title {
             color: #4f46e5; /* Indigo for section titles */
@@ -829,19 +831,29 @@
                 top: 0.75rem;
             }
             #language-menu-button { /* Ensure button is not too wide on mobile */
-                padding-left: 0.5rem;
+                padding-left: 0.5rem; /* Reduced padding for smaller overall button */
                 padding-right: 0.5rem;
+                padding-top: 0.5rem; /* py-2 equivalent */
+                padding-bottom: 0.5rem;
             }
-            /* current-language-name is hidden on xs screens by "hidden sm:inline" */
+            #language-menu { /* Dropdown menu itself */
+                width: auto; /* Allow content to determine width */
+                min-width: 12rem; /* Or w-48, approx 192px, as a minimum */
+                max-width: calc(100vw - 4rem); /* Prevent overflow, leave some margin */
+                right: 0; /* Align to the right of its container */
+            }
+            /* current-language-name is hidden on xs screens by "hidden sm:inline" in HTML */
 
             .dark-mode-toggle {
                 top: 0.75rem;
                 right: 0.75rem;
             }
             .header-content {
-                padding-right: 6.5rem; /* Make space for both buttons */
-                padding-left: 0.5rem; /* Adjust left padding as needed */
-                margin-top: 0.1rem; /* Optional: fine-tune vertical alignment */
+                padding-right: 6.5rem; /* Make space for both buttons. DarkMode ~2.5rem + Lang (flag only) ~2rem + space ~0.75 = ~5.25rem. 6.5rem gives some buffer. */
+                padding-left: 0.5rem;
+                margin-top: 0.1rem;
+                /* If title still too squished, consider reducing font size for title on very small screens, */
+                /* or adjusting button positions to be even more compact if possible. */
             }
         }
         /* Ensure header content is reasonably centered on larger screens too */
